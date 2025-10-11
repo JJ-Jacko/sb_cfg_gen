@@ -1,0 +1,193 @@
+{
+    "log": {
+        "disabled": false,
+        "level": "info",
+        "output": "box.log",
+        "timestamp": true
+    },
+    "dns": {
+        "servers": [
+            {
+                "type": "tcp",
+                "tag": "dns_proxy",
+                "server": "1.1.1.1",
+                "detour": "🚀 节点选择",
+                "domain_resolver": "dns_resolver"
+            },
+            {
+                "type": "https",
+                "tag": "dns_direct",
+                "server": "dns.alidns.com",
+                "domain_resolver": "dns_resolver"
+            },
+            {
+                "type": "udp",
+                "tag": "dns_resolver",
+                "server": "223.5.5.5"
+            },
+            {
+                "type": "fakeip",
+                "tag": "dns_fakeip",
+                "inet4_range": "198.18.0.0/15",
+                "inet6_range": "fc00::/18"
+            }
+        ],
+        "rules": [
+            {
+                "rule_set": "geolocation-!cn",
+                "query_type": [
+                    "A",
+                    "AAAA"
+                ],
+                "server": "dns_fakeip"
+            },
+            {
+                "rule_set": "geolocation-!cn",
+                "query_type": "CNAME",
+                "server": "dns_proxy"
+            },
+            {
+                "query_type": [
+                    "A",
+                    "AAAA",
+                    "CNAME"
+                ],
+                "invert": true,
+                "action": "predefined",
+                "rcode": "REFUSED"
+            }
+        ],
+        "final": "dns_direct",
+        "independent_cache": true
+    },
+    "ntp": {
+        "enabled": true,
+        "server": "time.apple.com",
+        "server_port": 123,
+        "interval": "30m"
+    },
+    "inbounds": [
+        {
+            "type": "mixed",
+            "tag": "mixed-in",
+            "listen": "0.0.0.0",
+            "listen_port": 2080
+        },
+        {
+            "type": "tun",
+            "tag": "tun-in",
+            "address": "172.19.0.1/30",
+            "auto_route": true,
+            "strict_route": true,
+            "stack": "mixed",
+            "sniff": true
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "direct",
+            "tag": "🏠 私有网络"
+        },
+        {
+            "type": "direct",
+            "tag": "🔒 国内服务"
+        },
+        {
+            "type": "block",
+            "tag": "REJECT"
+        },
+        {
+            "type": "direct",
+            "tag": "DIRECT"
+        }
+    ],
+    "route": {
+        "default_domain_resolver": "dns_resolver",
+        "rule_set": [
+            {
+                "tag": "geolocation-cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-geolocation-cn.srs"
+            },
+            {
+                "tag": "cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-cn.srs"
+            },
+            {
+                "tag": "geolocation-!cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-geolocation-!cn.srs"
+            },
+            {
+                "tag": "private-ip",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-private.srs"
+            },
+            {
+                "tag": "cn-ip",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-cn.srs"
+            }
+        ],
+        "rules": [
+            {
+                "clash_mode": "direct",
+                "outbound": "DIRECT"
+            },
+            {
+                "clash_mode": "global",
+                "outbound": "🚀 节点选择"
+            },
+            {
+                "action": "sniff"
+            },
+            {
+                "protocol": "dns",
+                "action": "hijack-dns"
+            },
+            {
+                "rule_set": [
+                    "geolocation-cn",
+                    "cn"
+                ],
+                "outbound": "🔒 国内服务"
+            },
+            {
+                "rule_set": [
+                    "geolocation-!cn"
+                ],
+                "outbound": "🚀 节点选择"
+            },
+            {
+                "rule_set": [
+                    "private-ip"
+                ],
+                "outbound": "🏠 私有网络"
+            },
+            {
+                "rule_set": [
+                    "cn-ip"
+                ],
+                "outbound": "🔒 国内服务"
+            }
+        ],
+        "auto_detect_interface": true,
+        "final": "🚀 节点选择"
+    },
+    "experimental": {
+        "clash_api": {
+            "external_controller": "0.0.0.0:9090",
+            "external_ui": "dashboard"
+        },
+        "cache_file": {
+            "enabled": true,
+            "store_fakeip": true
+        }
+    }
+}
