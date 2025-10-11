@@ -1,0 +1,11 @@
+__pycache__
+.venv
+.vscode
+
+dist
+build
+sing_box_config_generator.egg-info
+
+config.json
+
+test*

@@ -1,0 +1,17 @@
+[project]
+name = "sing-box-config-generator"
+version = "1.0"
+description = "The tools to generate sing-box config file"
+authors = [
+    { name = "Jacko", email = "l2982211930@163.com" }
+]
+dependencies = [
+    "requests"
+]
+
+[project.scripts]
+sb-cfg-gen = "sb_cfg_gen.cli:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
