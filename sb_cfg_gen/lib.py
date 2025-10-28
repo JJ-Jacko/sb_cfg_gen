@@ -42,7 +42,7 @@ def patch_config_file(
 
     # 提取节点
     for outbound in raw["outbounds"]:
-        if outbound["type"] not in ["vmess", "hysteria2"]:
+        if outbound["type"] not in ["shadowsocks", "vless", "vmess", "hysteria2"]:
             continue
 
         tag = outbound["tag"]
@@ -55,6 +55,9 @@ def patch_config_file(
         # 获取到期时间
         if "套餐到期" in tag:
             expiration_time = tag[5:]
+            continue
+        elif "未到期" in tag:
+            expiration_time = tag[4:]
             continue
 
         # 跳过重复
