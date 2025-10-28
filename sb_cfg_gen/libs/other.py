@@ -3,6 +3,51 @@ from typing import List
 from pathlib import Path
 
 
+def keywords_in_text(
+        keywords: List[str],
+        text: str
+):
+    for kw in keywords:
+        if kw in text:
+            return True
+    
+    return False
+
+
+def extra_nodes_from_singbox_config(singbox_config: dict) -> List[dict]:
+    node_types = [
+        "hysteria2",
+        "shadowsocks",
+        "vless",
+        "vmess",
+    ]
+    airport_info_keywords = [
+        # KTM
+        "剩余流量",
+        "距离下次重置剩余",
+        "套餐到期",
+        
+        # 流量光
+        "剩余流量",
+        "距离下次重置流量剩余",
+        "未到期"
+    ]
+    
+    nodes = []
+    for outbound in singbox_config["outbounds"]:
+        # 过滤 代理组
+        if outbound["type"] not in node_types:
+            continue
+
+        # 过滤 机场信息
+        if keywords_in_text(airport_info_keywords, outbound["tag"]):
+            continue
+        
+        nodes.append(outbound)
+        
+    return nodes
+
+
 def found_same_node(node, nodes: list):
     for exist_node in nodes:
         if (
