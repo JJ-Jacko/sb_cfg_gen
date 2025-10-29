@@ -4,6 +4,16 @@ from typing import Literal
 from sb_cfg_gen.libs.other import keywords_in_text
 
 
+node_tag_keywords = {
+    "HK": ["香港", "Hong Kong"],
+    "TW": ["台湾", "Taiwan"],
+    "SG": ["新加坡", "Singapore"],
+    "JP": ["日本", "Japan"],
+    "US": ["美国", "United States"],
+    "Other": [""]
+}
+
+
 def extra_nodes_from_singbox_config(singbox_config: dict) -> List[dict]:
     node_types = [
         "hysteria2",
@@ -64,28 +74,19 @@ def filter_nodes_with_specified_area(
         nodes: List[dict],
         area: Literal["HK", "TW", "SG", "JP", "US", "Other"]
 ) -> List[dict | None]:
-    map = {
-        "HK": ["香港", "Hong Kong"],
-        "TW": ["台湾", "Taiwan"],
-        "SG": ["新加坡", "Singapore"],
-        "JP": ["日本", "Japan"],
-        "US": ["美国", "United States"],
-        "Other": [""]
-    }
-    
     if area == "Other":
         return [
             node
             for node in nodes
-            if not keywords_in_text(map.get("HK"), node["tag"])
-            if not keywords_in_text(map.get("TW"), node["tag"])
-            if not keywords_in_text(map.get("SG"), node["tag"])
-            if not keywords_in_text(map.get("JP"), node["tag"])
-            if not keywords_in_text(map.get("US"), node["tag"])
+            if not keywords_in_text(node_tag_keywords.get("HK"), node["tag"])
+            if not keywords_in_text(node_tag_keywords.get("TW"), node["tag"])
+            if not keywords_in_text(node_tag_keywords.get("SG"), node["tag"])
+            if not keywords_in_text(node_tag_keywords.get("JP"), node["tag"])
+            if not keywords_in_text(node_tag_keywords.get("US"), node["tag"])
         ]
     
     return [
         node
         for node in nodes
-        if keywords_in_text(map.get(area), node["tag"])
+        if keywords_in_text(node_tag_keywords.get(area), node["tag"])
     ]
