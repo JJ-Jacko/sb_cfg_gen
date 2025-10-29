@@ -3,6 +3,7 @@ from typing import Literal
 
 from sb_cfg_gen.libs.other import keywords_in_text
 from sb_cfg_gen.libs.data import Area
+from sb_cfg_gen.libs.types import AreaCode
 
 
 areas = [
@@ -82,33 +83,28 @@ def deduplicate_nodes(nodes: List[dict]) -> List[dict | None]:
     return cleaned_nodes
 
 
-def get_area_flag(name: str):
+def get_area_flag(area_code: AreaCode):
     for area in areas:
-        if name == area.name:
+        if area_code == area.area_code:
             return area.flag
     
-    raise Exception(f"{name} 不存在")
+    raise Exception(f"{area_code} 不存在")
 
 
-def get_area_keywords(name: str):
+def get_area_keywords(area_code: AreaCode):
     for area in areas:
-        if name == area.name:
+        if area_code == area.area_code:
             return area.keywords
     
-    raise Exception(f"{name} 不存在")
+    raise Exception(f"{area_code} 不存在")
 
 
 def filter_nodes_with_specified_area(
         nodes: List[dict],
-        area_name: Literal[
-            "HK", "TW", "JP", "KR", "VN", "SG", "IN",
-            "AU",
-            "PL", "DE", "GB",
-            "US", "CA"
-        ]
+        area_code: AreaCode
 ) -> List[dict | None]:
     return [
         node
         for node in nodes
-        if keywords_in_text(get_area_keywords(area_name), node["tag"])
+        if keywords_in_text(get_area_keywords(area_code), node["tag"])
     ]
