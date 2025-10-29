@@ -59,7 +59,7 @@ def node_in_nodes(node: dict, nodes: List[dict]):
     return False
 
 
-def nodes_deduplicate(nodes: List[dict]) -> List[dict | None]:
+def deduplicate_nodes(nodes: List[dict]) -> List[dict | None]:
     cleaned_nodes = []
     for n in nodes:
         if node_in_nodes(n, cleaned_nodes):
