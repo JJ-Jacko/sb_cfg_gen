@@ -48,7 +48,7 @@ def extra_nodes_from_singbox_config(singbox_config: dict) -> List[dict]:
     return nodes
 
 
-def found_same_node(node, nodes: list):
+def node_in_nodes(node: dict, nodes: List[dict]):
     for exist_node in nodes:
         if (
             node["server"] == exist_node["server"]
@@ -58,6 +58,16 @@ def found_same_node(node, nodes: list):
 
     return False
 
+
+def nodes_deduplicate(nodes: List[dict]) -> List[dict | None]:
+    cleaned_nodes = []
+    for n in nodes:
+        if node_in_nodes(n, cleaned_nodes):
+            continue
+        
+        cleaned_nodes.append(n)
+
+    return cleaned_nodes
 
 def patch_config_file(
         raw: dict,
@@ -94,7 +104,7 @@ def patch_config_file(
             continue
 
         # 跳过重复
-        if found_same_node(
+        if node_in_nodes(
             outbound,
             hk_nodes + us_nodes + sg_nodes +
             tw_nodes + jp_nodes + other_nodes
