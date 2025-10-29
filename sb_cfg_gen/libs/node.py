@@ -2,16 +2,28 @@ from typing import List
 from typing import Literal
 
 from sb_cfg_gen.libs.other import keywords_in_text
+from sb_cfg_gen.libs.data import Area
 
 
-node_tag_keywords = {
-    "HK": ["香港", "Hong Kong"],
-    "TW": ["台湾", "Taiwan"],
-    "SG": ["新加坡", "Singapore"],
-    "JP": ["日本", "Japan"],
-    "US": ["美国", "United States"],
-    "Other": [""]
-}
+areas = [
+    # 亚洲
+    Area("HK", "🇭🇰", ["香港", "Hong Kong"]),
+    Area("TW", "🇹🇼", ["台湾", "Taiwan"]),
+    Area("JP", "🇯🇵", ["日本", "Japan"]),
+    Area("KR", "🇰🇷", ["韩国", "Korea", "South Korea"]),
+    Area("VN", "🇻🇳", ["越南", "Vietnam"]),
+    Area("SG", "🇸🇬", ["新加坡", "Singapore"]),
+    Area("IN", "🇮🇳", ["印度", "India"]),
+    # 大洋洲
+    Area("AU", "🇦🇺", ["澳大利亚", "澳洲", "Australia"]),
+    # 欧洲
+    Area("PL", "🇵🇱", ["波兰", "Poland"]),
+    Area("DE", "🇩🇪", ["德国", "Germany"]),
+    Area("GB", "🇬🇧", ["英国", "United Kingdom"]),
+    # 北美洲
+    Area("US", "🇺🇸", ["美国", "United States"]),
+    Area("CA", "🇨🇦", ["加拿大", "Canada"])
+]
 
 
 def extra_nodes_from_singbox_config(singbox_config: dict) -> List[dict]:
@@ -70,23 +82,33 @@ def deduplicate_nodes(nodes: List[dict]) -> List[dict | None]:
     return cleaned_nodes
 
 
+def get_area_flag(name: str):
+    for area in areas:
+        if name == area.name:
+            return area.flag
+    
+    raise Exception(f"{name} 不存在")
+
+
+def get_area_keywords(name: str):
+    for area in areas:
+        if name == area.name:
+            return area.keywords
+    
+    raise Exception(f"{name} 不存在")
+
+
 def filter_nodes_with_specified_area(
         nodes: List[dict],
-        area: Literal["HK", "TW", "SG", "JP", "US", "Other"]
-) -> List[dict | None]:
-    if area == "Other":
-        return [
-            node
-            for node in nodes
-            if not keywords_in_text(node_tag_keywords.get("HK"), node["tag"])
-            if not keywords_in_text(node_tag_keywords.get("TW"), node["tag"])
-            if not keywords_in_text(node_tag_keywords.get("SG"), node["tag"])
-            if not keywords_in_text(node_tag_keywords.get("JP"), node["tag"])
-            if not keywords_in_text(node_tag_keywords.get("US"), node["tag"])
+        area_name: Literal[
+            "HK", "TW", "JP", "KR", "VN", "SG", "IN",
+            "AU",
+            "PL", "DE", "GB",
+            "US", "CA"
         ]
-    
+) -> List[dict | None]:
     return [
         node
         for node in nodes
-        if keywords_in_text(node_tag_keywords.get(area), node["tag"])
+        if keywords_in_text(get_area_keywords(area_name), node["tag"])
     ]
