@@ -1,5 +1,6 @@
 import json
 from typing import List
+from typing import Literal
 from pathlib import Path
 
 
@@ -68,6 +69,38 @@ def nodes_deduplicate(nodes: List[dict]) -> List[dict | None]:
         cleaned_nodes.append(n)
 
     return cleaned_nodes
+
+
+def filter_nodes_with_specified_area(
+        nodes: List[dict],
+        area: Literal["HK", "TW", "SG", "JP", "US", "Other"]
+) -> List[dict | None]:
+    map = {
+        "HK": ["香港", "Hong Kong"],
+        "TW": ["台湾", "Taiwan"],
+        "SG": ["新加坡", "Singapore"],
+        "JP": ["日本", "Japan"],
+        "US": ["美国", "United States"],
+        "Other": [""]
+    }
+    
+    if area == "Other":
+        return [
+            node
+            for node in nodes
+            if not keywords_in_text(map.get("HK"), node["tag"])
+            if not keywords_in_text(map.get("TW"), node["tag"])
+            if not keywords_in_text(map.get("SG"), node["tag"])
+            if not keywords_in_text(map.get("JP"), node["tag"])
+            if not keywords_in_text(map.get("US"), node["tag"])
+        ]
+    
+    return [
+        node
+        for node in nodes
+        if keywords_in_text(map.get(area), node["tag"])
+    ]
+
 
 def patch_config_file(
         raw: dict,
