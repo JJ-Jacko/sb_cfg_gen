@@ -1,3 +1,4 @@
+import copy
 from typing import List
 from typing import Literal
 
@@ -108,3 +109,24 @@ def filter_nodes_with_specified_area(
         for node in nodes
         if keywords_in_text(get_area_keywords(area_code), node["tag"])
     ]
+
+
+def rename_same_area_nodes(
+        nodes: List[dict],
+        area_code: AreaCode,
+        area_name_mode: Literal["upper_case", "lower_case"] = "upper_case"
+):
+    renamed_nodes = []
+    
+    for i, node in enumerate(nodes):
+        new_node = copy.deepcopy(node)
+        match area_name_mode:
+            case "upper_case":
+                new_node["tag"] = f"{get_area_flag(area_code)} {area_code.upper()} {i + 1}"
+            case "lower_case":
+                new_node["tag"] = f"{get_area_flag(area_code)} {area_code.lower()} {i + 1}"
+        
+        renamed_nodes.append(new_node)
+    
+    return renamed_nodes
+
