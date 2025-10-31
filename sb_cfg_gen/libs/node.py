@@ -6,6 +6,7 @@ from typing import get_args
 from sb_cfg_gen.libs.other import keywords_in_text
 from sb_cfg_gen.libs.data import Area
 from sb_cfg_gen.libs.dicts import SingBoxConfig
+from sb_cfg_gen.libs.dicts import Node
 from sb_cfg_gen.libs.types import AreaCode
 from sb_cfg_gen.libs.types import NodeType
 
@@ -31,7 +32,9 @@ areas = [
 ]
 
 
-def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[dict]:
+def extra_nodes_from_singbox_config(
+        config: SingBoxConfig
+) -> List[Node]:
     airport_info_keywords = [
         # KTM
         "剩余流量",
@@ -59,7 +62,7 @@ def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[dict]:
     return nodes
 
 
-def node_in_nodes(node: dict, nodes: List[dict]):
+def node_in_nodes(node: Node, nodes: List[Node]):
     for exist_node in nodes:
         if (
             node["server"] == exist_node["server"]
@@ -70,7 +73,7 @@ def node_in_nodes(node: dict, nodes: List[dict]):
     return False
 
 
-def deduplicate_nodes(nodes: List[dict]) -> List[dict | None]:
+def deduplicate_nodes(nodes: List[Node]) -> List[Node | None]:
     cleaned_nodes = []
     for n in nodes:
         if node_in_nodes(n, cleaned_nodes):
@@ -98,9 +101,9 @@ def get_area_keywords(area_code: AreaCode):
 
 
 def filter_nodes_with_specified_area(
-        nodes: List[dict],
+        nodes: List[Node],
         area_code: AreaCode
-) -> List[dict | None]:
+) -> List[Node | None]:
     return [
         node
         for node in nodes
@@ -109,10 +112,10 @@ def filter_nodes_with_specified_area(
 
 
 def rename_same_area_nodes(
-        nodes: List[dict],
+        nodes: List[Node],
         area_code: AreaCode,
         area_name_mode: Literal["upper_case", "lower_case"] = "upper_case"
-):
+) -> List[Node]:
     renamed_nodes = []
     
     for i, node in enumerate(nodes):
