@@ -11,3 +11,11 @@ AreaCode = Literal[
     # 北美洲
     "US", "CA"
 ]
+
+
+NodeType = Literal[
+    "hysteria2",
+    "shadowsocks",
+    "vless",
+    "vmess"
+]

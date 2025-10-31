@@ -1,11 +1,13 @@
 import copy
 from typing import List
 from typing import Literal
+from typing import get_args
 
 from sb_cfg_gen.libs.other import keywords_in_text
 from sb_cfg_gen.libs.data import Area
 from sb_cfg_gen.libs.dicts import SingBoxConfig
 from sb_cfg_gen.libs.types import AreaCode
+from sb_cfg_gen.libs.types import NodeType
 
 
 areas = [
@@ -30,12 +32,6 @@ areas = [
 
 
 def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[dict]:
-    node_types = [
-        "hysteria2",
-        "shadowsocks",
-        "vless",
-        "vmess",
-    ]
     airport_info_keywords = [
         # KTM
         "剩余流量",
@@ -51,7 +47,7 @@ def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[dict]:
     nodes = []
     for outbound in config["outbounds"]:
         # 过滤 代理组
-        if outbound["type"] not in node_types:
+        if outbound["type"] not in get_args(NodeType):
             continue
 
         # 过滤 机场信息
