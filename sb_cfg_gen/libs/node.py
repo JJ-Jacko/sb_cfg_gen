@@ -4,6 +4,7 @@ from typing import Literal
 
 from sb_cfg_gen.libs.other import keywords_in_text
 from sb_cfg_gen.libs.data import Area
+from sb_cfg_gen.libs.dicts import SingBoxConfig
 from sb_cfg_gen.libs.types import AreaCode
 
 
@@ -28,7 +29,7 @@ areas = [
 ]
 
 
-def extra_nodes_from_singbox_config(singbox_config: dict) -> List[dict]:
+def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[dict]:
     node_types = [
         "hysteria2",
         "shadowsocks",
@@ -48,7 +49,7 @@ def extra_nodes_from_singbox_config(singbox_config: dict) -> List[dict]:
     ]
     
     nodes = []
-    for outbound in singbox_config["outbounds"]:
+    for outbound in config["outbounds"]:
         # 过滤 代理组
         if outbound["type"] not in node_types:
             continue
