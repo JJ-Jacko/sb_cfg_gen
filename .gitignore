@@ -1,11 +1,11 @@
+# Python
 __pycache__
-.venv
-.vscode
-
 dist
-build
-sing_box_config_generator.egg-info
+.venv
 
+# VSCode
+# .vscode
+
+# Project
+cache
 config.json
-
-test*

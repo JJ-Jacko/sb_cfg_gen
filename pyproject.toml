@@ -1,5 +1,5 @@
 [project]
-name = "sing-box-config-generator"
+name = "sb_cfg_gen"
 version = "1.0"
 description = "The tools to generate sing-box config file"
 authors = [
@@ -13,5 +13,5 @@ dependencies = [
 sb-cfg-gen = "sb_cfg_gen.cli:main"
 
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
