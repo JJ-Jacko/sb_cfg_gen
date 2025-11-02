@@ -9,7 +9,9 @@ AreaCode = Literal[
     # 欧洲
     "PL", "DE", "GB",
     # 北美洲
-    "US", "CA"
+    "US", "CA",
+    # 南极洲
+    "AQ"
 ]
 
 

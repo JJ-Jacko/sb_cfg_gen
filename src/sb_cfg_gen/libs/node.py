@@ -30,7 +30,9 @@ areas = [
     Area("GB", "🇬🇧", ["英国", "United Kingdom"]),
     # 北美洲
     Area("US", "🇺🇸", ["美国", "United States"]),
-    Area("CA", "🇨🇦", ["加拿大", "Canada"])
+    Area("CA", "🇨🇦", ["加拿大", "Canada"]),
+    # 南极洲
+    Area("AQ", "🇦🇶", ["南极", "Antarctica"])
 ]
 
 
