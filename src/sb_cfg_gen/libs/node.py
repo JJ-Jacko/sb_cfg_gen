@@ -34,23 +34,22 @@ areas = [
     # 南极洲
     Area("AQ", "🇦🇶", ["南极", "Antarctica"])
 ]
+airport_info_keywords = [
+    # KTM
+    "剩余流量",
+    "距离下次重置剩余",
+    "套餐到期",
+    
+    # 流量光
+    "剩余流量",
+    "距离下次重置流量剩余",
+    "未到期"
+]
 
 
 def extra_nodes_from_singbox_config(
         config: SingBoxConfig
 ) -> List[Node]:
-    airport_info_keywords = [
-        # KTM
-        "剩余流量",
-        "距离下次重置剩余",
-        "套餐到期",
-        
-        # 流量光
-        "剩余流量",
-        "距离下次重置流量剩余",
-        "未到期"
-    ]
-    
     nodes = []
     for outbound in config["outbounds"]:
         # 过滤 代理组
