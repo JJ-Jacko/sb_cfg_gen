@@ -6,7 +6,7 @@ from typing import Literal
 from typing import get_args
 
 from sb_cfg_gen.libs.other import keywords_in_text
-from sb_cfg_gen.libs.data import Area
+from sb_cfg_gen.libs.datas import Area
 from sb_cfg_gen.libs.dicts import SingBoxConfig
 from sb_cfg_gen.libs.dicts import Node
 from sb_cfg_gen.libs.types import AreaCode
