@@ -1,4 +1,3 @@
-import json
 from pathlib import Path
 
 from sb_cfg_gen.libs.web import url_get_singbox_config_file
@@ -6,6 +5,7 @@ from sb_cfg_gen.libs.node import extra_nodes_from_singbox_config
 from sb_cfg_gen.libs.node import deduplicate_nodes
 from sb_cfg_gen.libs.node import NodePool
 from sb_cfg_gen.libs.node import merge_singbox_config
+from sb_cfg_gen.libs.other import write_json_file
 from sb_cfg_gen.libs.inputing import Input
 
 
@@ -29,12 +29,10 @@ def main():
     cache = Path("cache")
 
     for i, raw in enumerate(low_raws):
-        with (cache / f"low_{i + 1}.json").open("w") as f:
-            json.dump(raw, f, indent=4, ensure_ascii=False)
+        write_json_file(cache / f"low_{i + 1}.json")
             
     for i, raw in enumerate(high_raws):
-        with (cache / f"high_{i + 1}.json").open("w") as f:
-            json.dump(raw, f, indent=4, ensure_ascii=False)
+        write_json_file(cache / f"high_{i + 1}.json")
     
     # Get nodes   
     nodes_low = []
@@ -79,8 +77,7 @@ def main():
     )
     
     # Save sing-box config
-    with open("config.json", "w") as f:
-        json.dump(config, f, indent=4, ensure_ascii=False)
+    write_json_file("config.json", config)
 
 
 if __name__ == "__main__":

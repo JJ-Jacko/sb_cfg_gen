@@ -12,3 +12,13 @@ def keywords_in_text(
             return True
     
     return False
+
+
+def write_json_file(
+        file: str | Path,
+        data: dict,
+        indent: int = 4
+):
+
+    with open(file, "w") as f:
+        json.dump(data, f, indent=indent, ensure_ascii=False)
