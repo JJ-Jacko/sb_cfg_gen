@@ -4,8 +4,9 @@ dist
 .venv
 
 # VSCode
-# .vscode
+.vscode
 
 # Project
+test
 cache
 config.json
