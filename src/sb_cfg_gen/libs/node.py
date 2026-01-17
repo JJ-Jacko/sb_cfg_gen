@@ -73,7 +73,10 @@ def filter_nodes_with_specified_area(
     return [
         node
         for node in nodes
-        if keywords_in_text(get_area_keywords(area_code), node["tag"])
+        if (
+            keywords_in_text(get_area_keywords(area_code), node["tag"])
+            or area_code in node["tag"]
+        )
     ]
 
 
@@ -92,108 +95,60 @@ def rename_same_area_nodes(
 
 
 def merge_singbox_config(
-        hq_HK_nodes: List[Node],
-        hq_TW_nodes: List[Node],
-        hq_SG_nodes: List[Node],
-        hq_JP_nodes: List[Node],
-        hq_US_nodes: List[Node],
-        hq_other_nodes: List[Node],
-        lq_HK_nodes: List[Node],
-        lq_TW_nodes: List[Node],
-        lq_SG_nodes: List[Node],
-        lq_JP_nodes: List[Node],
-        lq_US_nodes: List[Node],
-        lq_other_nodes: List[Node],
+        nodes: List[Node],
         with_clash_api: bool = True,
         template_file: Path = Path("template.json")
 ):
     with template_file.open("r") as f:
         template: SingBoxConfig = json.load(f)
     
+    # 总控制组
+    template["outbounds"].append({
+        "tag": "🚀 Proxy",
+        "type": "selector",
+        "outbounds": ["🇭🇰 HK", "🇹🇼 TW", "🇸🇬 SG", "🇯🇵 JP", "🇺🇸 US", "🖐️ Manual"]
+    })
+    
+    # 禁广告组
+    template["outbounds"].append({
+        "tag": "📢 ADs",
+        "type": "selector",
+        "outbounds": ["🚀 Proxy", "🚫 Reject"]
+    })
+    
+    # 手动组
+    template["outbounds"].append({
+        "tag": "🖐️ Manual",
+        "type": "selector",
+        "outbounds": [
+            node["tag"]
+            for node in nodes
+        ]
+    })
+
+    # 地区组
+    for area_code, tag in [
+            ("HK", "🇭🇰 HK"), ("TW", "🇹🇼 TW"),
+            ("SG", "🇸🇬 SG"), ("JP", "🇯🇵 JP"), ("US", "🇺🇸 US")
+    ]:
+        template["outbounds"].append({
+            "tag": tag,
+            "type": "selector",
+            "outbounds": [
+                node["tag"]
+                for node in filter_nodes_with_specified_area(nodes, area_code)
+            ]
+        })
+    
+    # 节点
+    template["outbounds"].extend(nodes)
+    
+    # 额外项目
     if with_clash_api:
         template["experimental"]["clash_api"] = {
             "external_controller": "0.0.0.0:9090",
             "external_ui": "dashboard"
         }
-
-    # 代理组
-    template["outbounds"].extend([
-        {
-            "type": "selector",
-            "tag": "🖐️ Manual",
-            "outbounds": [
-                n["tag"]
-                for n in hq_HK_nodes + lq_HK_nodes + \
-                        hq_TW_nodes + lq_TW_nodes + \
-                        hq_SG_nodes + lq_SG_nodes + \
-                        hq_JP_nodes + lq_JP_nodes + \
-                        hq_US_nodes + lq_US_nodes + \
-                        hq_other_nodes + lq_other_nodes
-            ]
-        },
-        {
-            "type": "urltest",
-            "tag": "⚒️ DataSaver",
-            "outbounds": [
-                n["tag"]
-                for n in lq_HK_nodes + lq_TW_nodes + \
-                        lq_SG_nodes + lq_JP_nodes + \
-                        lq_US_nodes + \
-                        lq_other_nodes
-            ]
-        },
-        {
-            "type": "urltest",
-            "tag": "🇭🇰 HK",
-            "outbounds": [
-                n["tag"]
-                for n in hq_HK_nodes
-            ]
-        },
-        {
-            "type": "urltest",
-            "tag": "🇹🇼 TW",
-            "outbounds": [
-                n["tag"]
-                for n in hq_TW_nodes
-            ]
-        },
-        {
-            "type": "urltest",
-            "tag": "🇸🇬 SG",
-            "outbounds": [
-                n["tag"]
-                for n in hq_SG_nodes
-            ]
-        },
-        {
-            "type": "urltest",
-            "tag": "🇯🇵 JP",
-            "outbounds": [
-                n["tag"]
-                for n in hq_JP_nodes
-            ]
-        },
-        {
-            "type": "urltest",
-            "tag": "🇺🇸 US",
-            "outbounds": [
-                n["tag"]
-                for n in hq_US_nodes
-            ]
-        }
-    ])
-
-    # 节点
-    template["outbounds"].extend([
-        n
-        for n in hq_HK_nodes + lq_HK_nodes + \
-                hq_TW_nodes + lq_TW_nodes + \
-                hq_SG_nodes + lq_SG_nodes + \
-                hq_JP_nodes + lq_JP_nodes + \
-                hq_US_nodes + lq_US_nodes + \
-                hq_other_nodes + lq_other_nodes
-    ])
     
     return template
 

@@ -82,34 +82,12 @@
     ],
     "outbounds": [
         {
-            "type": "block",
-            "tag": "REJECT"
+            "tag": "🚫 Reject",
+            "type": "block"
         },
         {
-            "type": "direct",
-            "tag": "DIRECT"
-        },
-        {
-            "type": "selector",
-            "tag": "🚀 Proxy",
-            "outbounds": [
-                "🇭🇰 HK",
-                "🇹🇼 TW",
-                "🇸🇬 SG",
-                "🇯🇵 JP",
-                "🇺🇸 US",
-                "⚒️ DataSaver",
-                "🖐️ Manual",
-                "DIRECT"
-            ]
-        },
-        {
-            "type": "selector",
-            "tag": "🚫 Block ADs",
-            "outbounds": [
-                "🚀 Proxy",
-                "REJECT"
-            ]
+            "tag": "⚡ Direct",
+            "type": "direct"
         }
     ],
     "route": {
@@ -120,24 +98,6 @@
                 "type": "remote",
                 "format": "binary",
                 "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-category-ads-all.srs"
-            },
-            {
-                "tag": "category-ai-!cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-category-ai-!cn.srs"
-            },
-            {
-                "tag": "youtube",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-youtube.srs"
-            },
-            {
-                "tag": "google",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-google.srs"
             },
             {
                 "tag": "geolocation-cn",
@@ -152,226 +112,10 @@
                 "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-cn.srs"
             },
             {
-                "tag": "github",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-github.srs"
-            },
-            {
-                "tag": "gitlab",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-gitlab.srs"
-            },
-            {
-                "tag": "microsoft",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-microsoft.srs"
-            },
-            {
-                "tag": "apple",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-apple.srs"
-            },
-            {
-                "tag": "facebook",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-facebook.srs"
-            },
-            {
-                "tag": "instagram",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-instagram.srs"
-            },
-            {
-                "tag": "twitter",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-twitter.srs"
-            },
-            {
-                "tag": "tiktok",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-tiktok.srs"
-            },
-            {
-                "tag": "linkedin",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-linkedin.srs"
-            },
-            {
-                "tag": "netflix",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-netflix.srs"
-            },
-            {
-                "tag": "hulu",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-hulu.srs"
-            },
-            {
-                "tag": "disney",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-disney.srs"
-            },
-            {
-                "tag": "hbo",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-hbo.srs"
-            },
-            {
-                "tag": "amazon",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-amazon.srs"
-            },
-            {
-                "tag": "bahamut",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-bahamut.srs"
-            },
-            {
-                "tag": "steam",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-steam.srs"
-            },
-            {
-                "tag": "epicgames",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-epicgames.srs"
-            },
-            {
-                "tag": "ea",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-ea.srs"
-            },
-            {
-                "tag": "ubisoft",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-ubisoft.srs"
-            },
-            {
-                "tag": "blizzard",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-blizzard.srs"
-            },
-            {
-                "tag": "coursera",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-coursera.srs"
-            },
-            {
-                "tag": "edx",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-edx.srs"
-            },
-            {
-                "tag": "udemy",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-udemy.srs"
-            },
-            {
-                "tag": "khanacademy",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-khanacademy.srs"
-            },
-            {
-                "tag": "category-scholar-!cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-category-scholar-!cn.srs"
-            },
-            {
-                "tag": "paypal",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-paypal.srs"
-            },
-            {
-                "tag": "visa",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-visa.srs"
-            },
-            {
-                "tag": "mastercard",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-mastercard.srs"
-            },
-            {
-                "tag": "stripe",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-stripe.srs"
-            },
-            {
-                "tag": "wise",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-wise.srs"
-            },
-            {
-                "tag": "aws",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-aws.srs"
-            },
-            {
-                "tag": "azure",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-azure.srs"
-            },
-            {
-                "tag": "digitalocean",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-digitalocean.srs"
-            },
-            {
-                "tag": "heroku",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-heroku.srs"
-            },
-            {
-                "tag": "dropbox",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-dropbox.srs"
-            },
-            {
                 "tag": "geolocation-!cn",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-geolocation-!cn.srs"
-            },
-            {
-                "tag": "google-ip",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-google.srs"
             },
             {
                 "tag": "private-ip",
@@ -384,18 +128,12 @@
                 "type": "remote",
                 "format": "binary",
                 "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-cn.srs"
-            },
-            {
-                "tag": "telegram-ip",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-telegram.srs"
             }
         ],
         "rules": [
             {
                 "clash_mode": "direct",
-                "outbound": "DIRECT"
+                "outbound": "⚡ Direct"
             },
             {
                 "clash_mode": "global",
@@ -410,78 +148,21 @@
             },
             {
                 "rule_set": [
-                    "private-ip"
-                ],
-                "outbound": "DIRECT"
-            },
-            {
-                "rule_set": [
                     "category-ads-all"
                 ],
-                "outbound": "🚫 Block ADs"
+                "outbound": "📢 ADs"
             },
             {
                 "rule_set": [
                     "geolocation-cn",
                     "cn-ip",
-                    "cn"
+                    "cn",
+                    "private-ip"
                 ],
-                "outbound": "DIRECT"
+                "outbound": "⚡ Direct"
             },
             {
                 "rule_set": [
-                    "category-ai-!cn",
-                    
-                    "google",
-                    "google-ip",
-                    "youtube",
-                    
-                    "microsoft",
-
-                    "github",
-                    "gitlab",
-
-                    "facebook",
-                    "instagram",
-                    "twitter",
-                    "tiktok",
-                    "linkedin",
-
-                    "telegram-ip",
-
-                    "netflix",
-                    "hulu",
-                    "disney",
-                    "hbo",
-                    "amazon",
-                    "bahamut",
-
-                    "steam",
-                    "epicgames",
-                    "ea",
-                    "ubisoft",
-                    "blizzard",
-
-                    "apple",
-
-                    "paypal",
-                    "visa",
-                    "mastercard",
-                    "stripe",
-                    "wise",
-
-                    "aws",
-                    "azure",
-                    "digitalocean",
-                    "heroku",
-                    "dropbox",
-
-                    "coursera",
-                    "edx",
-                    "udemy",
-                    "khanacademy",
-                    "category-scholar-!cn",
-                                        
                     "geolocation-!cn"
                 ],
                 "outbound": "🚀 Proxy"

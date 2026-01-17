@@ -6,6 +6,7 @@ from sb_cfg_gen.libs.web import url_get_singbox_config_file
 from sb_cfg_gen.libs.node import extra_nodes_from_singbox_config
 from sb_cfg_gen.libs.node import deduplicate_nodes
 from sb_cfg_gen.libs.node import filter_nodes_with_specified_area
+from sb_cfg_gen.libs.node import merge_singbox_config
 from sb_cfg_gen.libs.node import rename_same_area_nodes
 from sb_cfg_gen.libs.other import write_json_file
 from sb_cfg_gen.libs.types import AreaCode
@@ -35,9 +36,10 @@ def main():
         nodes_renamed.extend(nodes_filted_area_renamed)
 
     # Merge new sing-box config
+    final_cfg = merge_singbox_config(nodes_renamed)
     
     # Save sing-box config
-    write_json_file("config.json", config)
+    write_json_file("config.json", final_cfg)
 
 
 if __name__ == "__main__":
