@@ -132,10 +132,6 @@
         ],
         "rules": [
             {
-                "clash_mode": "direct",
-                "outbound": "⚡ Direct"
-            },
-            {
                 "clash_mode": "global",
                 "outbound": "🚀 Proxy"
             },

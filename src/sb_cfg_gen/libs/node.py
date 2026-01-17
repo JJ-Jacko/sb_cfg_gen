@@ -106,7 +106,10 @@ def merge_singbox_config(
     template["outbounds"].append({
         "tag": "🚀 Proxy",
         "type": "selector",
-        "outbounds": ["🇭🇰 HK", "🇹🇼 TW", "🇸🇬 SG", "🇯🇵 JP", "🇺🇸 US", "🖐️ Manual"]
+        "outbounds": [
+            "⚡ Direct", "🖐️ Manual",
+            "🇭🇰 HK", "🇹🇼 TW", "🇸🇬 SG", "🇯🇵 JP", "🇺🇸 US"
+        ]
     })
     
     # 禁广告组
