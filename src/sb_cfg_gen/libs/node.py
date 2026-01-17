@@ -2,7 +2,6 @@ import copy
 import json
 from pathlib import Path
 from typing import List
-from typing import Literal
 from typing import get_args
 
 from sb_cfg_gen.libs.other import keywords_in_text
@@ -116,19 +115,13 @@ def filter_nodes_with_specified_area(
 
 def rename_same_area_nodes(
         nodes: List[Node],
-        area_code: AreaCode,
-        area_name_mode: Literal["upper_case", "lower_case"] = "upper_case"
+        area_code: AreaCode
 ) -> List[Node]:
     renamed_nodes = []
     
     for i, node in enumerate(nodes):
         new_node = copy.deepcopy(node)
-        match area_name_mode:
-            case "upper_case":
-                new_node["tag"] = f"{get_area_flag(area_code)} {area_code.upper()} {i + 1}"
-            case "lower_case":
-                new_node["tag"] = f"{get_area_flag(area_code)} {area_code.lower()} {i + 1}"
-        
+        new_node["tag"] = f"{get_area_flag(area_code)} {area_code} {i + 1}"
         renamed_nodes.append(new_node)
     
     return renamed_nodes
