@@ -136,7 +136,7 @@ def merge_singbox_config(
     ]:
         template["outbounds"].append({
             "tag": tag,
-            "type": "selector",
+            "type": "urltest",
             "outbounds": [
                 node["tag"]
                 for node in filter_nodes_with_specified_area(nodes, area_code)
