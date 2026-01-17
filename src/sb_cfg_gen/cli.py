@@ -20,7 +20,7 @@ def main():
     raw_cfg = url_get_singbox_config_file(url)
         
     # Sava raw sing-box config
-    write_json_file(f"cache/raw_cfg.json")
+    write_json_file(f"cache/raw_cfg.json", raw_cfg)
     
     # Get nodes   
     nodes = extra_nodes_from_singbox_config(raw_cfg)
