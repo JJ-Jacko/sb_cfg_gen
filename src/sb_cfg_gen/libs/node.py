@@ -4,35 +4,15 @@ from pathlib import Path
 from typing import List
 from typing import get_args
 
+from sb_cfg_gen.libs.area import get_area_flag
+from sb_cfg_gen.libs.area import get_area_keywords
 from sb_cfg_gen.libs.other import keywords_in_text
-from sb_cfg_gen.libs.datas import Area
 from sb_cfg_gen.libs.dicts import SingBoxConfig
 from sb_cfg_gen.libs.dicts import Node
 from sb_cfg_gen.libs.types import AreaCode
 from sb_cfg_gen.libs.types import NodeType
 
 
-areas = [
-    # 亚洲
-    Area("HK", "🇭🇰", ["香港", "Hong Kong"]),
-    Area("TW", "🇹🇼", ["台湾", "Taiwan"]),
-    Area("JP", "🇯🇵", ["日本", "Japan"]),
-    Area("KR", "🇰🇷", ["韩国", "Korea", "South Korea"]),
-    Area("VN", "🇻🇳", ["越南", "Vietnam"]),
-    Area("SG", "🇸🇬", ["新加坡", "Singapore"]),
-    Area("IN", "🇮🇳", ["印度", "India"]),
-    # 大洋洲
-    Area("AU", "🇦🇺", ["澳大利亚", "澳洲", "Australia"]),
-    # 欧洲
-    Area("PL", "🇵🇱", ["波兰", "Poland"]),
-    Area("DE", "🇩🇪", ["德国", "Germany"]),
-    Area("GB", "🇬🇧", ["英国", "United Kingdom"]),
-    # 北美洲
-    Area("US", "🇺🇸", ["美国", "United States"]),
-    Area("CA", "🇨🇦", ["加拿大", "Canada"]),
-    # 南极洲
-    Area("AQ", "🇦🇶", ["南极", "Antarctica"])
-]
 airport_info_keywords = [
     # KTM
     "剩余流量",
@@ -84,22 +64,6 @@ def deduplicate_nodes(nodes: List[Node]) -> List[Node | None]:
         cleaned_nodes.append(n)
 
     return cleaned_nodes
-
-
-def get_area_flag(area_code: AreaCode):
-    for area in areas:
-        if area_code == area.area_code:
-            return area.flag
-    
-    raise Exception(f"{area_code} 不存在")
-
-
-def get_area_keywords(area_code: AreaCode):
-    for area in areas:
-        if area_code == area.area_code:
-            return area.keywords
-    
-    raise Exception(f"{area_code} 不存在")
 
 
 def filter_nodes_with_specified_area(
