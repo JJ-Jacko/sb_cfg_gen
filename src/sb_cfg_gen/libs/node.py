@@ -240,32 +240,4 @@ def merge_singbox_config(
     
     return template
 
-
-class NodePool:
-    low_nodes: List[Node]
-    high_nodes: List[Node]
     
-    def __init__(
-            self,
-            low_nodes: List[Node],
-            high_nodes: List[Node]
-    ):
-        self.low_nodes = low_nodes
-        self.high_nodes = high_nodes
-    
-    def get_nodes(
-            self,
-            level: Literal["low", "high"],
-            area_code: AreaCode
-    ):
-        match level:
-            case "low":
-                return rename_same_area_nodes(
-                    filter_nodes_with_specified_area(self.low_nodes, area_code),
-                    area_code
-                )
-            case "high":
-                return rename_same_area_nodes(
-                    filter_nodes_with_specified_area(self.high_nodes, area_code),
-                    area_code
-                )
