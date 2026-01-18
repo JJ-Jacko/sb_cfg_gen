@@ -2,14 +2,45 @@ from typing import Literal
 
 
 AreaCode = Literal[
-    # 亚洲
-    "HK", "TW", "JP", "KR", "VN", "SG", "IN",
+    # 东亚
+    "HK", "TW", "JP", "KR",
+    
+    # 东南亚
+    "SG", "MY", "TH", "VN", "KH", "ID", "PH",
+    
+    # 南亚
+    "IN", "PK", "BD", "NP",
+    
+    # 中亚
+    "KZ", "UZ",
+    
+    # 西亚
+    "GE", "AM", "TR", "CY", "IL", "QA", "AE", "SA", "IQ", "OM",
+    
+    # 东欧
+    "RU", "UA", "MD", "EE", "RO", "SK", "LV", "LT", "PL", "AT",
+    
+    # 东南欧
+    "BG", "RS", "AL", "HR", "SI", "GR", "MK",
+    
+    # 西欧
+    "DE", "FR", "NL", "BE", "LU", "GB", "IE", "IT", "ES", "PT", "CH",
+    
+    # 北欧
+    "DK", "SE", "NO", "FI", "IS",
+    
     # 大洋洲
-    "AU",
-    # 欧洲
-    "PL", "DE", "GB",
+    "AU", "NZ",
+    
     # 北美洲
-    "US", "CA",
+    "CA", "US", "MX",
+    
+    # 南美洲
+    "GT", "CR", "CO", "EC", "BR", "AR", "PE", "CL", "BO", "UY",
+    
+    # 非洲
+    "EG", "MG", "DZ", "AO", "NG", "ZA",
+    
     # 南极洲
     "AQ"
 ]
