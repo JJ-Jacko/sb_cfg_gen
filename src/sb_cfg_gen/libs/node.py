@@ -76,14 +76,25 @@ def filter_nodes_with_specified_area(
         nodes: List[Node],
         area_code: AreaCode
 ) -> List[Node | None]:
-    return [
-        node
-        for node in nodes
-        if (
-            keywords_in_text(get_area_keywords(area_code), node["tag"])
-            or area_code in node["tag"]
-        )
-    ]
+    
+    filtered_nodes: List[Node] = []
+    for node in nodes:
+        tag = node["tag"]
+        if area_code in tag:
+            filtered_nodes.append(node)
+        elif get_area_flag(area_code) in tag:
+            filtered_nodes.append(node)
+        else:
+            if (
+                area_code == "IN"
+                and "印度尼西亚" in tag
+            ):
+                continue
+            
+            if keywords_in_text(get_area_keywords(area_code), tag):
+                filtered_nodes.append(node)
+
+    return filtered_nodes
 
 
 def rename_same_area_nodes(
