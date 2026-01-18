@@ -2,14 +2,14 @@ from typing import get_args
 from typing import List
 
 from sb_cfg_gen.libs.dicts import Node
-from sb_cfg_gen.libs.web import url_get_singbox_config_file
-from sb_cfg_gen.libs.node import extra_nodes_from_singbox_config
 from sb_cfg_gen.libs.node import deduplicate_nodes
+from sb_cfg_gen.libs.node import extra_nodes_from_singbox_config
 from sb_cfg_gen.libs.node import filter_nodes_with_specified_area
 from sb_cfg_gen.libs.node import merge_singbox_config
 from sb_cfg_gen.libs.node import rename_same_area_nodes
 from sb_cfg_gen.libs.other import write_json_file
 from sb_cfg_gen.libs.types import AreaCode
+from sb_cfg_gen.libs.web import url_get_singbox_config_file
 
 
 def main():

@@ -1,5 +1,5 @@
-from typing import TypedDict
 from typing import List
+from typing import TypedDict
 
 from sb_cfg_gen.libs.types import NodeType
 

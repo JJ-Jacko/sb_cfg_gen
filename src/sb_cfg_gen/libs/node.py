@@ -1,14 +1,14 @@
 import copy
 import json
 from pathlib import Path
-from typing import List
 from typing import get_args
+from typing import List
 
 from sb_cfg_gen.libs.area import get_area_flag
 from sb_cfg_gen.libs.area import get_area_keywords
-from sb_cfg_gen.libs.other import keywords_in_text
-from sb_cfg_gen.libs.dicts import SingBoxConfig
 from sb_cfg_gen.libs.dicts import Node
+from sb_cfg_gen.libs.dicts import SingBoxConfig
+from sb_cfg_gen.libs.other import keywords_in_text
 from sb_cfg_gen.libs.types import AreaCode
 from sb_cfg_gen.libs.types import NodeType
 
