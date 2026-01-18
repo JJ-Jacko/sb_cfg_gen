@@ -6,7 +6,7 @@ from typing import List
 
 from sb_cfg_gen.libs.dicts import Node
 from sb_cfg_gen.libs.dicts import SingBoxConfig
-from sb_cfg_gen.libs.node import filter_nodes_with_specified_area
+from sb_cfg_gen.libs.node_factor import NodeFactor
 from sb_cfg_gen.libs.other import keywords_in_text
 from sb_cfg_gen.libs.types import NodeType
 
@@ -98,7 +98,7 @@ class ConfigFactor:
                 "type": "urltest",
                 "outbounds": [
                     node["tag"]
-                    for node in filter_nodes_with_specified_area(nodes, area_code)
+                    for node in NodeFactor.filter_nodes_with_specified_area(nodes, area_code)
                 ]
             })
         
