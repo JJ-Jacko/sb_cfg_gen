@@ -39,7 +39,13 @@ def extra_nodes_from_singbox_config(
         if keywords_in_text(airport_info_keywords, outbound["tag"]):
             continue
         
-        nodes.append(outbound)
+        # 过滤 节点本身带的 domain_resolver 键
+        if outbound.get("domain_resolver", None):
+            node_cleaned = copy.deepcopy(outbound)
+            node_cleaned.pop("domain_resolver")
+            nodes.append(node_cleaned)
+        else:
+            nodes.append(outbound)
         
     return nodes
 

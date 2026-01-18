@@ -8,6 +8,7 @@ class Node(TypedDict):
     type: NodeType
     server: str
     server_port: int
+    domain_resolver: str
 
 
 class SingBoxConfig(TypedDict):
