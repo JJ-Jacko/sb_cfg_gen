@@ -4,8 +4,7 @@ from pathlib import Path
 from typing import get_args
 from typing import List
 
-from sb_cfg_gen.libs.area import get_area_flag
-from sb_cfg_gen.libs.area import get_area_keywords
+from sb_cfg_gen.libs.areas import Areas
 from sb_cfg_gen.libs.dicts import Node
 from sb_cfg_gen.libs.dicts import SingBoxConfig
 from sb_cfg_gen.libs.other import keywords_in_text
@@ -82,7 +81,7 @@ def filter_nodes_with_specified_area(
         tag = node["tag"]
         if area_code in tag:
             filtered_nodes.append(node)
-        elif get_area_flag(area_code) in tag:
+        elif Areas.get(area_code).flag in tag:
             filtered_nodes.append(node)
         else:
             if (
@@ -90,8 +89,8 @@ def filter_nodes_with_specified_area(
                 and "印度尼西亚" in tag
             ):
                 continue
-            
-            if keywords_in_text(get_area_keywords(area_code), tag):
+
+            if keywords_in_text(Areas.get(area_code).keywords, tag):
                 filtered_nodes.append(node)
 
     return filtered_nodes
@@ -105,7 +104,7 @@ def rename_same_area_nodes(
     
     for i, node in enumerate(nodes):
         new_node = copy.deepcopy(node)
-        new_node["tag"] = f"{get_area_flag(area_code)} {area_code} {i + 1}"
+        new_node["tag"] = f"{Areas.get(area_code).flag} {area_code} {i + 1}"
         renamed_nodes.append(new_node)
     
     return renamed_nodes
