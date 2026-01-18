@@ -112,13 +112,6 @@ def merge_singbox_config(
         ]
     })
     
-    # 禁广告组
-    template["outbounds"].append({
-        "tag": "📢 ADs",
-        "type": "selector",
-        "outbounds": ["🚀 Proxy", "🚫 Reject"]
-    })
-    
     # 手动组
     template["outbounds"].append({
         "tag": "🖐️ Manual",
@@ -127,6 +120,13 @@ def merge_singbox_config(
             node["tag"]
             for node in nodes
         ]
+    })
+
+    # 禁广告组
+    template["outbounds"].append({
+        "tag": "📢 ADs",
+        "type": "selector",
+        "outbounds": ["🚀 Proxy", "🚫 Reject"]
     })
 
     # 地区组
