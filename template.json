@@ -100,6 +100,12 @@
                 "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-category-ads-all.srs"
             },
             {
+                "tag": "geosite-spotify",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-spotify.srs"
+            },
+            {
                 "tag": "geolocation-cn",
                 "type": "remote",
                 "format": "binary",
@@ -150,6 +156,7 @@
             },
             {
                 "rule_set": [
+                    "geosite-spotify",
                     "geolocation-cn",
                     "cn-ip",
                     "cn",
