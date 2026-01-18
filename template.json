@@ -132,7 +132,7 @@
         ],
         "rules": [
             {
-                "clash_mode": "global",
+                "clash_mode": "Global",
                 "outbound": "🚀 Proxy"
             },
             {
