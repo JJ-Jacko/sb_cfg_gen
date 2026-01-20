@@ -76,6 +76,17 @@ class ConfigFactor:
         template["outbounds"].extend(nodes)
 
     @classmethod
+    def __merge_clash_api_into_singbox_config(
+            cls,
+            template: SingBoxConfig,
+            port: int = 9090
+    ):
+        template["experimental"]["clash_api"] = {
+            "external_controller": f"0.0.0.0:{port}",
+            "external_ui": "dashboard"
+        }
+
+    @classmethod
     def extra_nodes_from_singbox_config(
             cls,
             config: SingBoxConfig
@@ -113,13 +124,9 @@ class ConfigFactor:
             template: SingBoxConfig = json.load(f)
         
         cls.__merge_nodes_into_singbox_config(nodes, template)
-        
-        # 额外项目
+
         if with_clash_api:
-            template["experimental"]["clash_api"] = {
-                "external_controller": "0.0.0.0:9090",
-                "external_ui": "dashboard"
-            }
+            cls.__merge_clash_api_into_singbox_config(template)
         
         return template
 
