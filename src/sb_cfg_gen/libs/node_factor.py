@@ -1,4 +1,5 @@
 import copy
+from typing import get_args
 from typing import List
 
 from sb_cfg_gen.libs.areas import Areas
@@ -70,3 +71,14 @@ class NodeFactor:
             renamed_nodes.append(new_node)
         
         return renamed_nodes
+
+    @classmethod
+    def organize_and_rename_nodes(cls, nodes: List[Node]):
+        return [
+            node
+            for area_code in get_args(AreaCode)
+            for node in cls.rename_same_area_nodes(
+                cls.filter_nodes_with_specified_area(nodes, area_code),
+                area_code
+            )
+        ]
