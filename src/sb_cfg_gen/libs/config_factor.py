@@ -25,41 +25,11 @@ class ConfigFactor:
     ]
 
     @classmethod
-    def extra_nodes_from_singbox_config(
-            cls,
-            config: SingBoxConfig
-    ) -> List[Node]:
-        
-        nodes = []
-        for outbound in config["outbounds"]:
-            # 过滤 代理组
-            if outbound["type"] not in get_args(NodeType):
-                continue
-
-            # 过滤 机场信息
-            if keywords_in_text(cls.airport_info_keywords, outbound["tag"]):
-                continue
-            
-            # 过滤 节点本身带的 domain_resolver 键
-            if outbound.get("domain_resolver", None):
-                node_cleaned = copy.deepcopy(outbound)
-                node_cleaned.pop("domain_resolver")
-                nodes.append(node_cleaned)
-            else:
-                nodes.append(outbound)
-            
-        return nodes
-    
-    @classmethod
-    def merge_singbox_config(
+    def __merge_nodes_into_singbox_config(
             cls,
             nodes: List[Node],
-            with_clash_api: bool = True,
-            template_file: Path = Path("template.json")
+            template: SingBoxConfig
     ):
-        
-        with template_file.open("r") as f:
-            template: SingBoxConfig = json.load(f)
         
         # 总控制组
         template["outbounds"].append({
@@ -104,6 +74,45 @@ class ConfigFactor:
         
         # 节点
         template["outbounds"].extend(nodes)
+
+    @classmethod
+    def extra_nodes_from_singbox_config(
+            cls,
+            config: SingBoxConfig
+    ) -> List[Node]:
+        
+        nodes = []
+        for outbound in config["outbounds"]:
+            # 过滤 代理组
+            if outbound["type"] not in get_args(NodeType):
+                continue
+
+            # 过滤 机场信息
+            if keywords_in_text(cls.airport_info_keywords, outbound["tag"]):
+                continue
+            
+            # 过滤 节点本身带的 domain_resolver 键
+            if outbound.get("domain_resolver", None):
+                node_cleaned = copy.deepcopy(outbound)
+                node_cleaned.pop("domain_resolver")
+                nodes.append(node_cleaned)
+            else:
+                nodes.append(outbound)
+            
+        return nodes
+    
+    @classmethod
+    def merge_singbox_config(
+            cls,
+            nodes: List[Node],
+            with_clash_api: bool = True,
+            template_file: Path = Path("template.json")
+    ):
+        
+        with template_file.open("r") as f:
+            template: SingBoxConfig = json.load(f)
+        
+        cls.__merge_nodes_into_singbox_config(nodes, template)
         
         # 额外项目
         if with_clash_api:
