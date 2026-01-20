@@ -3,6 +3,7 @@ from typing import TypedDict
 
 from sb_cfg_gen.libs.types import NodeType
 
+
 class Node(TypedDict):
     tag: str
     type: NodeType
@@ -10,6 +11,19 @@ class Node(TypedDict):
     server_port: int
     domain_resolver: str
 
+class RuleSet(TypedDict):
+    tag: str
+    type: str
+    format: str
+    url: str
+
+class Rules(TypedDict):
+    rule_set: List[str]
+    outbound: str
+
+class Route(TypedDict):
+    rule_set: List[RuleSet]
+    rules: List[Rules]
 
 class SingBoxConfig(TypedDict):
     log: dict
@@ -17,5 +31,5 @@ class SingBoxConfig(TypedDict):
     ntp: dict
     inbounds: list
     outbounds: List[Node | dict]
-    route: dict
+    route: Route
     experimental: dict

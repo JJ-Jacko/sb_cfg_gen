@@ -76,6 +76,75 @@ class ConfigFactor:
         template["outbounds"].extend(nodes)
 
     @classmethod
+    def __merge_rule_sets_into_singbox_config(
+            cls,
+            template: SingBoxConfig,
+            proxy: bool = True
+    ):
+        
+        url_proxy = "https://gh-proxy.com"
+        url_raw = "https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads"
+        rule_sets_map = {
+            # direct
+            "geoip-private": "geoip",
+            "geosite-geolocation-cn": "geosite",
+            "geosite-cn": "geosite",
+            "geoip-cn": "geoip",
+            # proxy
+            "geosite-geolocation-!cn": "geosite",
+            # ads
+            "geosite-category-ads-all": "geosite",
+            # other
+            "geosite-spotify": "geosite"
+        }
+        
+        for rule_set, type in rule_sets_map.items():
+            url = f"{url_raw}/rule-set-{type}/{rule_set}.srs"
+            
+            if proxy:
+                url =  f"{url_proxy}/{url}"
+    
+            template["route"]["rule_set"].append({
+                "tag": rule_set,
+                "type": "remote",
+                "format": "binary",
+                "url": url
+            })
+            
+    @classmethod
+    def __merge_rules_into_singbox_config(
+            cls,
+            template: SingBoxConfig,
+            block_ads: bool = True
+    ):
+        
+        # block ads
+        if block_ads:
+            template["route"]["rules"].append({
+                "rule_set": ["geosite-category-ads-all"],
+                "outbound": "📢 ADs"
+            })
+        
+        # dirct
+        template["route"]["rules"].append({
+            "rule_set": [
+                "geoip-private",
+                "geosite-geolocation-cn",
+                "geosite-cn",
+                "geoip-cn",
+                # other
+                "geosite-spotify"
+            ],
+            "outbound": "⚡ Direct"
+        })
+        
+        # proxy
+        template["route"]["rules"].append({
+            "rule_set": ["geosite-geolocation-!cn"],
+            "outbound": "🚀 Proxy"
+        })
+        
+    @classmethod
     def __merge_clash_api_into_singbox_config(
             cls,
             template: SingBoxConfig,
@@ -124,6 +193,8 @@ class ConfigFactor:
             template: SingBoxConfig = json.load(f)
         
         cls.__merge_nodes_into_singbox_config(nodes, template)
+        cls.__merge_rule_sets_into_singbox_config(template)
+        cls.__merge_rules_into_singbox_config(template)
 
         if with_clash_api:
             cls.__merge_clash_api_into_singbox_config(template)

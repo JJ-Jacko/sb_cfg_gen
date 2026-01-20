@@ -92,50 +92,7 @@
     ],
     "route": {
         "default_domain_resolver": "dns_resolver",
-        "rule_set": [
-            {
-                "tag": "geoip-private",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-private.srs"
-            },
-            {
-                "tag": "geosite-geolocation-cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-geolocation-cn.srs"
-            },
-            {
-                "tag": "geosite-cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-cn.srs"
-            },
-            {
-                "tag": "geoip-cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-cn.srs"
-            },
-            {
-                "tag": "geosite-geolocation-!cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-geolocation-!cn.srs"
-            },
-            {
-                "tag": "category-ads-all",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-category-ads-all.srs"
-            },
-            {
-                "tag": "geosite-spotify",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-spotify.srs"
-            }
-        ],
+        "rule_set": [],
         "rules": [
             {
                 "action": "sniff"
@@ -146,28 +103,6 @@
             },
             {
                 "clash_mode": "Global",
-                "outbound": "🚀 Proxy"
-            },
-            {
-                "rule_set": [
-                    "category-ads-all"
-                ],
-                "outbound": "📢 ADs"
-            },
-            {
-                "rule_set": [
-                    "geoip-private",
-                    "geosite-geolocation-cn",
-                    "geosite-cn",
-                    "geoip-cn",
-                    "geosite-spotify"
-                ],
-                "outbound": "⚡ Direct"
-            },
-            {
-                "rule_set": [
-                    "geosite-geolocation-!cn"
-                ],
                 "outbound": "🚀 Proxy"
             }
         ],
