@@ -31,7 +31,7 @@
         ],
         "rules": [
             {
-                "rule_set": "geolocation-!cn",
+                "rule_set": "geosite-geolocation-!cn",
                 "query_type": [
                     "A",
                     "AAAA"
@@ -39,7 +39,7 @@
                 "server": "dns_fakeip"
             },
             {
-                "rule_set": "geolocation-!cn",
+                "rule_set": "geosite-geolocation-!cn",
                 "query_type": "CNAME",
                 "server": "dns_proxy"
             },
@@ -94,6 +94,36 @@
         "default_domain_resolver": "dns_resolver",
         "rule_set": [
             {
+                "tag": "geoip-private",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-private.srs"
+            },
+            {
+                "tag": "geosite-geolocation-cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-geolocation-cn.srs"
+            },
+            {
+                "tag": "geosite-cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-cn.srs"
+            },
+            {
+                "tag": "geoip-cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-cn.srs"
+            },
+            {
+                "tag": "geosite-geolocation-!cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-geolocation-!cn.srs"
+            },
+            {
                 "tag": "category-ads-all",
                 "type": "remote",
                 "format": "binary",
@@ -104,36 +134,6 @@
                 "type": "remote",
                 "format": "binary",
                 "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-spotify.srs"
-            },
-            {
-                "tag": "geolocation-cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-geolocation-cn.srs"
-            },
-            {
-                "tag": "cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-cn.srs"
-            },
-            {
-                "tag": "geolocation-!cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/geosite-geolocation-!cn.srs"
-            },
-            {
-                "tag": "private-ip",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-private.srs"
-            },
-            {
-                "tag": "cn-ip",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/geoip-cn.srs"
             }
         ],
         "rules": [
@@ -156,17 +156,17 @@
             },
             {
                 "rule_set": [
-                    "geosite-spotify",
-                    "geolocation-cn",
-                    "cn-ip",
-                    "cn",
-                    "private-ip"
+                    "geoip-private",
+                    "geosite-geolocation-cn",
+                    "geosite-cn",
+                    "geoip-cn",
+                    "geosite-spotify"
                 ],
                 "outbound": "⚡ Direct"
             },
             {
                 "rule_set": [
-                    "geolocation-!cn"
+                    "geosite-geolocation-!cn"
                 ],
                 "outbound": "🚀 Proxy"
             }
