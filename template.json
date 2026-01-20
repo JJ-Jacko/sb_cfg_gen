@@ -5,26 +5,26 @@
     "dns": {
         "servers": [
             {
-                "type": "tcp",
                 "tag": "dns_proxy",
+                "type": "tcp",
                 "server": "1.1.1.1",
                 "detour": "🚀 Proxy",
                 "domain_resolver": "dns_resolver"
             },
             {
-                "type": "https",
                 "tag": "dns_direct",
+                "type": "https",
                 "server": "dns.alidns.com",
                 "domain_resolver": "dns_resolver"
             },
             {
-                "type": "udp",
                 "tag": "dns_resolver",
+                "type": "udp",
                 "server": "223.5.5.5"
             },
             {
-                "type": "fakeip",
                 "tag": "dns_fakeip",
+                "type": "fakeip",
                 "inet4_range": "198.18.0.0/15",
                 "inet6_range": "fc00::/18"
             }
@@ -65,14 +65,14 @@
     },
     "inbounds": [
         {
-            "type": "mixed",
             "tag": "mixed-in",
+            "type": "mixed",
             "listen": "0.0.0.0",
             "listen_port": 2080
         },
         {
-            "type": "tun",
             "tag": "tun-in",
+            "type": "tun",
             "address": "172.19.0.1/30",
             "auto_route": true,
             "strict_route": true,
