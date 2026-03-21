@@ -166,7 +166,8 @@ class ConfigFactor:
             config: SingBoxConfig
     ) -> List[Node]:
         
-        nodes = []
+        nodes: List[Node] = []
+        
         for outbound in config["outbounds"]:
             # 过滤 代理组
             if outbound["type"] not in get_args(NodeType):
@@ -176,16 +177,12 @@ class ConfigFactor:
             if keywords_in_text(cls.airport_info_keywords, outbound["tag"]):
                 continue
             
-            node_cleaned = copy.deepcopy(outbound)
+            # 保留 节点必须的键值
+            node_cleaned: Node = dict()
+            for k in ["tag", "type", "server", "server_port", "method", "password"]:
+                if k in outbound:
+                    node_cleaned[k] = outbound[k]
             
-            # 去除 节点本身带的不需要的键
-            for e in [
-                "domain_resolver", "plugin",
-                "plugin_opts", "network", "tcp_fast_open"
-            ]:
-                if e in node_cleaned:
-                    node_cleaned.pop(e)
-
             nodes.append(node_cleaned)
             
         return nodes
