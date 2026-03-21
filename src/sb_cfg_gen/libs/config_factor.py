@@ -176,13 +176,17 @@ class ConfigFactor:
             if keywords_in_text(cls.airport_info_keywords, outbound["tag"]):
                 continue
             
-            # 过滤 节点本身带的 domain_resolver 键
-            if outbound.get("domain_resolver", None):
-                node_cleaned = copy.deepcopy(outbound)
-                node_cleaned.pop("domain_resolver")
-                nodes.append(node_cleaned)
-            else:
-                nodes.append(outbound)
+            node_cleaned = copy.deepcopy(outbound)
+            
+            # 去除 节点本身带的不需要的键
+            for e in [
+                "domain_resolver", "plugin",
+                "plugin_opts", "network", "tcp_fast_open"
+            ]:
+                if e in node_cleaned:
+                    node_cleaned.pop(e)
+
+            nodes.append(node_cleaned)
             
         return nodes
     

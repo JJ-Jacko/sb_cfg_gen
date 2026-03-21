@@ -9,7 +9,13 @@ class Node(TypedDict):
     type: NodeType
     server: str
     server_port: int
+    method: str
+    password: str
     domain_resolver: str
+    plugin: str
+    plugin_opts: str
+    network: str
+    tcp_fast_open: bool
 
 class RuleSet(TypedDict):
     tag: str
