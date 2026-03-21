@@ -41,19 +41,14 @@ class NodeFactor:
         filtered_nodes: List[Node] = []
         for node in nodes:
             tag = node["tag"]
-            if area_code in tag:
+            if Areas.get(area_code).flag in tag:
                 filtered_nodes.append(node)
-            elif Areas.get(area_code).flag in tag:
+            elif area_code in tag:
                 filtered_nodes.append(node)
-            else:
-                if (
-                    area_code == "IN"
-                    and "印度尼西亚" in tag
-                ):
-                    continue
-
-                if keywords_in_text(Areas.get(area_code).keywords, tag):
-                    filtered_nodes.append(node)
+            elif area_code == "IN" and "印度尼西亚" in tag:
+                continue
+            elif keywords_in_text(Areas.get(area_code).keywords, tag):
+                filtered_nodes.append(node)
 
         return filtered_nodes
 
