@@ -3,7 +3,7 @@ from typing import Literal
 
 AreaCode = Literal[
     # 东亚
-    "HK", "TW", "JP", "KR",
+    "HK", "MO", "TW", "JP", "KR",
     
     # 东南亚
     "SG", "MY", "TH", "VN", "KH", "ID", "PH",
@@ -15,10 +15,10 @@ AreaCode = Literal[
     "KZ", "UZ",
     
     # 西亚
-    "GE", "AM", "TR", "CY", "IL", "QA", "AE", "SA", "IQ", "OM",
+    "GE", "AM", "TR", "CY", "IL", "QA", "AE", "SA", "IQ", "OM", "AZ",
     
     # 东欧
-    "RU", "UA", "MD", "EE", "RO", "SK", "LV", "LT", "PL", "AT",
+    "RU", "UA", "MD", "EE", "RO", "SK", "LV", "LT", "PL", "AT", "HU",
     
     # 东南欧
     "BG", "RS", "AL", "HR", "SI", "GR", "MK",
@@ -36,10 +36,10 @@ AreaCode = Literal[
     "CA", "US", "MX",
     
     # 南美洲
-    "GT", "CR", "CO", "EC", "BR", "AR", "PE", "CL", "BO", "UY",
+    "GT", "CR", "CO", "EC", "BR", "AR", "PE", "CL", "BO", "UY", "GF",
     
     # 非洲
-    "EG", "MG", "DZ", "AO", "NG", "ZA",
+    "EG", "MG", "DZ", "AO", "NG", "ZA", "TG",
     
     # 南极洲
     "AQ"
