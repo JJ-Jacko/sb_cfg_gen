@@ -27,6 +27,7 @@ class NodeFactor:
         "[ATT]",
         "[GTT]"
     ]
+    node_level_keywords: List[str] = ["x0.8", "x1", "x3", "x2", "x4"]
     
     @classmethod
     def __node_in_nodes(cls, node: Node, nodes: List[Node]):
@@ -49,6 +50,20 @@ class NodeFactor:
                 tag_cleaned = tag_cleaned[:i] + tag_cleaned[i + len(kw):]
         
         return tag_cleaned
+
+    @classmethod
+    def __get_basic_nodes(cls, nodes: List[Node]):
+        basic_nodes: List[Node] = []
+        
+        for node in nodes:
+            tag_cleaned = cls.__get_cleaned_tag(node["tag"])
+            if keywords_in_text(cls.node_level_keywords, tag_cleaned):
+                if keywords_in_text(["x1", "x0.8"], tag_cleaned):
+                    basic_nodes.append(node)
+            else:
+                basic_nodes.append(node)
+        
+        return basic_nodes
 
     @classmethod
     def deduplicate_nodes(cls, nodes: List[Node]) -> List[Node | None]:
@@ -99,11 +114,12 @@ class NodeFactor:
 
     @classmethod
     def organize_and_rename_nodes(cls, nodes: List[Node]):
-        return [
-            node
-            for area_code in get_args(AreaCode)
-            for node in cls.rename_same_area_nodes(
-                cls.filter_nodes_with_specified_area(nodes, area_code),
-                area_code
-            )
-        ]
+        result_nodes: List[Node] = []
+        
+        for area_code in get_args(AreaCode):
+            specified_area_nodes = cls.filter_nodes_with_specified_area(nodes, area_code)
+            basic_nodes = cls.__get_basic_nodes(specified_area_nodes)
+            for node in cls.rename_same_area_nodes(basic_nodes, area_code):
+                result_nodes.append(node)
+    
+        return result_nodes
