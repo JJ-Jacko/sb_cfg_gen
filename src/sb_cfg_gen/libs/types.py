@@ -24,7 +24,7 @@ AreaCode = Literal[
     "BG", "RS", "AL", "HR", "SI", "GR", "MK",
     
     # 西欧
-    "DE", "FR", "NL", "BE", "LU", "GB", "IE", "IT", "ES", "PT", "CH",
+    "DE", "FR", "NL", "BE", "LU", "GB", "IE", "IT", "ES", "PT", "CH", "CZ",
     
     # 北欧
     "DK", "SE", "NO", "FI", "IS",
