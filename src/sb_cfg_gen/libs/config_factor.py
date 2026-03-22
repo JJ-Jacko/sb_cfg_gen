@@ -1,14 +1,15 @@
-import copy
 import json
 from pathlib import Path
 from typing import get_args
 from typing import List
 
+from sb_cfg_gen.libs.areas import Areas
 from sb_cfg_gen.libs.dicts import Node
 from sb_cfg_gen.libs.dicts import SingBoxConfig
 from sb_cfg_gen.libs.node_factor import NodeFactor
 from sb_cfg_gen.libs.other import keywords_in_text
 from sb_cfg_gen.libs.types import NodeType
+from sb_cfg_gen.libs.types import AreaCode
 
 
 class ConfigFactor:
@@ -33,29 +34,31 @@ class ConfigFactor:
     def __merge_nodes_into_singbox_config(
             cls,
             nodes: List[Node],
+            buildin_area_codes: List[AreaCode],
             template: SingBoxConfig,
-            extra_country: bool = False
+            extra_area: bool = False
     ):
         
-        if extra_country:
+        if extra_area:
             nodes_output = nodes
         else:
-            nodes_output = (
-                NodeFactor.filter_nodes_with_specified_area(nodes, "HK")
-                + NodeFactor.filter_nodes_with_specified_area(nodes, "TW")
-                + NodeFactor.filter_nodes_with_specified_area(nodes, "SG")
-                + NodeFactor.filter_nodes_with_specified_area(nodes, "JP")
-                + NodeFactor.filter_nodes_with_specified_area(nodes, "US")
-            )
+            nodes_output = [
+                node
+                for area_code in buildin_area_codes
+                for node in NodeFactor.filter_nodes_with_specified_area(nodes, area_code)
+            ]
         
         # 总控制组
         template["outbounds"].append({
             "tag": "🚀 Proxy",
             "type": "selector",
-            "outbounds": [
-                "⚡ Direct", "🖐️ Manual",
-                "🇭🇰 HK", "🇹🇼 TW", "🇸🇬 SG", "🇯🇵 JP", "🇺🇸 US"
-            ]
+            "outbounds": (
+                ["⚡ Direct", "🖐️ Manual"] +
+                [
+                    f"{Areas.get(area_code).flag} {area_code}"
+                    for area_code in buildin_area_codes
+                ]
+            )
         })
         
         # 手动组
@@ -69,12 +72,9 @@ class ConfigFactor:
         })
 
         # 地区组
-        for area_code, tag in [
-                ("HK", "🇭🇰 HK"), ("TW", "🇹🇼 TW"),
-                ("SG", "🇸🇬 SG"), ("JP", "🇯🇵 JP"), ("US", "🇺🇸 US")
-        ]:
+        for area_code in buildin_area_codes:
             template["outbounds"].append({
-                "tag": tag,
+                "tag": f"{Areas.get(area_code).flag} {area_code}",
                 "type": "urltest",
                 "outbounds": [
                     node["tag"]
@@ -134,7 +134,11 @@ class ConfigFactor:
         with template_file.open("r") as f:
             template: SingBoxConfig = json.load(f)
         
-        cls.__merge_nodes_into_singbox_config(nodes, template)
+        cls.__merge_nodes_into_singbox_config(
+            nodes,
+            ["HK", "TW", "SG", "JP", "US"],
+            template
+        )
 
         if with_clash_api:
             cls.__merge_clash_api_into_singbox_config(template)
