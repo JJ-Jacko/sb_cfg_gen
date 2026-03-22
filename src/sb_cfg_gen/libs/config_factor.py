@@ -37,6 +37,17 @@ class ConfigFactor:
             extra_country: bool = False
     ):
         
+        if extra_country:
+            nodes_output = nodes
+        else:
+            nodes_output = (
+                NodeFactor.filter_nodes_with_specified_area(nodes, "HK")
+                + NodeFactor.filter_nodes_with_specified_area(nodes, "TW")
+                + NodeFactor.filter_nodes_with_specified_area(nodes, "SG")
+                + NodeFactor.filter_nodes_with_specified_area(nodes, "JP")
+                + NodeFactor.filter_nodes_with_specified_area(nodes, "US")
+            )
+        
         # 总控制组
         template["outbounds"].append({
             "tag": "🚀 Proxy",
@@ -53,7 +64,7 @@ class ConfigFactor:
             "type": "selector",
             "outbounds": [
                 node["tag"]
-                for node in nodes
+                for node in nodes_output
             ]
         })
 
@@ -72,14 +83,7 @@ class ConfigFactor:
             })
         
         # 节点
-        if extra_country:
-            template["outbounds"].extend(nodes)
-        else:
-            template["outbounds"].extend(NodeFactor.filter_nodes_with_specified_area(nodes, "HK"))
-            template["outbounds"].extend(NodeFactor.filter_nodes_with_specified_area(nodes, "TW"))
-            template["outbounds"].extend(NodeFactor.filter_nodes_with_specified_area(nodes, "SG"))
-            template["outbounds"].extend(NodeFactor.filter_nodes_with_specified_area(nodes, "JP"))
-            template["outbounds"].extend(NodeFactor.filter_nodes_with_specified_area(nodes, "US"))
+        template["outbounds"].extend(nodes_output)
         
     @classmethod
     def __merge_clash_api_into_singbox_config(
