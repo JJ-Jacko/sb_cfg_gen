@@ -33,7 +33,8 @@ class ConfigFactor:
     def __merge_nodes_into_singbox_config(
             cls,
             nodes: List[Node],
-            template: SingBoxConfig
+            template: SingBoxConfig,
+            extra_country: bool = False
     ):
         
         # 总控制组
@@ -71,7 +72,14 @@ class ConfigFactor:
             })
         
         # 节点
-        template["outbounds"].extend(nodes)
+        if extra_country:
+            template["outbounds"].extend(nodes)
+        else:
+            template["outbounds"].extend(NodeFactor.filter_nodes_with_specified_area(nodes, "HK"))
+            template["outbounds"].extend(NodeFactor.filter_nodes_with_specified_area(nodes, "TW"))
+            template["outbounds"].extend(NodeFactor.filter_nodes_with_specified_area(nodes, "SG"))
+            template["outbounds"].extend(NodeFactor.filter_nodes_with_specified_area(nodes, "JP"))
+            template["outbounds"].extend(NodeFactor.filter_nodes_with_specified_area(nodes, "US"))
         
     @classmethod
     def __merge_clash_api_into_singbox_config(
