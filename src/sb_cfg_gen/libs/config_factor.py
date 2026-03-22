@@ -56,13 +56,6 @@ class ConfigFactor:
             ]
         })
 
-        # 禁广告组
-        template["outbounds"].append({
-            "tag": "📢 ADs",
-            "type": "selector",
-            "outbounds": ["🚀 Proxy", "🚫 Reject"]
-        })
-
         # 地区组
         for area_code, tag in [
                 ("HK", "🇭🇰 HK"), ("TW", "🇹🇼 TW"),
