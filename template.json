@@ -2,73 +2,18 @@
     "log": {
         "level": "info"
     },
-    "dns": {
-        "servers": [
-            {
-                "tag": "dns_proxy",
-                "type": "tcp",
-                "server": "1.1.1.1",
-                "detour": "🚀 Proxy",
-                "domain_resolver": "dns_resolver"
-            },
-            {
-                "tag": "dns_direct",
-                "type": "https",
-                "server": "dns.alidns.com",
-                "domain_resolver": "dns_resolver"
-            },
-            {
-                "tag": "dns_resolver",
-                "type": "udp",
-                "server": "223.5.5.5"
-            },
-            {
-                "tag": "dns_fakeip",
-                "type": "fakeip",
-                "inet4_range": "198.18.0.0/15",
-                "inet6_range": "fc00::/18"
-            }
-        ],
-        "rules": [
-            {
-                "rule_set": "geosite-geolocation-!cn",
-                "query_type": [
-                    "A",
-                    "AAAA"
-                ],
-                "server": "dns_fakeip"
-            },
-            {
-                "rule_set": "geosite-geolocation-!cn",
-                "query_type": "CNAME",
-                "server": "dns_proxy"
-            },
-            {
-                "query_type": [
-                    "A",
-                    "AAAA",
-                    "CNAME"
-                ],
-                "invert": true,
-                "action": "predefined",
-                "rcode": "REFUSED"
-            }
-        ],
-        "final": "dns_direct",
-        "independent_cache": true
-    },
-    "ntp": {
-        "enabled": true,
-        "server": "time.apple.com",
-        "server_port": 123,
-        "interval": "30m"
+    "experimental": {
+        "cache_file": {
+            "enabled": true,
+            "store_fakeip": true
+        }
     },
     "inbounds": [
         {
             "tag": "mixed-in",
             "type": "mixed",
             "listen": "0.0.0.0",
-            "listen_port": 2080
+            "listen_port": 8848
         },
         {
             "tag": "tun-in",
@@ -91,8 +36,45 @@
         }
     ],
     "route": {
-        "default_domain_resolver": "dns_resolver",
-        "rule_set": [],
+        "default_domain_resolver": "Ali-DNS",
+        "rule_set": [
+            {
+                "tag": "GeoSite-Private",
+                "type": "remote",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/private.srs",
+                "format": "binary"
+            },
+            {
+                "tag": "GeoIP-Private",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs"
+            },
+            {
+                "tag": "GeoSite-CN",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs"
+            },
+            {
+                "tag": "GeoIP-CN",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs"
+            },
+            {
+                "tag": "GeoLocation-!CN",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs"
+            },
+            {
+                "tag": "GeoSite-Spotify",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/spotify.srs"
+            }
+        ],
         "rules": [
             {
                 "action": "sniff"
@@ -104,15 +86,87 @@
             {
                 "clash_mode": "Global",
                 "outbound": "🚀 Proxy"
+            },
+            {
+                "domain": "services.googleapis.cn",
+                "outbound": "🚀 Proxy"
+            },
+            {
+                "rule_set": [
+                    "GeoIP-Private",
+                    "GeoSite-Private",
+                    "GeoIP-CN",
+                    "GeoSite-CN",
+                    "GeoSite-Spotify"
+                ],
+                "outbound": "⚡ Direct"
+            },
+            {
+                "rule_set": [
+                    "GeoLocation-!CN"
+                ],
+                "outbound": "🚀 Proxy"
             }
         ],
         "auto_detect_interface": true,
         "final": "🚀 Proxy"
     },
-    "experimental": {
-        "cache_file": {
-            "enabled": true,
-            "store_fakeip": true
-        }
+    "dns": {
+        "servers": [
+            {
+                "tag": "Ali-DNS",
+                "type": "https",
+                "server": "223.5.5.5",
+                "server_port": 443,
+                "path": "/dns-query",
+                "domain_resolver": "Ali-DNS-UDP"
+            },
+            {
+                "tag": "Ali-DNS-UDP",
+                "type": "udp",
+                "server": "223.5.5.5",
+                "server_port": 53
+            },
+            {
+                "tag": "Cloudflare-DNS",
+                "type": "tls",
+                "server": "1.1.1.1",
+                "domain_resolver": "Cloudflare-DNS-UDP",
+                "detour": "🚀 Proxy"
+            },
+            {
+                "tag": "Cloudflare-DNS-UDP",
+                "type": "udp",
+                "server": "1.1.1.1",
+                "detour": "🚀 Proxy"
+            }
+        ],
+        "rules": [
+            {
+                "action": "route",
+                "clash_mode": "Global",
+                "server": "Cloudflare-DNS"
+            },
+            {
+                "action": "route",
+                "rule_set": [
+                    "GeoSite-CN",
+                    "GeoIP-CN",
+                    "GeoSite-Private",
+                    "GeoIP-Private",
+                    "GeoSite-Spotify"
+                ],
+                "server": "Ali-DNS"
+            },
+            {
+                "action": "route",
+                "rule_set": [
+                    "GeoLocation-!CN"
+                ],
+                "server": "Cloudflare-DNS"
+            }
+        ],
+        "final": "Cloudflare-DNS",
+        "independent_cache": true
     }
 }
