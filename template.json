@@ -21,8 +21,7 @@
             "address": "172.19.0.1/30",
             "auto_route": true,
             "strict_route": true,
-            "stack": "mixed",
-            "sniff": true
+            "stack": "mixed"
         }
     ],
     "outbounds": [
@@ -77,7 +76,11 @@
         ],
         "rules": [
             {
-                "action": "sniff"
+                "action": "sniff",
+                "inbound": [
+                    "mixed-in",
+                    "tun-in"
+                ]
             },
             {
                 "protocol": "dns",
