@@ -165,7 +165,8 @@
             {
                 "action": "route",
                 "rule_set": [
-                    "GeoLocation-!CN"
+                    "GeoLocation-!CN",
+                    "GeoSite-Linkedin"
                 ],
                 "server": "Cloudflare-DNS"
             }
