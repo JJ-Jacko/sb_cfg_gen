@@ -1,3 +1,4 @@
+import copy
 import json
 from pathlib import Path
 from typing import get_args
@@ -113,12 +114,26 @@ class ConfigFactor:
             if keywords_in_text(cls.airport_info_keywords, outbound["tag"]):
                 continue
             
-            # 保留 节点必须的键值
-            node_cleaned: Node = dict()
-            for k in ["tag", "type", "server", "server_port", "method", "password"]:
-                if k in outbound:
-                    node_cleaned[k] = outbound[k]
-            
+            # 调整 不同类型的节点键值顺序
+            match outbound["type"]:
+                case "shadowsocks":
+                    node_cleaned = {
+                        k: copy.deepcopy(outbound[k])
+                        for k in ["tag", "type", "server", "server_port", "method", "password"]
+                        if k in outbound
+                    }
+                    
+                case _:
+                    node_cleaned = {
+                        k: copy.deepcopy(outbound[k])
+                        for k in ["tag", "type", "server", "server_port"]
+                        if k in outbound
+                    }
+                            
+                    for k in outbound:
+                        if k not in node_cleaned:
+                            node_cleaned[k] = outbound[k]
+                    
             nodes.append(node_cleaned)
             
         return nodes
