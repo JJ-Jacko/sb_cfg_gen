@@ -110,12 +110,6 @@
                     "GeoSite-Spotify"
                 ],
                 "outbound": "⚡ Direct"
-            },
-            {
-                "rule_set": [
-                    "GeoLocation-!CN"
-                ],
-                "outbound": "🚀 Proxy"
             }
         ],
         "auto_detect_interface": true,
