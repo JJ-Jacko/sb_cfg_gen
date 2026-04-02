@@ -72,6 +72,12 @@
                 "type": "remote",
                 "format": "binary",
                 "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/spotify.srs"
+            },
+            {
+                "tag": "GeoSite-Linkedin",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/linkedin.srs"
             }
         ],
         "rules": [
@@ -92,6 +98,7 @@
             },
             {
                 "domain": "services.googleapis.cn",
+                "rule_set": "GeoSite-Linkedin",
                 "outbound": "🚀 Proxy"
             },
             {
