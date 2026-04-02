@@ -18,6 +18,7 @@ class NodeFactor:
         "[日动]",
         "[月动]",
         "[大宽带]",
+        "[实验]",
         "[星链]",
         "[starlink]",
         "[T-Mobile]",
@@ -25,7 +26,8 @@ class NodeFactor:
         "[Hawaiian]",
         "[ISP]",
         "[ATT]",
-        "[GTT]"
+        "[GTT]",
+        "[vless]"
     ]
     node_level_keywords: List[str] = ["x0.8", "x1", "x3", "x2", "x4"]
     
