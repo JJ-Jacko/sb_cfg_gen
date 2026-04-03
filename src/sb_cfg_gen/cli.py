@@ -1,10 +1,13 @@
 from sb_cfg_gen.libs.config_factor import ConfigFactor
 from sb_cfg_gen.libs.node_factor import NodeFactor
 from sb_cfg_gen.libs.other import write_json_file
+from sb_cfg_gen.libs.other import load_json_file
 from sb_cfg_gen.libs.web import url_get_singbox_config_file
 
 
 def main():
+    # raw_cfg = load_json_file("cache/raw_cfg.json")
+    
     # Get urls
     url = input("url: ")
     

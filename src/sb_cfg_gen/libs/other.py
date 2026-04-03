@@ -14,6 +14,12 @@ def keywords_in_text(
     return False
 
 
+def load_json_file(file: str | Path):
+
+    with open(file, "r") as f:
+        return json.load(f)
+
+
 def write_json_file(
         file: str | Path,
         data: dict,
