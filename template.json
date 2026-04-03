@@ -8,22 +8,7 @@
             "store_fakeip": true
         }
     },
-    "inbounds": [
-        {
-            "tag": "mixed-in",
-            "type": "mixed",
-            "listen": "0.0.0.0",
-            "listen_port": 8848
-        },
-        {
-            "tag": "tun-in",
-            "type": "tun",
-            "address": "172.19.0.1/30",
-            "auto_route": true,
-            "strict_route": true,
-            "stack": "mixed"
-        }
-    ],
+    "inbounds": [],
     "outbounds": [
         {
             "tag": "🚫 Reject",

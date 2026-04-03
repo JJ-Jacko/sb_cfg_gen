@@ -99,6 +99,32 @@ class ConfigFactor:
         }
 
     @classmethod
+    def __merge_inbounds_into_singbox_config(
+            cls,
+            template: SingBoxConfig,
+            mixed_in: bool = True,
+            mixed_in_port: int = 8848,
+            tun_in: bool = True
+    ):
+
+        if mixed_in:
+            template["inbounds"].append({
+                "tag": "mixed-in",
+                "type": "mixed",
+                "listen": "0.0.0.0",
+                "listen_port": mixed_in_port
+            })
+        if tun_in:
+            template["inbounds"].append({
+                "tag": "tun-in",
+                "type": "tun",
+                "address": "172.19.0.1/30",
+                "auto_route": True,
+                "strict_route": True,
+                "stack": "mixed"
+            })
+
+    @classmethod
     def extra_nodes_from_singbox_config(
             cls,
             config: SingBoxConfig
@@ -143,7 +169,9 @@ class ConfigFactor:
     def merge_singbox_config(
             cls,
             nodes: List[Node],
-            with_clash_api: bool = True,
+            inbound_mixd_in: bool,
+            inbound_tun_in: bool,
+            with_clash_api: bool,
             clash_api_path: str = "dashboard",
             template_file: Path = Path("template.json")
     ):
@@ -155,6 +183,12 @@ class ConfigFactor:
             nodes,
             ["HK", "TW", "SG", "JP", "US"],
             template
+        )
+        
+        cls.__merge_inbounds_into_singbox_config(
+            template,
+            mixed_in=inbound_mixd_in,
+            tun_in=inbound_tun_in
         )
 
         if with_clash_api:

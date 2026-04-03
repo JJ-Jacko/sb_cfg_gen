@@ -24,12 +24,28 @@ def main():
     nodes_organize_renamed = NodeFactor.organize_and_rename_nodes(nodes_deduplicated)
 
     # Merge new sing-box config
-    final_cfg = ConfigFactor.merge_singbox_config(nodes_organize_renamed)
-    final_cfg_mobie = ConfigFactor.merge_singbox_config(nodes_organize_renamed, with_clash_api=False)
-    final_cfg_server = ConfigFactor.merge_singbox_config(nodes_organize_renamed, clash_api_path="/var/www/clash_api")
+    final_cfg_desktop = ConfigFactor.merge_singbox_config(
+        nodes_organize_renamed,
+        inbound_mixd_in=False,
+        inbound_tun_in=True,
+        with_clash_api=True
+    )
+    final_cfg_mobie = ConfigFactor.merge_singbox_config(
+        nodes_organize_renamed,
+        inbound_mixd_in=False,
+        inbound_tun_in=True,
+        with_clash_api=False
+    )
+    final_cfg_server = ConfigFactor.merge_singbox_config(
+        nodes_organize_renamed, 
+        inbound_mixd_in=True,
+        inbound_tun_in=True,
+        with_clash_api=True,
+        clash_api_path="/var/www/clash_api"
+    )
     
     # Save sing-box config
-    write_json_file("config.json", final_cfg)
+    write_json_file("config-desktop.json", final_cfg_desktop)
     write_json_file("config-mobie.json", final_cfg_mobie)
     write_json_file("config-server.json", final_cfg_server)
 
