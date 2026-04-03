@@ -90,11 +90,12 @@ class ConfigFactor:
     def __merge_clash_api_into_singbox_config(
             cls,
             template: SingBoxConfig,
-            port: int = 9090
+            port: int = 9090,
+            clash_api_path: str = "dashboard"
     ):
         template["experimental"]["clash_api"] = {
             "external_controller": f"0.0.0.0:{port}",
-            "external_ui": "dashboard"
+            "external_ui": clash_api_path
         }
 
     @classmethod
@@ -143,6 +144,7 @@ class ConfigFactor:
             cls,
             nodes: List[Node],
             with_clash_api: bool = True,
+            clash_api_path: str = "dashboard",
             template_file: Path = Path("template.json")
     ):
         
@@ -156,7 +158,7 @@ class ConfigFactor:
         )
 
         if with_clash_api:
-            cls.__merge_clash_api_into_singbox_config(template)
+            cls.__merge_clash_api_into_singbox_config(template, clash_api_path=clash_api_path)
         
         return template
 

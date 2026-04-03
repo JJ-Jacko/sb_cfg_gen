@@ -25,9 +25,13 @@ def main():
 
     # Merge new sing-box config
     final_cfg = ConfigFactor.merge_singbox_config(nodes_organize_renamed)
+    final_cfg_mobie = ConfigFactor.merge_singbox_config(nodes_organize_renamed, with_clash_api=False)
+    final_cfg_server = ConfigFactor.merge_singbox_config(nodes_organize_renamed, clash_api_path="/var/www/clash_api")
     
     # Save sing-box config
     write_json_file("config.json", final_cfg)
+    write_json_file("config-mobie.json", final_cfg_mobie)
+    write_json_file("config-server.json", final_cfg_server)
 
 
 if __name__ == "__main__":
