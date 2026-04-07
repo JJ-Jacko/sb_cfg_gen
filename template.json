@@ -68,10 +68,7 @@
         "rules": [
             {
                 "action": "sniff",
-                "inbound": [
-                    "mixed-in",
-                    "tun-in"
-                ]
+                "inbound": []
             },
             {
                 "protocol": "dns",

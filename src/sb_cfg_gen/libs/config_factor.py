@@ -114,6 +114,7 @@ class ConfigFactor:
                 "listen": "0.0.0.0",
                 "listen_port": mixed_in_port
             })
+            template["route"]["rules"][0]["inbound"].append("mixed-in")
         if tun_in:
             template["inbounds"].append({
                 "tag": "tun-in",
@@ -123,6 +124,7 @@ class ConfigFactor:
                 "strict_route": True,
                 "stack": "mixed"
             })
+            template["route"]["rules"][0]["inbound"].append("tun-in")
 
     @classmethod
     def extra_nodes_from_singbox_config(

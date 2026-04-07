@@ -26,6 +26,7 @@ class RuleSet(TypedDict):
 class Rules(TypedDict):
     rule_set: List[str]
     outbound: str
+    inbound: List[str]
 
 class Route(TypedDict):
     rule_set: List[RuleSet]
