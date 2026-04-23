@@ -10,7 +10,8 @@ dependencies = [
 ]
 
 [project.scripts]
-sb-cfg-gen = "sb_cfg_gen.cli:main"
+sb-gen-airport = "sb_cfg_gen.main:gen_airport"
+sb-gen-diy = "sb_cfg_gen.main:gen_diy"
 
 [build-system]
 requires = ["hatchling"]

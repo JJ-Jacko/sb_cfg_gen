@@ -5,7 +5,7 @@ from sb_cfg_gen.libs.other import load_json_file
 from sb_cfg_gen.libs.web import url_get_singbox_config_file
 
 
-def main():
+def gen_airport():
     # raw_cfg = load_json_file("cache/raw_cfg.json")
     
     # Get urls
@@ -53,5 +53,43 @@ def main():
     write_json_file("config-server.json", final_cfg_server)
 
 
+def gen_diy():
+    nodes = load_json_file("cache/nodes.json")["nodes"]
+    
+    # Merge new sing-box config
+    final_cfg_desktop = ConfigFactor.merge_singbox_config(
+        nodes,
+        inbound_mixd_in=False,
+        inbound_tun_in=True,
+        with_clash_api=True
+    )
+    final_cfg_mobie = ConfigFactor.merge_singbox_config(
+        nodes,
+        inbound_mixd_in=False,
+        inbound_tun_in=True,
+        with_clash_api=False
+    )
+    final_cfg_server = ConfigFactor.merge_singbox_config(
+        nodes, 
+        inbound_mixd_in=True,
+        inbound_tun_in=True,
+        with_clash_api=True,
+        clash_api_path="/var/www/clash_api"
+    )
+    
+    # Save sing-box config
+    write_json_file("config-diy-desktop.json", final_cfg_desktop)
+    write_json_file("config-diy-mobie.json", final_cfg_mobie)
+    write_json_file("config-diy-server.json", final_cfg_server)
+
+
+def test():
+    pass
+
+
 if __name__ == "__main__":
-    main()
+    # gen_airport()
+    # gen_diy()
+    # test()
+    
+    pass
