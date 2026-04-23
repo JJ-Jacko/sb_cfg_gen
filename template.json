@@ -59,6 +59,12 @@
                 "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/spotify.srs"
             },
             {
+                "tag": "GeoSite-Zoom",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/zoom.srs"
+            },
+            {
                 "tag": "GeoSite-Linkedin",
                 "type": "remote",
                 "format": "binary",
@@ -89,7 +95,8 @@
                     "GeoSite-Private",
                     "GeoIP-CN",
                     "GeoSite-CN",
-                    "GeoSite-Spotify"
+                    "GeoSite-Spotify",
+                    "GeoSite-Zoom"
                 ],
                 "outbound": "⚡ Direct"
             }
@@ -140,7 +147,8 @@
                     "GeoIP-CN",
                     "GeoSite-Private",
                     "GeoIP-Private",
-                    "GeoSite-Spotify"
+                    "GeoSite-Spotify",
+                    "GeoSite-Zoom"
                 ],
                 "server": "Ali-DNS"
             },
