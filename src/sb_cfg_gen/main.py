@@ -51,9 +51,9 @@ def gen_airport():
     )
     
     # Save sing-box config
-    write_json_file("config-desktop.json", final_cfg_desktop)
-    write_json_file("config-mobie.json", final_cfg_mobie)
-    write_json_file("config-server.json", final_cfg_server)
+    write_json_file("output/config-desktop.json", final_cfg_desktop)
+    write_json_file("output/config-mobie.json", final_cfg_mobie)
+    write_json_file("output/config-server.json", final_cfg_server)
 
 
 def gen_diy():
@@ -84,9 +84,9 @@ def gen_diy():
     )
     
     # Save sing-box config
-    write_json_file("config-diy-desktop.json", final_cfg_desktop)
-    write_json_file("config-diy-mobie.json", final_cfg_mobie)
-    write_json_file("config-diy-server.json", final_cfg_server)
+    write_json_file("output/config-diy-desktop.json", final_cfg_desktop)
+    write_json_file("output/config-diy-mobie.json", final_cfg_mobie)
+    write_json_file("output/config-diy-server.json", final_cfg_server)
 
 
 def test():

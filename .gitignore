@@ -10,4 +10,4 @@ uv.lock
 # Project
 test
 cache
-config*.json
+output
