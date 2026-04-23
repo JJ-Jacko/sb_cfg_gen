@@ -25,9 +25,32 @@ source .venv/bin/activate
 ```
 
 ### 運行
+#### 生成機場的 sing-box 配置文件
 ```sh
-sb-cfg-gen
+sb-gen-airport
 ```
 ```log
 url:
+```
+#### 生成客制化代理的 sing-box 配置文件
+在檔案 `nodes.json` 中寫入節點
+```json
+{
+    "nodes": [
+        {
+            "tag": "vless_reality",
+            "type": "vless",
+            ...
+        },
+        {
+            "tag": "hy2",
+            "type": "hysteria2",
+            ...
+        },
+        ...
+    ]
+}
+```
+```sh
+sb-gen-diy
 ```
