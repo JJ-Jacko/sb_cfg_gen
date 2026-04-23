@@ -31,19 +31,22 @@ def gen_airport():
         nodes_organize_renamed,
         inbound_mixd_in=False,
         inbound_tun_in=True,
-        with_clash_api=True
+        with_clash_api=True,
+        type="airport"
     )
     final_cfg_mobie = ConfigFactor.merge_singbox_config(
         nodes_organize_renamed,
         inbound_mixd_in=False,
         inbound_tun_in=True,
-        with_clash_api=False
+        with_clash_api=False,
+        type="airport"
     )
     final_cfg_server = ConfigFactor.merge_singbox_config(
         nodes_organize_renamed, 
         inbound_mixd_in=True,
         inbound_tun_in=True,
         with_clash_api=True,
+        type="airport",
         clash_api_path="/var/www/clash_api"
     )
     
@@ -61,19 +64,22 @@ def gen_diy():
         nodes,
         inbound_mixd_in=False,
         inbound_tun_in=True,
-        with_clash_api=True
+        with_clash_api=True,
+        type="diy"
     )
     final_cfg_mobie = ConfigFactor.merge_singbox_config(
         nodes,
         inbound_mixd_in=False,
         inbound_tun_in=True,
-        with_clash_api=False
+        with_clash_api=False,
+        type="diy"
     )
     final_cfg_server = ConfigFactor.merge_singbox_config(
         nodes, 
         inbound_mixd_in=True,
         inbound_tun_in=True,
         with_clash_api=True,
+        type="diy",
         clash_api_path="/var/www/clash_api"
     )
     

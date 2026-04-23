@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 from typing import get_args
 from typing import List
+from typing import Literal
 
 from sb_cfg_gen.libs.areas import Areas
 from sb_cfg_gen.libs.dicts import Node
@@ -85,6 +86,26 @@ class ConfigFactor:
         
         # 节点
         template["outbounds"].extend(nodes_output)
+
+    @classmethod
+    def __merge_nodes_into_singbox_config_no_area_group(
+            cls,
+            nodes: List[Node],
+            template: SingBoxConfig
+    ):
+        
+        # 总控制组
+        template["outbounds"].append({
+            "tag": "🚀 Proxy",
+            "type": "selector",
+            "outbounds": [
+                node["tag"]
+                for node in nodes
+            ]
+        })
+
+        # 节点
+        template["outbounds"].extend(nodes)
         
     @classmethod
     def __merge_clash_api_into_singbox_config(
@@ -174,6 +195,7 @@ class ConfigFactor:
             inbound_mixd_in: bool,
             inbound_tun_in: bool,
             with_clash_api: bool,
+            type: Literal["airport", "diy"],
             clash_api_path: str = "dashboard",
             template_file: Path = Path("template.json")
     ):
@@ -181,11 +203,18 @@ class ConfigFactor:
         with template_file.open("r") as f:
             template: SingBoxConfig = json.load(f)
         
-        cls.__merge_nodes_into_singbox_config(
-            nodes,
-            ["HK", "TW", "SG", "JP", "US"],
-            template
-        )
+        match type:
+            case "airport":
+                cls.__merge_nodes_into_singbox_config(
+                    nodes,
+                    ["HK", "TW", "SG", "JP", "US"],
+                    template
+                )
+            case "diy":
+                cls.__merge_nodes_into_singbox_config_no_area_group(
+                    nodes,
+                    template
+                )
         
         cls.__merge_inbounds_into_singbox_config(
             template,
