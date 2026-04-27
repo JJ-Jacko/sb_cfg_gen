@@ -54,3 +54,14 @@ url:
 ```sh
 sb-gen-diy
 ```
+#### Web API
+设置配置文件 `config.toml`
+```toml
+api_tokens = [
+    "jacko",
+    "john"
+]
+```
+```sh
+sb-web-api
+```

@@ -53,3 +53,14 @@ Write nodes in file `nodes.json`
 ```sh
 sb-gen-diy
 ```
+#### Web API
+Set configuration file `config.toml`
+```toml
+api_tokens = [
+    "jacko",
+    "john"
+]
+```
+```sh
+sb-web-api
+```

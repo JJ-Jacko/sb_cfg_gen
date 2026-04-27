@@ -6,12 +6,14 @@ authors = [
     { name = "Jacko", email = "l2982211930@163.com" }
 ]
 dependencies = [
-    "requests"
+    "requests",
+    "fastapi[standard]"
 ]
 
 [project.scripts]
 sb-gen-airport = "sb_cfg_gen.main:gen_airport"
 sb-gen-diy = "sb_cfg_gen.main:gen_diy"
+sb-web-api = "sb_cfg_gen.main:web_api"
 
 [build-system]
 requires = ["hatchling"]

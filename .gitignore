@@ -12,3 +12,4 @@ test
 cache
 output
 nodes.json
+config.toml

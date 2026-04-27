@@ -1,3 +1,5 @@
+import uvicorn
+
 from sb_cfg_gen.libs.config_factor import ConfigFactor
 from sb_cfg_gen.libs.node_factor import NodeFactor
 from sb_cfg_gen.libs.other import write_json_file
@@ -89,6 +91,15 @@ def gen_diy():
     write_json_file("output/diy-server.json", final_cfg_server)
 
 
+def web_api():
+    uvicorn.run(
+        "sb_cfg_gen.app:app",
+        host="0.0.0.0",
+        port=9988,
+        reload=False
+    )
+
+
 def test():
     pass
 
@@ -96,6 +107,7 @@ def test():
 if __name__ == "__main__":
     # gen_airport()
     # gen_diy()
+    # web_api()
     # test()
     
     pass
