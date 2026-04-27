@@ -4,14 +4,18 @@ from sb_cfg_gen.libs.config_factor import ConfigFactor
 from sb_cfg_gen.libs.node_factor import NodeFactor
 from sb_cfg_gen.libs.other import write_json_file
 from sb_cfg_gen.libs.other import load_json_file
+from sb_cfg_gen.libs.other import load_config
 from sb_cfg_gen.libs.web import Web
+
+
+config_file = load_config()
 
 
 def gen_airport():
     # raw_cfg = load_json_file("cache/raw_cfg.json")
     
     # Get urls
-    url = input("url: ")
+    url = config_file["airport_url"]
     
     # Get raw sing-box config
     raw_cfg: dict = Web.singbox_config_file(url).json()
@@ -105,7 +109,7 @@ def test():
 
 
 if __name__ == "__main__":
-    # gen_airport()
+    gen_airport()
     # gen_diy()
     # web_api()
     # test()

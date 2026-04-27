@@ -26,11 +26,12 @@ source .venv/bin/activate
 
 ### 运行
 #### 生成机场的 sing-box 配置文件
+设置配置文件 `config.toml`
+```toml
+airport_url = "https://example.com/sing-box"
+```
 ```sh
 sb-gen-airport
-```
-```log
-url:
 ```
 #### 生成自建代理的 sing-box 配置文件
 在文件 `nodes.json` 中写入节点

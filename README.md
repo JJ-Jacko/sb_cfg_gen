@@ -25,11 +25,12 @@ source .venv/bin/activate
 
 ### Run
 #### Generate airport's sing-box config file 
+Set configuration file `config.toml`
+```toml
+airport_url = "https://example.com/sing-box"
+```
 ```sh
 sb-gen-airport
-```
-```log
-url:
 ```
 #### Generate DIY sing-box config file 
 Write nodes in file `nodes.json`
