@@ -11,3 +11,4 @@ uv.lock
 test
 cache
 output
+nodes.json
