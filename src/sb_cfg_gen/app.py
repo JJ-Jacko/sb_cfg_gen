@@ -1,15 +1,14 @@
-import tomllib
 from typing import Literal
 
 from fastapi import FastAPI
 from fastapi import HTTPException
 
 from sb_cfg_gen.libs.other import load_json_file
+from sb_cfg_gen.libs.other import load_config
 
 
 app = FastAPI()
-with open("config.toml", "rb") as f:
-    config_file = tomllib.load(f)
+config_file = load_config()
 
 
 @app.get("/sb_cfg")

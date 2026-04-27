@@ -1,4 +1,5 @@
 import json
+import tomllib
 from pathlib import Path
 from typing import List
 
@@ -12,6 +13,14 @@ def keywords_in_text(
             return True
     
     return False
+
+
+def load_config():
+    p = Path("config.toml")
+    
+    with p.open("rb") as f:
+
+        return  tomllib.load(f)
 
 
 def load_json_file(file: str | Path):
