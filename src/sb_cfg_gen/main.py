@@ -2,7 +2,7 @@ from sb_cfg_gen.libs.config_factor import ConfigFactor
 from sb_cfg_gen.libs.node_factor import NodeFactor
 from sb_cfg_gen.libs.other import write_json_file
 from sb_cfg_gen.libs.other import load_json_file
-from sb_cfg_gen.libs.web import url_get_singbox_config_file
+from sb_cfg_gen.libs.web import Web
 
 
 def gen_airport():
@@ -12,7 +12,7 @@ def gen_airport():
     url = input("url: ")
     
     # Get raw sing-box config
-    raw_cfg = url_get_singbox_config_file(url)
+    raw_cfg: dict = Web.singbox_config_file(url).json()
         
     # Sava raw sing-box config
     write_json_file(f"cache/raw_cfg.json", raw_cfg)
@@ -94,7 +94,7 @@ def test():
 
 
 if __name__ == "__main__":
-    # gen_airport()
+    gen_airport()
     # gen_diy()
     # test()
     
