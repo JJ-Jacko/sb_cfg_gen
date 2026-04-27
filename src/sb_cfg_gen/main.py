@@ -27,18 +27,18 @@ def gen_airport():
     nodes_organize_renamed = NodeFactor.organize_and_rename_nodes(nodes_deduplicated)
 
     # Merge new sing-box config
-    final_cfg_desktop = ConfigFactor.merge_singbox_config(
-        nodes_organize_renamed,
-        inbound_mixd_in=False,
-        inbound_tun_in=True,
-        with_clash_api=True,
-        type="airport"
-    )
-    final_cfg_mobie = ConfigFactor.merge_singbox_config(
+    final_cfg_app = ConfigFactor.merge_singbox_config(
         nodes_organize_renamed,
         inbound_mixd_in=False,
         inbound_tun_in=True,
         with_clash_api=False,
+        type="airport"
+    )
+    final_cfg_cli = ConfigFactor.merge_singbox_config(
+        nodes_organize_renamed,
+        inbound_mixd_in=False,
+        inbound_tun_in=True,
+        with_clash_api=True,
         type="airport"
     )
     final_cfg_server = ConfigFactor.merge_singbox_config(
@@ -51,27 +51,27 @@ def gen_airport():
     )
     
     # Save sing-box config
-    write_json_file("output/config-desktop.json", final_cfg_desktop)
-    write_json_file("output/config-mobie.json", final_cfg_mobie)
-    write_json_file("output/config-server.json", final_cfg_server)
+    write_json_file("output/airport-app.json", final_cfg_app)
+    write_json_file("output/airport-cli.json", final_cfg_cli)
+    write_json_file("output/airport-server.json", final_cfg_server)
 
 
 def gen_diy():
-    nodes = load_json_file("cache/nodes.json")["nodes"]
+    nodes = load_json_file("nodes.json")["nodes"]
     
     # Merge new sing-box config
-    final_cfg_desktop = ConfigFactor.merge_singbox_config(
-        nodes,
-        inbound_mixd_in=False,
-        inbound_tun_in=True,
-        with_clash_api=True,
-        type="diy"
-    )
-    final_cfg_mobie = ConfigFactor.merge_singbox_config(
+    final_cfg_app = ConfigFactor.merge_singbox_config(
         nodes,
         inbound_mixd_in=False,
         inbound_tun_in=True,
         with_clash_api=False,
+        type="diy"
+    )
+    final_cfg_cli = ConfigFactor.merge_singbox_config(
+        nodes,
+        inbound_mixd_in=False,
+        inbound_tun_in=True,
+        with_clash_api=True,
         type="diy"
     )
     final_cfg_server = ConfigFactor.merge_singbox_config(
@@ -84,9 +84,9 @@ def gen_diy():
     )
     
     # Save sing-box config
-    write_json_file("output/config-diy-desktop.json", final_cfg_desktop)
-    write_json_file("output/config-diy-mobie.json", final_cfg_mobie)
-    write_json_file("output/config-diy-server.json", final_cfg_server)
+    write_json_file("output/diy-app.json", final_cfg_app)
+    write_json_file("output/diy-cli.json", final_cfg_cli)
+    write_json_file("output/diy-server.json", final_cfg_server)
 
 
 def test():
@@ -94,7 +94,7 @@ def test():
 
 
 if __name__ == "__main__":
-    gen_airport()
+    # gen_airport()
     # gen_diy()
     # test()
     
