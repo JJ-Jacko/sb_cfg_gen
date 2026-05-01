@@ -15,9 +15,8 @@ def keywords_in_text(
     return False
 
 
-def load_config():
-    p = Path("config.toml")
-    
+def load_config(p: Path):
+        
     with p.open("rb") as f:
 
         return  tomllib.load(f)

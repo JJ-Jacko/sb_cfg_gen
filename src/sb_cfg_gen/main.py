@@ -1,4 +1,5 @@
 import uvicorn
+from pathlib import Path
 
 from sb_cfg_gen.libs.config_factor import ConfigFactor
 from sb_cfg_gen.libs.node_factor import NodeFactor
@@ -8,20 +9,35 @@ from sb_cfg_gen.libs.other import load_config
 from sb_cfg_gen.libs.web import Web
 
 
-config_file = load_config()
+project_config_file = Path("config.toml")
+nodes_file = Path("nodes.json")
+cache_dir = Path("cache")
+output_dir = Path("output")
+raw_cfg_file = cache_dir / "raw_cfg.json"
+airport_app_file = output_dir / "airport-app.json"
+airport_cli_file = output_dir / "airport-cli.json"
+airport_server_file = output_dir / "airport-server.json"
+diy_app_file = output_dir / "diy-app.json"
+diy_cli_file = output_dir / "diy-cli.json"
+diy_server_file = output_dir / "diy-server.json"
+
+
+def _init():
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
 
 def gen_airport():
-    # raw_cfg = load_json_file("cache/raw_cfg.json")
+    # raw_cfg = load_json_file(raw_cfg_file)
     
     # Get urls
-    url = config_file["airport_url"]
+    url = project_config["airport_url"]
     
     # Get raw sing-box config
     raw_cfg: dict = Web.singbox_config_file(url).json()
         
     # Sava raw sing-box config
-    write_json_file(f"cache/raw_cfg.json", raw_cfg)
+    write_json_file(raw_cfg_file, raw_cfg)
     
     # Get nodes   
     nodes = ConfigFactor.extra_nodes_from_singbox_config(raw_cfg)
@@ -57,13 +73,13 @@ def gen_airport():
     )
     
     # Save sing-box config
-    write_json_file("output/airport-app.json", final_cfg_app)
-    write_json_file("output/airport-cli.json", final_cfg_cli)
-    write_json_file("output/airport-server.json", final_cfg_server)
+    write_json_file(airport_app_file, final_cfg_app)
+    write_json_file(airport_cli_file, final_cfg_cli)
+    write_json_file(airport_server_file, final_cfg_server)
 
 
 def gen_diy():
-    nodes = load_json_file("nodes.json")["nodes"]
+    nodes = load_json_file(nodes_file)["nodes"]
     
     # Merge new sing-box config
     final_cfg_app = ConfigFactor.merge_singbox_config(
@@ -90,9 +106,9 @@ def gen_diy():
     )
     
     # Save sing-box config
-    write_json_file("output/diy-app.json", final_cfg_app)
-    write_json_file("output/diy-cli.json", final_cfg_cli)
-    write_json_file("output/diy-server.json", final_cfg_server)
+    write_json_file(diy_app_file, final_cfg_app)
+    write_json_file(diy_cli_file, final_cfg_cli)
+    write_json_file(diy_server_file, final_cfg_server)
 
 
 def web_api():
@@ -106,6 +122,10 @@ def web_api():
 
 def test():
     pass
+
+
+_init()
+project_config = load_config(project_config_file)
 
 
 if __name__ == "__main__":
