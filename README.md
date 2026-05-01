@@ -105,3 +105,21 @@ OnCalendar=*-*-* 00,12:00:00
 [Install]
 WantedBy=timers.target
 ```
+Reload
+```sh
+sudo systemctl daemon-reload
+```
+Start WebAPI service
+```sh
+sudo systemctl start sb_cfg_gen_webapi.service
+```
+```sh
+sudo systemctl enable sb_cfg_gen_webapi.service
+```
+Start timer
+```sh
+sudo systemctl start sb_cfg_gen.timer
+```
+```sh
+sudo systemctl enable sb_cfg_gen.timer
+```
