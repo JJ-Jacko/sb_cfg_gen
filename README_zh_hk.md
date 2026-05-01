@@ -2,7 +2,6 @@
 
 **Languages:** [简中](README_zh_cn.md) | [English](README.md)
 
-
 ## 📋 描述
 由於 sing-box 官方更新比較激進，
 很多機場透過訂閱下發的 sing-box 配置文件實質上過於陳舊，
@@ -20,11 +19,15 @@
 ## 🚀 使用方法
 ### 激活環境
 ```sh
+uv venv --python /usr/bin/python3 .venv
+```
+```sh
 uv sync
+```
+```sh
 source .venv/bin/activate
 ```
-
-### 運行
+### 手動運行
 #### 生成機場的 sing-box 配置文件
 設定配置文件 `config.toml`
 ```toml
@@ -55,7 +58,7 @@ sb-gen-airport
 ```sh
 sb-gen-diy
 ```
-#### Web API
+### Web API
 設定配置文件 `config.toml`
 ```toml
 api_tokens = [
@@ -63,6 +66,43 @@ api_tokens = [
     "john"
 ]
 ```
-```sh
-sb-web-api
+WebAPI 服務文件 `/etc/systemd/system/sb_cfg_gen_webapi.service`
+```ini
+[Unit]
+Description=Sing-box Config Genarator Web API
+After=network.target
+Wants=network.target
+Before=shutdown.target
+
+[Service]
+Type=simple
+User=web_runner
+WorkingDirectory=/opt/sb_cfg_gen
+ExecStart=/opt/sb_cfg_gen/.venv/bin/sb-web-api
+
+[Install]
+WantedBy=multi-user.target
+```
+自動生成機場配置文件的服務文件 `/etc/systemd/system/sb_cfg_gen.service`
+```ini
+[Unit]
+Description=Sing-box Config Genarator
+After=network.target
+
+[Service]
+Type=oneshot
+User=web_runner
+WorkingDirectory=/opt/sb_cfg_gen
+ExecStart=/opt/sb_cfg_gen/.venv/bin/sb-gen-airport
+```
+計時文件 `/etc/systemd/system/sb_cfg_gen.timer`
+```ini
+[Unit]
+Description=Timer for sb_cfg_gen.service
+
+[Timer]
+OnCalendar=*-*-* 00,12:00:00
+
+[Install]
+WantedBy=timers.target
 ```
