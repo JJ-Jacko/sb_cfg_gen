@@ -109,7 +109,7 @@ def test():
 
 
 if __name__ == "__main__":
-    gen_airport()
+    # gen_airport()
     # gen_diy()
     # web_api()
     # test()

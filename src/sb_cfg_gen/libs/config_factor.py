@@ -98,10 +98,13 @@ class ConfigFactor:
         template["outbounds"].append({
             "tag": "🚀 Proxy",
             "type": "selector",
-            "outbounds": [
-                node["tag"]
-                for node in nodes
-            ]
+            "outbounds": (
+                ["⚡ Direct"] +
+                [
+                    node["tag"]
+                    for node in nodes
+                ]
+            )
         })
 
         # 节点
