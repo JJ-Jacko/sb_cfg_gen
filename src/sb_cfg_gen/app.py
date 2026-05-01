@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Literal
 
 from fastapi import FastAPI
@@ -8,7 +9,8 @@ from sb_cfg_gen.libs.other import load_config
 
 
 app = FastAPI()
-config_file = load_config()
+project_config_file = Path("config.toml")
+config_file = load_config(project_config_file)
 
 
 @app.get("/sb_cfg")
