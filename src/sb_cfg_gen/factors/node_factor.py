@@ -26,6 +26,7 @@ class NodeFactor:
         "[Hawaiian]",
         "[ISP]",
         "[ATT]",
+        "[BGP]",
         "[GTT]",
         "[vless]"
     ]
