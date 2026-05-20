@@ -1,5 +1,5 @@
 from . import context
-from sb_cfg_gen.libs.config_factor import ConfigFactor
+from sb_cfg_gen.factors.config_factor import ConfigFactor
 from sb_cfg_gen.libs.other import write_json_file
 from sb_cfg_gen.libs.other import load_json_file
 
