@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from sb_cfg_gen.libs.types import AreaCode
+from sb_cfg_gen.types import AreaCode
 
 
 @dataclass

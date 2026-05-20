@@ -10,8 +10,8 @@ from sb_cfg_gen.libs.dicts import Node
 from sb_cfg_gen.libs.dicts import SingBoxConfig
 from sb_cfg_gen.libs.node_factor import NodeFactor
 from sb_cfg_gen.libs.other import keywords_in_text
-from sb_cfg_gen.libs.types import NodeType
-from sb_cfg_gen.libs.types import AreaCode
+from sb_cfg_gen.types import NodeType
+from sb_cfg_gen.types import AreaCode
 
 
 class ConfigFactor:
