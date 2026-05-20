@@ -11,9 +11,9 @@ dependencies = [
 ]
 
 [project.scripts]
-sb-gen-airport = "sb_cfg_gen.main:gen_airport"
-sb-gen-diy = "sb_cfg_gen.main:gen_diy"
-sb-web-api = "sb_cfg_gen.main:web_api"
+sb-gen-airport = "sb_cfg_gen.cli.gen_airport:run"
+sb-gen-diy = "sb_cfg_gen.cli.gen_diy:run"
+sb-web-api = "sb_cfg_gen.cli.web_api:run"
 
 [build-system]
 requires = ["hatchling"]
