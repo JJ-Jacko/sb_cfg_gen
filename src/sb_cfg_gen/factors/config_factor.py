@@ -6,8 +6,8 @@ from typing import List
 from typing import Literal
 
 from sb_cfg_gen.libs.areas import Areas
-from sb_cfg_gen.libs.dicts import Node
-from sb_cfg_gen.libs.dicts import SingBoxConfig
+from sb_cfg_gen.dicts import Node
+from sb_cfg_gen.dicts import SingBoxConfig
 from sb_cfg_gen.factors.node_factor import NodeFactor
 from sb_cfg_gen.libs.other import keywords_in_text
 from sb_cfg_gen.types import NodeType
