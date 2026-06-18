@@ -39,21 +39,19 @@ sb-gen-airport
 #### 生成自建代理的 sing-box 配置文件
 在文件 `nodes.json` 中写入节点
 ```json
-{
-    "nodes": [
-        {
-            "tag": "vless_reality",
-            "type": "vless",
-            ...
-        },
-        {
-            "tag": "hy2",
-            "type": "hysteria2",
-            ...
-        },
+[
+    {
+        "tag": "vless_reality",
+        "type": "vless",
         ...
-    ]
-}
+    },
+    {
+        "tag": "hy2",
+        "type": "hysteria2",
+        ...
+    },
+    ...
+]
 ```
 ```sh
 sb-gen-diy

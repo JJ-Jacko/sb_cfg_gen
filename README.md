@@ -38,21 +38,19 @@ sb-gen-airport
 #### Generate DIY sing-box config file 
 Write nodes in file `nodes.json`
 ```json
-{
-    "nodes": [
-        {
-            "tag": "vless_reality",
-            "type": "vless",
-            ...
-        },
-        {
-            "tag": "hy2",
-            "type": "hysteria2",
-            ...
-        },
+[
+    {
+        "tag": "vless_reality",
+        "type": "vless",
         ...
-    ]
-}
+    },
+    {
+        "tag": "hy2",
+        "type": "hysteria2",
+        ...
+    },
+    ...
+]
 ```
 ```sh
 sb-gen-diy
