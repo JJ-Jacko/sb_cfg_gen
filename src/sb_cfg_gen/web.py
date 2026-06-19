@@ -5,11 +5,18 @@ import time
 import requests
 
 
-def _web_retry(func):
-    """Decorator for retrying web operations in case of disconnection 修饰 Web 请求的函数断联后尝试重连
+__all__ = ["SingBox"]
+
+
+def web_retry(func):
+    """
+    Decorator for retrying web operations in case of disconnection
+    修饰 Web 请求的函数断联后尝试重连
 
     Raises:
-        Exception: Raised when multiple retry attempts fail 多次尝试重连都无法连上
+        Exception:
+            Raised when multiple retry attempts fail
+            多次尝试重连都无法连上
     """
     
     @functools.wraps(func)
@@ -38,16 +45,19 @@ def _web_retry(func):
     return wrapper
 
 
-class Web:
-    s = requests.session()
-    s.headers = {
-        "user-agent": "SFA/1.12.12 (575; sing-box 1.12.12; language zh_Hant_HK)",
-        "accept-encoding": "gzip"
-    }
+class SingBox:
+    s: requests.Session
     
-    @classmethod
-    @_web_retry
-    def singbox_config_file(cls, url: str):
-        resp = cls.s.get(url)
+    def __init__(self):
+        self.s = requests.Session()
+    
+        self.s.headers = {
+            "user-agent": "SFA/1.12.12 (575; sing-box 1.12.12; language zh_Hant_HK)",
+            "accept-encoding": "gzip"
+        }
+    
+    @web_retry
+    def fetch_singbox_config_file(self, url: str):
+        resp = self.s.get(url)
 
         return resp

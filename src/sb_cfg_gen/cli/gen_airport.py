@@ -1,9 +1,10 @@
 from . import context
 from sb_cfg_gen.factors.config_factor import ConfigFactor
 from sb_cfg_gen.factors.node_factor import NodeFactor
+from sb_cfg_gen.dicts import SingBoxConfig
 from sb_cfg_gen.other import load_json_file
 from sb_cfg_gen.other import write_json_file
-from sb_cfg_gen.web import Web
+from sb_cfg_gen.web import SingBox
 
 
 def run():
@@ -13,7 +14,8 @@ def run():
     url = context.project_config["airport_url"]
     
     # Get raw sing-box config
-    raw_cfg: dict = Web.singbox_config_file(url).json()
+    client = SingBox()
+    raw_cfg: SingBoxConfig = client.fetch_singbox_config_file(url).json()
         
     # Sava raw sing-box config
     write_json_file(context.raw_cfg_file, raw_cfg)
