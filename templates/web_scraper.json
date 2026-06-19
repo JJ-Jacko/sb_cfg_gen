@@ -1,0 +1,20 @@
+{
+    "log": {
+        "level": "info"
+    },
+    "inbounds": [],
+    "outbounds": [
+        {
+            "tag": "🚫 Reject",
+            "type": "block"
+        },
+        {
+            "tag": "⚡ Direct",
+            "type": "direct"
+        }
+    ],
+    "route": {
+        "rules": [],
+        "final": "🚫 Reject"
+    }
+}

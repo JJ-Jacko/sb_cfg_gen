@@ -200,7 +200,7 @@ class ConfigFactor:
             with_clash_api: bool,
             type: Literal["airport", "diy"],
             clash_api_path: str = "dashboard",
-            template_file: Path = Path("template.json")
+            template_file: Path = Path("templates/client.json")
     ):
         
         with template_file.open("r") as f:
