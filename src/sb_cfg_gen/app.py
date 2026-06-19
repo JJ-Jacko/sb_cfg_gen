@@ -4,8 +4,8 @@ from typing import Literal
 from fastapi import FastAPI
 from fastapi import HTTPException
 
-from sb_cfg_gen.libs.other import load_json_file
-from sb_cfg_gen.libs.other import load_config
+from sb_cfg_gen.other import load_config
+from sb_cfg_gen.other import load_json_file
 
 
 app = FastAPI()

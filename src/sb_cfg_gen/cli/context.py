@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from sb_cfg_gen.libs.other import load_config
+from sb_cfg_gen.other import load_config
 
 
 __all__ = [

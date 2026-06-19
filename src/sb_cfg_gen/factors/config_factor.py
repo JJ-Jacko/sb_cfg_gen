@@ -5,13 +5,13 @@ from typing import get_args
 from typing import List
 from typing import Literal
 
-from sb_cfg_gen.libs.areas import Areas
+from sb_cfg_gen.areas import Areas
 from sb_cfg_gen.dicts import Node
 from sb_cfg_gen.dicts import SingBoxConfig
 from sb_cfg_gen.factors.node_factor import NodeFactor
-from sb_cfg_gen.libs.other import keywords_in_text
-from sb_cfg_gen.types import NodeType
+from sb_cfg_gen.other import keywords_in_text
 from sb_cfg_gen.types import AreaCode
+from sb_cfg_gen.types import NodeType
 
 
 class ConfigFactor:

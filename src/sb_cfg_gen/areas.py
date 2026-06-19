@@ -1,4 +1,4 @@
-from sb_cfg_gen.libs.datas import Area
+from sb_cfg_gen.datas import Area
 from sb_cfg_gen.types import AreaCode
 
 

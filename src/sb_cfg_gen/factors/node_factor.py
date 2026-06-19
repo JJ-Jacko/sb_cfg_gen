@@ -2,9 +2,9 @@ import copy
 from typing import get_args
 from typing import List
 
-from sb_cfg_gen.libs.areas import Areas
+from sb_cfg_gen.areas import Areas
 from sb_cfg_gen.dicts import Node
-from sb_cfg_gen.libs.other import keywords_in_text
+from sb_cfg_gen.other import keywords_in_text
 from sb_cfg_gen.types import AreaCode
 
 
