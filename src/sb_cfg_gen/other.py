@@ -30,7 +30,7 @@ def load_json_file(file: str | Path):
 
 def write_json_file(
         file: str | Path,
-        data: dict,
+        data: dict | list,
         indent: int = 4
 ):
 
