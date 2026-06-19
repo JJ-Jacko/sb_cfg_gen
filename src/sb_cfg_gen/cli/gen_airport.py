@@ -3,19 +3,20 @@ from sb_cfg_gen.factors.config_factor import ConfigFactor
 from sb_cfg_gen.factors.node_factor import NodeFactor
 from sb_cfg_gen.other import load_json_file
 from sb_cfg_gen.other import write_json_file
+from sb_cfg_gen.web import Web
 
 
 def run():
-    raw_cfg = load_json_file(context.raw_cfg_file)
+    # raw_cfg = load_json_file(context.raw_cfg_file)
     
-    # # Get urls
-    # url = context.project_config["airport_url"]
+    # Get urls
+    url = context.project_config["airport_url"]
     
-    # # Get raw sing-box config
-    # raw_cfg: dict = Web.singbox_config_file(url).json()
+    # Get raw sing-box config
+    raw_cfg: dict = Web.singbox_config_file(url).json()
         
-    # # Sava raw sing-box config
-    # write_json_file(context.raw_cfg_file, raw_cfg)
+    # Sava raw sing-box config
+    write_json_file(context.raw_cfg_file, raw_cfg)
     
     # Get nodes   
     nodes = ConfigFactor.extra_nodes_from_singbox_config(raw_cfg)

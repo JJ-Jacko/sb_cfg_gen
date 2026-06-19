@@ -4,6 +4,7 @@ from typing import Literal
 from fastapi import FastAPI
 from fastapi import HTTPException
 
+from sb_cfg_gen.dicts import SingBoxConfig
 from sb_cfg_gen.other import load_config
 from sb_cfg_gen.other import load_json_file
 
@@ -22,6 +23,6 @@ def sb_cfg(
     if token not in config_file["api_tokens"]:
         raise HTTPException(status_code=401, detail="Invalid token")
     
-    sb_cfg: dict = load_json_file(f"output/{type}-{client}.json")
+    sb_cfg: SingBoxConfig = load_json_file(f"output/{type}-{client}.json")
     
     return sb_cfg
