@@ -8,7 +8,7 @@ from sb_cfg_gen.other import write_json_file
 
 
 def run():
-    nodes: List[Node] = load_json_file(context.nodes_file)
+    nodes: List[Node] = load_json_file(context.nodes_diy_file)
     
     # Merge new sing-box config
     final_cfg_app = ConfigFactor.merge_singbox_config(

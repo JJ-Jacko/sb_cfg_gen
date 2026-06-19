@@ -17,10 +17,11 @@ __all__ = [
 
 # Path
 project_config_file = Path("config.toml")
-nodes_file = Path("nodes.json")
 cache_dir = Path("cache")
 output_dir = Path("output")
 raw_cfg_file = cache_dir/"raw_cfg.json"
+nodes_file = cache_dir/"nodes.json"
+nodes_diy_file = cache_dir/"nodes_diy.json"
 airport_app_file = output_dir/"airport-app.json"
 airport_cli_file = output_dir/"airport-cli.json"
 airport_server_file = output_dir/"airport-server.json"
