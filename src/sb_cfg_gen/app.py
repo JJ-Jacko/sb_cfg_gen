@@ -23,14 +23,25 @@ def sb_cfg(
         token: str,
         source: Literal["airport", "diy"] = "airport",
         client: Literal["app", "cli", "server"] = "app",
+        organize_and_rename: bool = False,
         area_group: bool = False
     ):
+    """
+    Args:
+        organize_and_rename:
+            Using the custom names and positions instead of default names and positions of airport.
+            Only while `source` is set to `airport` effect
+    """
+    
     if token not in config_file["api_tokens"]:
         raise HTTPException(status_code=401, detail="Invalid token")
     
     if source == "airport":
         nodes_raw: List[Node] = load_json_file(context.nodes_p)
-        nodes = NodeFactor.organize_and_rename_nodes(nodes_raw)
+        if organize_and_rename:
+            nodes = NodeFactor.organize_and_rename_nodes(nodes_raw)
+        else:
+            nodes = nodes_raw
     elif source == "diy":
         nodes: List[Node] = load_json_file(context.nodes_diy_p)
         
