@@ -29,10 +29,10 @@ def sb_cfg(
         raise HTTPException(status_code=401, detail="Invalid token")
     
     if source == "airport":
-        nodes_raw: List[Node] = load_json_file(context.nodes_file)
+        nodes_raw: List[Node] = load_json_file(context.nodes_p)
         nodes = NodeFactor.organize_and_rename_nodes(nodes_raw)
     elif source == "diy":
-        nodes: List[Node] = load_json_file(context.nodes_diy_file)
+        nodes: List[Node] = load_json_file(context.nodes_diy_p)
         
     if client == "app":
         sb_cfg = ConfigFactor.merge_singbox_config(

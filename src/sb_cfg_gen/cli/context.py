@@ -5,19 +5,19 @@ from sb_cfg_gen.other import load_config
 
 __all__ = [
     # Path
-    "project_config_file",
-    "raw_cfg_file",
-    "nodes_file",
-    "nodes_diy_file"
+    "project_config_p",
+    "raw_cfg_p",
+    "nodes_p",
+    "nodes_diy_p"
 ]
 
 # Path
-project_config_file = Path("config.toml")
-cache_dir = Path("cache")
-raw_cfg_file = cache_dir/"raw_cfg.json"
-nodes_file = cache_dir/"nodes.json"
-nodes_diy_file = cache_dir/"nodes_diy.json"
+project_config_p = Path("config.toml")
+cache_p = Path("cache")
+raw_cfg_p = cache_p/"raw_cfg.json"
+nodes_p = cache_p/"nodes.json"
+nodes_diy_p = cache_p/"nodes_diy.json"
 
 # Initialization
-project_config = load_config(project_config_file)
-cache_dir.mkdir(parents=True, exist_ok=True)
+project_config = load_config(project_config_p)
+cache_p.mkdir(parents=True, exist_ok=True)

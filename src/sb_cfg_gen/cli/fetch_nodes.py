@@ -34,8 +34,8 @@ def fetch(url: str):
 def run():
     url = context.project_config["airport_url"]
     raw_cfg = fetch(url)
-    write_json_file(context.raw_cfg_file, raw_cfg)
+    write_json_file(context.raw_cfg_p, raw_cfg)
     nodes = ConfigFactor.extra_nodes_from_singbox_config(raw_cfg)
     nodes_deduplicated = NodeFactor.deduplicate_nodes(nodes)
-    write_json_file(context.nodes_file, nodes_deduplicated)
+    write_json_file(context.nodes_p, nodes_deduplicated)
     
