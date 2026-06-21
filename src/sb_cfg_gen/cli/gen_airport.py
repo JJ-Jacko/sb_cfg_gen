@@ -35,21 +35,21 @@ def run():
         inbound_mixd_in=False,
         inbound_tun_in=True,
         with_clash_api=False,
-        type="airport"
+        area_group=True
     )
     final_cfg_cli = ConfigFactor.merge_singbox_config(
         nodes_organize_renamed,
         inbound_mixd_in=False,
         inbound_tun_in=True,
         with_clash_api=True,
-        type="airport"
+        area_group=True
     )
     final_cfg_server = ConfigFactor.merge_singbox_config(
         nodes_organize_renamed, 
         inbound_mixd_in=True,
         inbound_tun_in=True,
         with_clash_api=True,
-        type="airport",
+        area_group=True,
         clash_api_path="/var/www/clash_api"
     )
     

@@ -198,7 +198,7 @@ class ConfigFactor:
             inbound_mixd_in: bool,
             inbound_tun_in: bool,
             with_clash_api: bool,
-            type: Literal["airport", "diy"],
+            area_group: bool,
             clash_api_path: str = "dashboard",
             template_file: Path = Path("templates/client.json")
     ):
@@ -206,18 +206,17 @@ class ConfigFactor:
         with template_file.open("r") as f:
             template: SingBoxConfig = json.load(f)
         
-        match type:
-            case "airport":
-                cls.__merge_nodes_into_singbox_config(
-                    nodes,
-                    ["HK", "TW", "SG", "JP", "US"],
-                    template
-                )
-            case "diy":
-                cls.__merge_nodes_into_singbox_config_no_area_group(
-                    nodes,
-                    template
-                )
+        if area_group:
+            cls.__merge_nodes_into_singbox_config(
+                nodes,
+                ["HK", "TW", "SG", "JP", "US"],
+                template
+            )
+        else:
+            cls.__merge_nodes_into_singbox_config_no_area_group(
+                nodes,
+                template
+            )
         
         cls.__merge_inbounds_into_singbox_config(
             template,

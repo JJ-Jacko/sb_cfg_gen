@@ -16,21 +16,21 @@ def run():
         inbound_mixd_in=False,
         inbound_tun_in=True,
         with_clash_api=False,
-        type="diy"
+        area_group=False
     )
     final_cfg_cli = ConfigFactor.merge_singbox_config(
         nodes,
         inbound_mixd_in=False,
         inbound_tun_in=True,
         with_clash_api=True,
-        type="diy"
+        area_group=False
     )
     final_cfg_server = ConfigFactor.merge_singbox_config(
         nodes, 
         inbound_mixd_in=True,
         inbound_tun_in=True,
         with_clash_api=True,
-        type="diy",
+        area_group=False,
         clash_api_path="/var/www/clash_api"
     )
     
