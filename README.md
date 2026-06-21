@@ -26,17 +26,20 @@ uv sync
 ```sh
 source .venv/bin/activate
 ```
-### Manually run
-#### Generate airport's sing-box config file 
-Set configuration file `config.toml`
+### Configure
+#### Configuration file `config.toml`
+Airport subcription url
 ```toml
 airport_url = "https://example.com/sing-box"
 ```
-```sh
-sb-gen-airport
+Allowed tokens
+```toml
+api_tokens = [
+    "jacko",
+    "john"
+]
 ```
-#### Generate DIY sing-box config file 
-Write nodes in file `nodes.json`
+#### List of DIY nodes `cache/nodes.json`
 ```json
 [
     {
@@ -52,17 +55,10 @@ Write nodes in file `nodes.json`
     ...
 ]
 ```
-```sh
-sb-gen-diy
-```
+#### Sing-box configuration file `templates`
+* `templates/client.json` client template
+* `templates/web_scraper.json` web scraper proxy template
 ### Web API
-Set configuration file `config.toml`
-```toml
-api_tokens = [
-    "jacko",
-    "john"
-]
-```
 WebAPI service file `/etc/systemd/system/sb_cfg_gen_webapi.service`
 ```ini
 [Unit]
@@ -80,22 +76,22 @@ ExecStart=/opt/sb_cfg_gen/.venv/bin/sb-web-api
 [Install]
 WantedBy=multi-user.target
 ```
-Service file which automatically generate airport configration file `/etc/systemd/system/sb_cfg_gen.service`
+Service file which automatically generate airport configration file `/etc/systemd/system/sb_cfg_gen_fetch_nodes.service`
 ```ini
 [Unit]
-Description=Sing-box Config Genarator
+Description=Sing-box Config Genarator Fetch Nodes
 After=network.target
 
 [Service]
 Type=oneshot
 User=web_runner
 WorkingDirectory=/opt/sb_cfg_gen
-ExecStart=/opt/sb_cfg_gen/.venv/bin/sb-gen-airport
+ExecStart=/opt/sb_cfg_gen/.venv/bin/sb-fetch-nodes
 ```
-Timmer file `/etc/systemd/system/sb_cfg_gen.timer`
+Timmer file `/etc/systemd/system/sb_cfg_gen_fetch_nodes.timer`
 ```ini
 [Unit]
-Description=Timer for sb_cfg_gen.service
+Description=Timer for sb_cfg_gen_fetch_nodes.service
 
 [Timer]
 OnCalendar=*-*-* 00,12:00:00
@@ -116,8 +112,8 @@ sudo systemctl enable sb_cfg_gen_webapi.service
 ```
 Start timer
 ```sh
-sudo systemctl start sb_cfg_gen.timer
+sudo systemctl start sb_cfg_gen_fetch_nodes.timer
 ```
 ```sh
-sudo systemctl enable sb_cfg_gen.timer
+sudo systemctl enable sb_cfg_gen_fetch_nodes.timer
 ```

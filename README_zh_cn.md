@@ -27,17 +27,20 @@ uv sync
 ```sh
 source .venv/bin/activate
 ```
-### 手动运行
-#### 生成机场的 sing-box 配置文件
-设置配置文件 `config.toml`
+### 配置
+#### 配置文件 `config.toml`
+机场订阅链接
 ```toml
 airport_url = "https://example.com/sing-box"
 ```
-```sh
-sb-gen-airport
+允许通过的 token
+```toml
+api_tokens = [
+    "jacko",
+    "john"
+]
 ```
-#### 生成自建代理的 sing-box 配置文件
-在文件 `nodes.json` 中写入节点
+#### 自建节点列表 `cache/nodes.json`
 ```json
 [
     {
@@ -53,17 +56,10 @@ sb-gen-airport
     ...
 ]
 ```
-```sh
-sb-gen-diy
-```
+#### Sing-box 配置文件模板 `templates`
+* `templates/client.json` 客户端模板
+* `templates/web_scraper.json` 爬虫代理服务器模板
 ### Web API
-设置配置文件 `config.toml`
-```toml
-api_tokens = [
-    "jacko",
-    "john"
-]
-```
 WebAPI 服务文件 `/etc/systemd/system/sb_cfg_gen_webapi.service`
 ```ini
 [Unit]
@@ -81,22 +77,22 @@ ExecStart=/opt/sb_cfg_gen/.venv/bin/sb-web-api
 [Install]
 WantedBy=multi-user.target
 ```
-自动生成机场配置文件的服务文件 `/etc/systemd/system/sb_cfg_gen.service`
+自动生成机场配置文件的服务文件 `/etc/systemd/system/sb_cfg_gen_fetch_nodes.service`
 ```ini
 [Unit]
-Description=Sing-box Config Genarator
+Description=Sing-box Config Genarator Fetch Nodes
 After=network.target
 
 [Service]
 Type=oneshot
 User=web_runner
 WorkingDirectory=/opt/sb_cfg_gen
-ExecStart=/opt/sb_cfg_gen/.venv/bin/sb-gen-airport
+ExecStart=/opt/sb_cfg_gen/.venv/bin/sb-fetch-nodes
 ```
-计时文件 `/etc/systemd/system/sb_cfg_gen.timer`
+计时文件 `/etc/systemd/system/sb_cfg_gen_fetch_nodes.timer`
 ```ini
 [Unit]
-Description=Timer for sb_cfg_gen.service
+Description=Timer for sb_cfg_gen_fetch_nodes.service
 
 [Timer]
 OnCalendar=*-*-* 00,12:00:00
@@ -117,8 +113,8 @@ sudo systemctl enable sb_cfg_gen_webapi.service
 ```
 开启计时服务
 ```sh
-sudo systemctl start sb_cfg_gen.timer
+sudo systemctl start sb_cfg_gen_fetch_nodes.timer
 ```
 ```sh
-sudo systemctl enable sb_cfg_gen.timer
+sudo systemctl enable sb_cfg_gen_fetch_nodes.timer
 ```
