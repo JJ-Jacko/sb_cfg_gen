@@ -1,10 +1,8 @@
-from . import gen_airport
-from . import gen_diy
+from . import fetch_nodes
 from . import test
 from . import web_api
 
 
-# gen_airport.run()
-# gen_diy.run()
+# fetch_nodes.run()
 # web_api.run()
 # test.run()
