@@ -22,7 +22,7 @@ config_file = load_config(project_config_file)
 def sb_cfg(
         token: str,
         source: Literal["airport", "diy"] = "airport",
-        client: Literal["app", "cli", "server"] = "app",
+        client: Literal["app", "cli-win", "cli-linux", "server"] = "app",
         organize_and_rename: bool = False,
         area_group: bool = False
     ):
@@ -30,7 +30,10 @@ def sb_cfg(
     Args:
         organize_and_rename:
             Using the custom names and positions instead of default names and positions of airport.
-            Only while `source` is set to `airport` effect
+            Only while `source` is set to `airport` effect.
+        area_group:
+            Using the area group instead of default non-grouping layout in outbound.
+            Only while `client` is set to `app`, `cli-win`, `cli-linux` effect.
     """
     
     if token not in config_file["api_tokens"]:
@@ -53,7 +56,7 @@ def sb_cfg(
             with_clash_api=False,
             area_group=area_group
         )
-    elif client == "cli":
+    elif client == "cli-win":
         sb_cfg = ConfigFactor.merge_singbox_config(
             nodes,
             inbound_mixd_in=False,
@@ -61,7 +64,7 @@ def sb_cfg(
             with_clash_api=True,
             area_group=area_group
         )
-    elif client == "server":
+    elif client == "cli-linux":
         sb_cfg = ConfigFactor.merge_singbox_config(
             nodes, 
             inbound_mixd_in=True,
@@ -70,5 +73,7 @@ def sb_cfg(
             area_group=area_group,
             clash_api_path="/var/www/clash_api"
         )
+    elif client == "server":
+        ...
     
     return sb_cfg
