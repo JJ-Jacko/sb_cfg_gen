@@ -2,7 +2,7 @@ import itertools
 import requests
 import time
 
-from sb_cfg_gen.cli import context
+from sb_cfg_gen import context
 from sb_cfg_gen.dicts import SingBoxConfig
 from sb_cfg_gen.factors.config_factor import ConfigFactor
 from sb_cfg_gen.factors.node_factor import NodeFactor

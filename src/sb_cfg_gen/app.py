@@ -5,7 +5,7 @@ from typing import Literal
 from fastapi import FastAPI
 from fastapi import HTTPException
 
-from sb_cfg_gen.cli import context
+from sb_cfg_gen import context
 from sb_cfg_gen.dicts import Node
 from sb_cfg_gen.factors.config_factor import ConfigFactor
 from sb_cfg_gen.factors.node_factor import NodeFactor
