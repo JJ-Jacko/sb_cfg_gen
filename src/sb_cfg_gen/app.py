@@ -7,8 +7,8 @@ from fastapi import HTTPException
 
 from sb_cfg_gen import context
 from sb_cfg_gen.dicts import Node
-from sb_cfg_gen.factors.config_factor import ConfigFactor
-from sb_cfg_gen.factors.node_factor import NodeFactor
+from sb_cfg_gen.factors import config_ops
+from sb_cfg_gen.factors import node_ops
 from sb_cfg_gen.other import load_config
 from sb_cfg_gen.other import load_json_file
 
@@ -42,14 +42,14 @@ def sb_cfg(
     if source == "airport":
         nodes_raw: List[Node] = load_json_file(context.nodes_p)
         if organize_and_rename:
-            nodes = NodeFactor.organize_and_rename_nodes(nodes_raw)
+            nodes = node_ops.organize_and_rename_nodes(nodes_raw)
         else:
             nodes = nodes_raw
     elif source == "diy":
         nodes: List[Node] = load_json_file(context.nodes_diy_p)
         
     if client == "app":
-        sb_cfg = ConfigFactor.merge_singbox_config(
+        sb_cfg = config_ops.merge_singbox_config(
             nodes,
             inbound_mixd_in=False,
             inbound_tun_in=True,
@@ -57,7 +57,7 @@ def sb_cfg(
             area_group=area_group
         )
     elif client == "cli-win":
-        sb_cfg = ConfigFactor.merge_singbox_config(
+        sb_cfg = config_ops.merge_singbox_config(
             nodes,
             inbound_mixd_in=False,
             inbound_tun_in=True,
@@ -65,7 +65,7 @@ def sb_cfg(
             area_group=area_group
         )
     elif client == "cli-linux":
-        sb_cfg = ConfigFactor.merge_singbox_config(
+        sb_cfg = config_ops.merge_singbox_config(
             nodes, 
             inbound_mixd_in=True,
             inbound_tun_in=True,
