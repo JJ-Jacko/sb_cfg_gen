@@ -6,6 +6,7 @@ from sb_cfg_gen.cli import context
 from sb_cfg_gen.dicts import SingBoxConfig
 from sb_cfg_gen.factors.config_factor import ConfigFactor
 from sb_cfg_gen.factors.node_factor import NodeFactor
+from sb_cfg_gen.other import load_json_file
 from sb_cfg_gen.other import write_json_file
 from sb_cfg_gen.web import SingBox
 
@@ -32,9 +33,12 @@ def fetch(url: str):
 
 
 def run():
+    # raw_cfg = load_json_file(context.raw_cfg_p)
+
     url = context.project_config["airport_url"]
     raw_cfg = fetch(url)
     write_json_file(context.raw_cfg_p, raw_cfg)
+    
     nodes = ConfigFactor.extra_nodes_from_singbox_config(raw_cfg)
     nodes_deduplicated = NodeFactor.deduplicate_nodes(nodes)
     write_json_file(context.nodes_p, nodes_deduplicated)
