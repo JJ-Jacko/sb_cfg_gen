@@ -14,9 +14,12 @@ __all__ = [
 # Path
 project_config_p = Path("config.toml")
 cache_p = Path("cache")
+template_p = Path("templates")
 raw_cfg_p = cache_p/"raw_cfg.json"
 nodes_p = cache_p/"nodes.json"
 nodes_diy_p = cache_p/"nodes_diy.json"
+template_client_p = template_p/"client.json"
+template_web_scraper_p = template_p/"web_scraper.json"
 
 # Initialization
 project_config = load_config(project_config_p)

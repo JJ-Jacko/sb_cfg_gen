@@ -2,8 +2,10 @@ import copy
 import json
 from pathlib import Path
 from typing import List
+from typing import Literal
 
 from sb_cfg_gen import constants
+from sb_cfg_gen import context
 from sb_cfg_gen.areas import Areas
 from sb_cfg_gen.dicts import Node
 from sb_cfg_gen.dicts import SingBoxConfig
@@ -167,11 +169,17 @@ def merge_singbox_config(
         with_clash_api: bool,
         area_group: bool,
         clash_api_path: str = "dashboard",
-        template_file: Path = Path("templates/client.json")
+        template_type: Literal["client", "web_scraper"] = "client"
 ):
     
-    with template_file.open("r") as f:
-        template: SingBoxConfig = json.load(f)
+    if template_type == "client":
+        with context.template_client_p.open() as f:
+            template: SingBoxConfig = json.load(f)
+    elif template_type == "web_scraper":
+        with context.template_web_scraper_p.open() as f:
+            template: SingBoxConfig = json.load(f)
+    else:
+        raise ValueError    
     
     if area_group:
         _merge_nodes_into_singbox_config(
