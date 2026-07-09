@@ -1,4 +1,9 @@
+from typing import Final
 from typing import List
+from typing import get_args
+from typing import Tuple
+
+from sb_cfg_gen import types
 
 
 AIRPORT_INFO_KEYWORDS: List[str] = [
@@ -41,3 +46,7 @@ NODE_TYPE_KEYWORDS: List[str] = [
 ]
 
 NODE_LEVEL_KEYWORDS: List[str] = ["x0.8", "x1", "x3", "x2", "x4"]
+
+AREA_CODES: Final[Tuple[str, ...]] = get_args(types.AreaCode)
+
+NODE_TYPES: Final[Tuple[str, ...]] = get_args(types.NodeType)

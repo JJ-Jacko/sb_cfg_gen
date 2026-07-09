@@ -1,5 +1,4 @@
 import copy
-from typing import get_args
 from typing import List
 
 from sb_cfg_gen import constants
@@ -93,7 +92,7 @@ def rename_same_area_nodes(
 def organize_and_rename_nodes(nodes: List[Node]):
     result_nodes: List[Node] = []
     
-    for area_code in get_args(AreaCode):
+    for area_code in constants.AREA_CODES:
         specified_area_nodes = filter_nodes_with_specified_area(nodes, area_code)
         basic_nodes = _get_basic_nodes(specified_area_nodes)
         for node in rename_same_area_nodes(basic_nodes, area_code):

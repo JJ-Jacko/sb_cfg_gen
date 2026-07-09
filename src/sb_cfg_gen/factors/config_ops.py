@@ -1,7 +1,6 @@
 import copy
 import json
 from pathlib import Path
-from typing import get_args
 from typing import List
 
 from sb_cfg_gen import constants
@@ -130,7 +129,7 @@ def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[Node]:
     
     for outbound in config["outbounds"]:
         # 过滤 代理组
-        if outbound["type"] not in get_args(NodeType):
+        if outbound["type"] not in constants.NODE_TYPES:
             continue
 
         # 过滤 机场信息
