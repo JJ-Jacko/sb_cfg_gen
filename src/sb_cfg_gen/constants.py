@@ -1,12 +1,11 @@
 from typing import Final
-from typing import List
 from typing import get_args
-from typing import Tuple
+from typing import FrozenSet
 
 from sb_cfg_gen import types
 
 
-AIRPORT_INFO_KEYWORDS: Final[Tuple[str, ...]] = (
+AIRPORT_INFO_KEYWORDS: Final[FrozenSet[str]] = frozenset([
     # KTM
     "剩余流量",
     "距离下次重置剩余",
@@ -21,9 +20,9 @@ AIRPORT_INFO_KEYWORDS: Final[Tuple[str, ...]] = (
     "过期时间",
     "官方地址",
     "备用地址"
-)
+])
 
-NODE_TYPE_KEYWORDS: Final[Tuple[str, ...]] = (
+NODE_TYPE_KEYWORDS: Final[FrozenSet[str]] = frozenset([
     "[优]",
     "[家宽]",
     "[家宽/住宅]",
@@ -43,10 +42,10 @@ NODE_TYPE_KEYWORDS: Final[Tuple[str, ...]] = (
     "[BGP]",
     "[GTT]",
     "[vless]"
-)
+])
 
-NODE_LEVEL_KEYWORDS: Final[Tuple[str, ...]] = ("x0.8", "x1", "x3", "x2", "x4")
+NODE_LEVEL_KEYWORDS: Final[FrozenSet[str]] = frozenset(["x0.8", "x1", "x3", "x2", "x4"])
 
-AREA_CODES: Final[Tuple[str, ...]] = get_args(types.AreaCode)
+AREA_CODES: Final[FrozenSet[str]] = frozenset(get_args(types.AreaCode))
 
-NODE_TYPES: Final[Tuple[str, ...]] = get_args(types.NodeType)
+NODE_TYPES: Final[FrozenSet[str]] = frozenset(get_args(types.NodeType))
