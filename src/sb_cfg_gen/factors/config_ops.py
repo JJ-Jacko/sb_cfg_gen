@@ -1,8 +1,6 @@
 import copy
 import json
-from pathlib import Path
 from typing import List
-from typing import Literal
 
 from sb_cfg_gen import constants
 from sb_cfg_gen import context
@@ -12,7 +10,6 @@ from sb_cfg_gen.dicts import SingBoxConfig
 from sb_cfg_gen.factors import node_ops
 from sb_cfg_gen.other import keywords_in_text
 from sb_cfg_gen.types import AreaCode
-from sb_cfg_gen.types import NodeType
 
 
 def _merge_nodes_into_singbox_config(
@@ -162,24 +159,18 @@ def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[Node]:
         
     return nodes
 
-def merge_singbox_config(
+def merge_singbox_config_client(
         nodes: List[Node],
         inbound_mixd_in: bool,
         inbound_tun_in: bool,
         with_clash_api: bool,
         area_group: bool,
-        clash_api_path: str = "dashboard",
-        template_type: Literal["client", "web_scraper"] = "client"
+        clash_api_path: str = "dashboard"
 ):
+    """Merge sing-box configration in client mode."""
     
-    if template_type == "client":
-        with context.template_client_p.open() as f:
-            template: SingBoxConfig = json.load(f)
-    elif template_type == "web_scraper":
-        with context.template_web_scraper_p.open() as f:
-            template: SingBoxConfig = json.load(f)
-    else:
-        raise ValueError    
+    with context.template_client_p.open() as f:
+        template: SingBoxConfig = json.load(f)
     
     if area_group:
         _merge_nodes_into_singbox_config(
@@ -201,5 +192,16 @@ def merge_singbox_config(
 
     if with_clash_api:
         _merge_clash_api_into_singbox_config(template, clash_api_path=clash_api_path)
+    
+    return template
+
+
+def merge_singbox_config_web_scraper(nodes: List[Node]):
+    """Merge sing-box configration in client mode."""
+    
+    with context.template_web_scraper_p.open() as f:
+        template: SingBoxConfig = json.load(f)
+    
+    ...
     
     return template
