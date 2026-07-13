@@ -58,7 +58,7 @@ api_tokens = [
 #### Sing-box configuration file `templates`
 * `templates/client.json` client template
 * `templates/web_scraper.json` web scraper proxy template
-### Web API
+### Service
 WebAPI service file `/etc/systemd/system/sb_cfg_gen_webapi.service`
 ```ini
 [Unit]

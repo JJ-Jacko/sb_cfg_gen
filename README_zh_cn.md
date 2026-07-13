@@ -59,7 +59,7 @@ api_tokens = [
 #### Sing-box 配置文件模板 `templates`
 * `templates/client.json` 客户端模板
 * `templates/web_scraper.json` 爬虫代理服务器模板
-### Web API
+### 服务
 WebAPI 服务文件 `/etc/systemd/system/sb_cfg_gen_webapi.service`
 ```ini
 [Unit]
