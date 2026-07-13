@@ -118,3 +118,17 @@ sudo systemctl start sb_cfg_gen_fetch_nodes.timer
 ```sh
 sudo systemctl enable sb_cfg_gen_fetch_nodes.timer
 ```
+### Web API
+#### GET `/sb_cfg`
+获取 sing-box 配置文件.
+| 参数 | 选项 | 默认 | 必要项 | 描述 |
+| :-: | :-: | :-: | :-: | :-: |
+| token |  |  | ✔️ | API token |
+| source | airport | ✔️ |  | 通过机场获取节点 |
+|  | diy |  |  | 通过自定义获取节点 |
+| client | app | ✔️ |  | App 的配置文件 (Andriod, IOS, Mac 官方 App) |
+|  | cli-win |  |  | 在 Windows 命令行的配置文件 |
+|  | cli-linux |  |  | 在 Linux 命令行的配置文件 |
+|  | server |  |  | 在服务器用于爬虫程序的配置文件 |
+| organize_and_rename | true / false | false |  | 使用自定义的名称和位置替代机场默认的名称和位置，仅当 `source` 设置为 `airport` 时才生效 |
+| area_group | true / false | false |  | 在 outbound 使用地区组替代默认的无组布局，仅当 `client` 设置为 `app`, `cli-win`, `cli-linux` 时才生效 |
