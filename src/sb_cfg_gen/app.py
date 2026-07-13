@@ -74,6 +74,6 @@ def sb_cfg(
             clash_api_path="/var/www/clash_api"
         )
     elif client == "server":
-        ...
+        sb_cfg = config_ops.merge_singbox_config_web_scraper(nodes)
     
     return sb_cfg

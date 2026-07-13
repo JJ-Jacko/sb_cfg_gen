@@ -196,12 +196,40 @@ def merge_singbox_config_client(
     return template
 
 
-def merge_singbox_config_web_scraper(nodes: List[Node]):
-    """Merge sing-box configration in client mode."""
+def merge_singbox_config_web_scraper(
+        nodes: List[Node],
+        port_start: int = 10801
+):
+    """
+    Merge sing-box configration in web scraper mode.
+
+    Args:
+        port_start: The start port of the proxy servers. 
+    """
     
     with context.template_web_scraper_p.open() as f:
         template: SingBoxConfig = json.load(f)
-    
-    ...
+
+    for i, node in enumerate(nodes):
+        tag_node = node["tag"]
+        tag_inbound = f"in-{1 + i}"
+        port = port_start + i
+        
+        # nodes
+        template["outbounds"].append(node)
+        
+        # inbounds
+        template["inbounds"].append({
+            "tag": tag_inbound,
+            "type": "mixed",
+            "listen": "0.0.0.0",
+            "listen_port": port
+        })
+        
+        # rules (Bind the inbound port with the specific node)
+        template["route"]["rules"].append({
+            "inbound": tag_inbound,
+            "outbound": tag_node
+        })
     
     return template
