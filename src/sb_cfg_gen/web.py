@@ -1,11 +1,17 @@
 import functools
 import itertools
 import time
+from typing import Literal
 
 import requests
 
 
-__all__ = ["SingBox"]
+__all__ = ["Client"]
+map_client_UA = {
+    "V2rayN": "v2rayN/7.23.4",
+    "SingBox": "SFA/1.12.12 (575; sing-box 1.12.12; language zh_Hant_HK)",
+    "ClashMeta": "ClashMetaForAndroid/2.11.31.Meta"
+}
 
 
 def web_retry(func):
@@ -45,19 +51,21 @@ def web_retry(func):
     return wrapper
 
 
-class SingBox:
+class Client:
     s: requests.Session
     
-    def __init__(self):
+    def __init__(
+            self,
+            client_type: Literal["V2rayN", "SingBox", "ClashMeta"]
+    ):
         self.s = requests.Session()
     
         self.s.headers = {
-            "user-agent": "SFA/1.12.12 (575; sing-box 1.12.12; language zh_Hant_HK)",
-            "accept-encoding": "gzip"
+            "user-agent": map_client_UA.get(client_type)
         }
     
     @web_retry
-    def fetch_singbox_config_file(self, url: str):
+    def fetch_airport_config(self, url: str):
         resp = self.s.get(url)
 
         return resp

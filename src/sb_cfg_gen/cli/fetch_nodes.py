@@ -8,20 +8,20 @@ from sb_cfg_gen.factors import config_ops
 from sb_cfg_gen.factors import node_ops
 from sb_cfg_gen.other import load_json_file
 from sb_cfg_gen.other import write_json_file
-from sb_cfg_gen.web import SingBox
+from sb_cfg_gen.web import Client
 
 
 __all__ = ["run"]
 
 
 def fetch(url: str):
-    client = SingBox()
+    client = Client("SingBox")
     
     for attempt in itertools.count(0):
         if attempt >= 3:
             raise Exception("airport can not support sing-box")
         
-        resp = client.fetch_singbox_config_file(url)
+        resp = client.fetch_airport_config(url)
         
         try:
             cfg: SingBoxConfig = resp.json()
