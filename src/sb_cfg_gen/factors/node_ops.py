@@ -59,6 +59,12 @@ def filter_nodes_with_specified_area(
         nodes: List[Node],
         area_code: AreaCode
 ) -> List[Node | None]:
+    """
+    Fiter nodes with specified area from input nodes.
+
+    Returns:
+        nodes_with_specified_area: A list of the nodes which is in specified area.
+    """
     
     filtered_nodes: List[Node] = []
     for node in nodes:
@@ -73,6 +79,24 @@ def filter_nodes_with_specified_area(
             filtered_nodes.append(node)
 
     return filtered_nodes
+
+
+def filter_nodes_with_specified_areas(
+        nodes: List[Node],
+        buildin_area_codes: List[AreaCode],
+):
+    """
+    Fiter nodes with specified areas from input nodes.
+
+    Returns:
+        nodes_with_specified_areas: A list of nodes in order of the list of the area codes.
+    """
+    
+    return [
+        node
+        for area_code in buildin_area_codes
+        for node in filter_nodes_with_specified_area(nodes, area_code)
+    ]
 
 
 def rename_same_area_nodes(
