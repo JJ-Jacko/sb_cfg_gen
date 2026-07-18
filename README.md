@@ -39,6 +39,10 @@ api_tokens = [
     "john"
 ]
 ```
+The areas of the nodes which wanted to inject to Sing-box configuration file
+```toml
+buildin_area_codes = ["HK", "TW", "SG", "JP", "US"]
+```
 #### List of DIY nodes `cache/nodes.json`
 ```json
 [

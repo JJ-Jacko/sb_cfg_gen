@@ -40,6 +40,10 @@ api_tokens = [
     "john"
 ]
 ```
+需要注入 Sing-box 配置文件的節點的地區 
+```toml
+buildin_area_codes = ["HK", "TW", "SG", "JP", "US"]
+```
 #### 自建節點列表 `cache/nodes.json`
 ```json
 [
