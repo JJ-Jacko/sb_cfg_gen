@@ -22,11 +22,7 @@ def _merge_nodes_into_singbox_config(
     if extra_area:
         nodes_output = nodes
     else:
-        nodes_output = [
-            node
-            for area_code in buildin_area_codes
-            for node in node_ops.filter_nodes_with_specified_area(nodes, area_code)
-        ]
+        nodes_output = node_ops.filter_nodes_with_specified_areas(nodes, buildin_area_codes)
     
     # 总控制组
     template["outbounds"].append({
@@ -175,7 +171,7 @@ def merge_singbox_config_client(
     if area_group:
         _merge_nodes_into_singbox_config(
             nodes,
-            ["HK", "TW", "SG", "JP", "US"],
+            context.project_config["buildin_area_codes"],
             template
         )
     else:
