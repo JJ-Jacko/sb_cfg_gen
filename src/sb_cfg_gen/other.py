@@ -1,3 +1,4 @@
+import base64
 import json
 import tomllib
 from pathlib import Path
@@ -36,3 +37,10 @@ def write_json_file(
 
     with open(file, "w") as f:
         json.dump(data, f, indent=indent, ensure_ascii=False)
+
+
+def base64_decode(src: str):
+    decoded_bytes = base64.b64decode(src)
+    decoded_str = decoded_bytes.decode()
+    
+    return decoded_str
