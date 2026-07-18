@@ -16,6 +16,7 @@ project_config_p = Path("config.toml")
 cache_p = Path("cache")
 template_p = Path("templates")
 raw_cfg_p = cache_p/"raw_cfg.json"
+raw_base64_p = cache_p/"raw_base64.txt"
 nodes_p = cache_p/"nodes.json"
 nodes_diy_p = cache_p/"nodes_diy.json"
 template_client_p = template_p/"client.json"
