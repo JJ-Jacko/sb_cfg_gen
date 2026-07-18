@@ -11,7 +11,10 @@ __all__ = [
     "f_nodes",
     "f_nodes_diy",
     "f_template_client",
-    "f_template_web_scraper"
+    "f_template_web_scraper",
+    
+    # Config
+    "project_config"
 ]
 
 # Path
