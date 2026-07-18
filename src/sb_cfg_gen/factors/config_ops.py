@@ -169,7 +169,7 @@ def merge_singbox_config_client(
 ):
     """Merge sing-box configration in client mode."""
     
-    with context.template_client_p.open() as f:
+    with context.f_template_client.open() as f:
         template: SingBoxConfig = json.load(f)
     
     if area_group:
@@ -207,7 +207,7 @@ def merge_singbox_config_web_scraper(
         port_start: The start port of the proxy servers. 
     """
     
-    with context.template_web_scraper_p.open() as f:
+    with context.f_template_web_scraper.open() as f:
         template: SingBoxConfig = json.load(f)
 
     for i, node in enumerate(nodes):
