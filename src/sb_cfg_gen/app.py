@@ -23,11 +23,15 @@ def sb_cfg(
         token: str,
         source: Literal["airport", "diy"] = "airport",
         client: Literal["app", "cli-win", "cli-linux", "server"] = "app",
+        mainstream_area: bool = True,
         organize_and_rename: bool = False,
         area_group: bool = False
     ):
     """
     Args:
+        mainstream_area:
+            Using the custom areas nodes instead of all the nodes from airport.
+            Only while `source` is set to `airport` effect.
         organize_and_rename:
             Using the custom names and positions instead of default names and positions of airport.
             Only while `source` is set to `airport` effect.
@@ -41,10 +45,17 @@ def sb_cfg(
     
     if source == "airport":
         nodes_raw: List[Node] = load_json_file(context.f_nodes)
-        if organize_and_rename:
-            nodes = node_ops.organize_and_rename_nodes(nodes_raw)
+        
+        if mainstream_area:
+            nodes_filterd_area = node_ops.filter_nodes_with_specified_areas(nodes_raw, context.project_config["buildin_area_codes"])
         else:
-            nodes = nodes_raw
+            nodes_filterd_area = nodes_raw
+            
+        if organize_and_rename:
+            nodes = node_ops.organize_and_rename_nodes(nodes_filterd_area)
+        else:
+            nodes = nodes_filterd_area
+            
     elif source == "diy":
         nodes: List[Node] = load_json_file(context.f_nodes_diy)
         
