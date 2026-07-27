@@ -16,7 +16,8 @@ During this process, you can configure highly customized templates,
 adjust node order, grouping, or routing rules, and specify whether a clash-api frontend is required.
 
 ## 🚀 Usage
-### Activate Environment
+### 🛠️ Environment
+Activate Environment
 ```sh
 uv venv --python /usr/bin/python3 .venv
 ```
@@ -26,7 +27,7 @@ uv sync
 ```sh
 source .venv/bin/activate
 ```
-### Configure
+### ⚙️ Configure
 #### Configuration file `config.toml`
 Airport subcription url
 ```toml
@@ -62,7 +63,7 @@ buildin_area_codes = ["HK", "TW", "SG", "JP", "US"]
 #### Sing-box configuration file `templates`
 * `templates/client.json` client template
 * `templates/web_scraper.json` web scraper proxy template
-### Service
+### 🧩 Service
 WebAPI service file `/etc/systemd/system/sb_cfg_gen_webapi.service`
 ```ini
 [Unit]
@@ -121,7 +122,7 @@ sudo systemctl start sb_cfg_gen_fetch_nodes.timer
 ```sh
 sudo systemctl enable sb_cfg_gen_fetch_nodes.timer
 ```
-### Web API
+### 🔌 Web API
 #### GET `/sb_cfg`
 Get the sing-box Configuration.
 | Param | Options | Default | Required | Description |

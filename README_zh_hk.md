@@ -17,7 +17,8 @@
 也可以指定需不需要 clash-api 前端。
 
 ## 🚀 使用方法
-### 激活環境
+### 🛠️ 環境
+激活環境
 ```sh
 uv venv --python /usr/bin/python3 .venv
 ```
@@ -27,7 +28,7 @@ uv sync
 ```sh
 source .venv/bin/activate
 ```
-### 配置
+### ⚙️ 配置
 #### 配置文件 `config.toml`
 機場訂閲鏈接
 ```toml
@@ -63,7 +64,7 @@ buildin_area_codes = ["HK", "TW", "SG", "JP", "US"]
 #### Sing-box 配置文件模板 `templates`
 * `templates/client.json` 客戶端模板
 * `templates/web_scraper.json` 爬蟲代理伺服器模板
-### 服務
+### 🧩 服務
 WebAPI 服務文件 `/etc/systemd/system/sb_cfg_gen_webapi.service`
 ```ini
 [Unit]
@@ -122,7 +123,7 @@ sudo systemctl start sb_cfg_gen_fetch_nodes.timer
 ```sh
 sudo systemctl enable sb_cfg_gen_fetch_nodes.timer
 ```
-### Web API
+### 🔌 Web API
 #### GET `/sb_cfg`
 獲取 sing-box 配置文件.
 | 參數 | 選項 | 默認 | 必要項 | 描述 |
