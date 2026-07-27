@@ -16,6 +16,21 @@ During this process, you can configure highly customized templates,
 adjust node order, grouping, or routing rules, and specify whether a clash-api frontend is required.
 
 ## 🚀 Usage
+### 🔌 Web API
+#### GET `/sb_cfg`
+Get the sing-box Configuration.
+| Param | Options | Default | Required | Description |
+| :-: | :-: | :-: | :-: | :-: |
+| token |  |  | ✔️ | API token |
+| source | airport | ✔️ |  | Load nodes from airport |
+|  | diy |  |  | Load nodes from DIY |
+| client | app | ✔️ |  |  Configuration for App (Andriod, IOS, Mac official App) |
+|  | cli-win |  |  | Configuration for command line in Windows |
+|  | cli-linux |  |  | Configuration for command line in Linux |
+|  | server |  |  | Configuration for server used to web scraper |
+| mainstream_area | true / false | true |  | Using the custom areas nodes instead of all the nodes from airport. Only while `source` is set to `airport` effect. |
+| organize_and_rename | true / false | false |  | Using the custom names and positions instead of default names and positions of airport. Only while `source` is set to `airport` effect. |
+| area_group | true / false | false |  | Using the area group instead of default non-grouping layout in outbound. Only while `client` is set to `app`, `cli-win`, `cli-linux` effect. |
 ### 🛠️ Environment
 Activate Environment
 ```sh
@@ -122,18 +137,3 @@ sudo systemctl start sb_cfg_gen_fetch_nodes.timer
 ```sh
 sudo systemctl enable sb_cfg_gen_fetch_nodes.timer
 ```
-### 🔌 Web API
-#### GET `/sb_cfg`
-Get the sing-box Configuration.
-| Param | Options | Default | Required | Description |
-| :-: | :-: | :-: | :-: | :-: |
-| token |  |  | ✔️ | API token |
-| source | airport | ✔️ |  | Load nodes from airport |
-|  | diy |  |  | Load nodes from DIY |
-| client | app | ✔️ |  |  Configuration for App (Andriod, IOS, Mac official App) |
-|  | cli-win |  |  | Configuration for command line in Windows |
-|  | cli-linux |  |  | Configuration for command line in Linux |
-|  | server |  |  | Configuration for server used to web scraper |
-| mainstream_area | true / false | true |  | Using the custom areas nodes instead of all the nodes from airport. Only while `source` is set to `airport` effect. |
-| organize_and_rename | true / false | false |  | Using the custom names and positions instead of default names and positions of airport. Only while `source` is set to `airport` effect. |
-| area_group | true / false | false |  | Using the area group instead of default non-grouping layout in outbound. Only while `client` is set to `app`, `cli-win`, `cli-linux` effect. |
