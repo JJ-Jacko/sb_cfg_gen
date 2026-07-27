@@ -3,17 +3,36 @@
 **Languages:** [简体中文](README_zh_cn.md) | [繁體中文](README_zh_hk.md)
 
 ## 📋 Description
-Since official sing-box updates are quite aggressive,
-the subscription-based configuration files provided by many airports are
-essentially outdated and contain numerous improper configurations.
-This project was created to address this exact issue. 
+Due to the relatively aggressive update pace of official sing-box,
+many sing-box configuration files distributed by airports through subscriptions are in fact outdated,
+and contain many improper settings, making them hard to meet the needs of using the efficient proxy tool sing-box in normal operation and across different usage scenarios.
+This project automatically fetches or imports node data, and combines it with highly customizable templates to generate sing-box configuration files,
+suitable for a variety of scenarios such as clients, servers, and crawler proxying.
 
-Under the hood, it uses the Python `requests` library to fetch the airport's sing-box config file,
-extracts the node-related configurations using specific rules,
-and finally injects them into your own custom configuration template. 
-
-During this process, you can configure highly customized templates,
-adjust node order, grouping, or routing rules, and specify whether a clash-api frontend is required.
+## 💡 Key Highlights
+### 🔄 Multi-source Node Ingestion
+* **Dual-mode node import**:
+    Supports automatically fetching nodes through `airport subscriptions`, and also supports importing `self-hosted node` lists,
+    covering different deployment modes such as public airports and self-hosted nodes.
+* **Smart node extraction**:
+    Automatically parses `sing-box` configuration files or `Base64` node subscriptions distributed by airports,
+    extracts node information and converts it into a standard `sing-box` format in a unified way.
+### 🧩 Highly Customizable Configuration Generation
+* **Template-based configuration generation**:
+    Dynamically generates configuration files based on predefined `JSON` templates,
+    supporting different runtime environments such as clients, command-line usage, and servers.
+* **Flexible node orchestration**:
+    Supports custom node ordering, region filtering, name renaming, and region grouping,
+    enabling configuration files in different styles according to actual needs.
+* **Multi-scenario configuration output**:
+    The same set of node data can generate configurations suitable for `Android`, `iOS`, `macOS`,
+    `Linux`, `Windows`, and server-side scenarios.
+### ⚙️ Automated Deployment
+* **Lightweight Web API**: Provides a `RESTful-API`, allowing clients to retrieve the latest configuration files in real time as needed.
+* **Automatic airport node synchronization**:
+    Combined with `Linux` `systemd timer`, periodically pulls airport subscriptions,
+    automatically updates the local node cache without manual maintenance.
+* **Secure access control**: Controls configuration file access permissions through `API Token`, preventing unauthorized users from obtaining the configuration content.
 
 ## 🏗️ Structure
 ```mermaid
