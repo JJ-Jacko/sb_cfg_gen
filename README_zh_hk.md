@@ -16,6 +16,42 @@
 調整節點的順序、分組或者分流規則，
 也可以指定需不需要 clash-api 前端。
 
+## 🏗️ 架構
+```mermaid
+flowchart
+    subgraph User["👤 用戶"]
+        sb_client["Sing-box 客戶端"]
+    end
+
+    subgraph System["⚙️ Sing-box 配置文件生成器"]
+        fake_v2rayn_client["虛擬 V2rayN 客戶端"]
+        fake_sb_client["虛擬 Sing-box 客戶端"]
+        parser["轉化器"]
+        filter["提取器"]
+        store[(檔案存儲)]
+        lite_server["輕量伺服器"]
+        generator["生成器"]
+    end
+
+    subgraph Airport["✈️ 機場"]
+        airport_server["機場伺服器"]
+    end
+
+    fake_v2rayn_client -->|請求節點列表| airport_server
+    fake_sb_client -->|請求 sing-box 配置文件| airport_server
+
+    airport_server -->|響應 base64 加密節點列表| parser
+    airport_server -->|響應 sing-box 配置文件| filter
+
+    parser -->|sing-box 格式節點列表| store
+    filter -->|sing-box 格式節點列表| store
+
+    store --> lite_server
+    sb_client -->|請求 sing-box 配置文件| lite_server
+    lite_server --> generator
+    generator -->|響應 sing-box 配置文件| sb_client
+```
+
 ## 🚀 使用方法
 ### 🔌 Web API
 #### GET `/sb_cfg`

@@ -15,6 +15,42 @@ and finally injects them into your own custom configuration template.
 During this process, you can configure highly customized templates,
 adjust node order, grouping, or routing rules, and specify whether a clash-api frontend is required.
 
+## 🏗️ Structure
+```mermaid
+flowchart
+    subgraph User["👤 User"]
+        sb_client["Sing-box Client"]
+    end
+
+    subgraph System["⚙️ Sing-box 配置文件生成器"]
+        fake_v2rayn_client["Virtual V2rayN Client"]
+        fake_sb_client["Virtual Sing-box Client"]
+        parser["Parser"]
+        filter["Filter"]
+        store[(Files Store)]
+        lite_server["Lite Server"]
+        generator["Generator"]
+    end
+
+    subgraph Airport["✈️ Airport"]
+        airport_server["Airport Server"]
+    end
+
+    fake_v2rayn_client -->|Request a list of nodes| airport_server
+    fake_sb_client -->|Request a configuration file of sing-box| airport_server
+
+    airport_server -->|Respond a list of encrypted nodes| parser
+    airport_server -->|Respond a configuration file of sing-box| filter
+
+    parser -->|A list of sing-box format nodes| store
+    filter -->|A list of sing-box format nodes| store
+
+    store --> lite_server
+    sb_client -->|Request a configuration file of sing-box| lite_server
+    lite_server --> generator
+    generator -->|Respond a configuration file of sing-box| sb_client
+```
+
 ## 🚀 Usage
 ### 🔌 Web API
 #### GET `/sb_cfg`
