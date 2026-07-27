@@ -1,6 +1,6 @@
 # Sing-box Config Generator
 
-**Languages:** [简中](README_zh_cn.md) | [繁中](README_zh_hk.md)
+**Languages:** [简体中文](README_zh_cn.md) | [繁體中文](README_zh_hk.md)
 
 ## 📋 Description
 Since official sing-box updates are quite aggressive,

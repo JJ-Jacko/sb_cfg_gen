@@ -1,6 +1,6 @@
 # Sing-box 配置文件生成器
 
-**Languages:** [简中](README_zh_cn.md) | [English](README.md)
+**Languages:** [简体中文](README_zh_cn.md) | [English](README.md)
 
 ## 📋 描述
 由於 sing-box 官方更新比較激進，
