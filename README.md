@@ -23,8 +23,8 @@ flowchart
     end
 
     subgraph System["⚙️ Sing-box Config Generator"]
-        fake_v2rayn_client["Virtual V2rayN Client"]
-        fake_sb_client["Virtual Sing-box Client"]
+        virtual_v2rayn_client["Virtual V2rayN Client"]
+        virtual_sb_client["Virtual Sing-box Client"]
         parser["Parser"]
         filter["Filter"]
         store[(Files Store)]
@@ -36,8 +36,8 @@ flowchart
         airport_server["Airport Server"]
     end
 
-    fake_v2rayn_client -->|Request a list of nodes| airport_server
-    fake_sb_client -->|Request a configuration file of sing-box| airport_server
+    virtual_v2rayn_client -->|Request a list of nodes| airport_server
+    virtual_sb_client -->|Request a configuration file of sing-box| airport_server
 
     airport_server -->|Respond a list of encrypted nodes| parser
     airport_server -->|Respond a configuration file of sing-box| filter

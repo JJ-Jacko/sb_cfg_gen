@@ -24,8 +24,8 @@ flowchart
     end
 
     subgraph System["⚙️ Sing-box 配置文件生成器"]
-        fake_v2rayn_client["虛擬 V2rayN 客戶端"]
-        fake_sb_client["虛擬 Sing-box 客戶端"]
+        virtual_v2rayn_client["虛擬 V2rayN 客戶端"]
+        virtual_sb_client["虛擬 Sing-box 客戶端"]
         parser["轉化器"]
         filter["提取器"]
         store[(檔案存儲)]
@@ -37,8 +37,8 @@ flowchart
         airport_server["機場伺服器"]
     end
 
-    fake_v2rayn_client -->|請求節點列表| airport_server
-    fake_sb_client -->|請求 sing-box 配置文件| airport_server
+    virtual_v2rayn_client -->|請求節點列表| airport_server
+    virtual_sb_client -->|請求 sing-box 配置文件| airport_server
 
     airport_server -->|響應 base64 加密節點列表| parser
     airport_server -->|響應 sing-box 配置文件| filter
