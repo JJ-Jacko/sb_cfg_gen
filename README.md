@@ -9,6 +9,12 @@ and contain many improper settings, making them hard to meet the needs of using 
 This project automatically fetches or imports node data, and combines it with highly customizable templates to generate sing-box configuration files,
 suitable for a variety of scenarios such as clients, servers, and crawler proxying.
 
+> **Disclaimer:**
+> 1. This project strictly complies with applicable laws and regulations as well as the MIT open-source license.
+> 2. Any third-party forks or derivative works based on this project represent the independent actions of their respective developers and have no association with this project or the original author.
+> 3. Developers shall be solely responsible for any legal liability arising from the use or modification of this source code.
+> 4. This project is for technical research purposes only, and does not encourage any individual or organization to use proxy crawlers to bypass website interface restrictions and carry out illegal scraping for profit.
+
 ## 💡 Key Highlights
 ### 🔄 Multi-source Node Ingestion
 * **Dual-mode node import**:
