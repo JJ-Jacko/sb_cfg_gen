@@ -45,6 +45,7 @@ suitable for a variety of scenarios such as clients, servers, and crawler proxyi
 flowchart
     subgraph User["👤 User"]
         sb_client["Sing-box Client"]
+        configuration["Configuration File"]
     end
 
     subgraph System["⚙️ Sing-box Config Generator"]
@@ -61,6 +62,10 @@ flowchart
         airport_server["Airport Server"]
     end
 
+    configuration -->|Tokens, the list of custom nodes| lite_server
+    configuration -->|Subcription URL| virtual_v2rayn_client
+    configuration -->|Subcription URL| virtual_sb_client
+
     virtual_v2rayn_client -->|Request a list of nodes| airport_server
     virtual_sb_client -->|Request a configuration file of sing-box| airport_server
 
@@ -74,6 +79,10 @@ flowchart
     sb_client -->|Request a configuration file of sing-box| lite_server
     lite_server --> generator
     generator -->|Respond a configuration file of sing-box| sb_client
+
+    classDef orange fill:#FFF7ED,stroke:#F59E0B,color:#92400E;
+    class configuration orange;
+    linkStyle 0,1,2 stroke:#F59E0B,stroke-width:2px
 ```
 
 ## 🚀 Usage

@@ -45,6 +45,7 @@
 flowchart
     subgraph User["👤 用戶"]
         sb_client["Sing-box 客戶端"]
+        configuration["配置文件"]
     end
 
     subgraph System["⚙️ Sing-box 配置文件生成器"]
@@ -61,6 +62,10 @@ flowchart
         airport_server["機場伺服器"]
     end
 
+    configuration -->|Tokens, 客制化節點列表| lite_server
+    configuration -->|訂閲鏈接| virtual_v2rayn_client
+    configuration -->|訂閲鏈接| virtual_sb_client
+
     virtual_v2rayn_client -->|請求節點列表| airport_server
     virtual_sb_client -->|請求 sing-box 配置文件| airport_server
 
@@ -74,6 +79,10 @@ flowchart
     sb_client -->|請求 sing-box 配置文件| lite_server
     lite_server --> generator
     generator -->|響應 sing-box 配置文件| sb_client
+
+    classDef orange fill:#FFF7ED,stroke:#F59E0B,color:#92400E;
+    class configuration orange;
+    linkStyle 0,1,2 stroke:#F59E0B,stroke-width:2px
 ```
 
 ## 🚀 使用方法
