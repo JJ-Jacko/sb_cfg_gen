@@ -22,7 +22,7 @@ flowchart
         sb_client["Sing-box Client"]
     end
 
-    subgraph System["⚙️ Sing-box 配置文件生成器"]
+    subgraph System["⚙️ Sing-box Config Generator"]
         fake_v2rayn_client["Virtual V2rayN Client"]
         fake_sb_client["Virtual Sing-box Client"]
         parser["Parser"]
