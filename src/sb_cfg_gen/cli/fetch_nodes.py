@@ -32,9 +32,9 @@ def fetch(url: str):
 
 
 def run():
-    # urls_str = base64_decode(context.f_raw_base64.read_text())
+    # urls_str = base64_decode(context.CACHE.RAW_BASE64.read_text())
 
-    url = context.project_config["airport_url"]
+    url = context.CONFIG["airport_url"]
     urls_str = fetch(url)
     
     urls_node = urls_str.split("\r\n")
@@ -45,5 +45,5 @@ def run():
     ]
     
     nodes_deduplicated = node_ops.deduplicate_nodes(nodes)
-    write_json_file(context.f_nodes, nodes_deduplicated)
+    write_json_file(context.CACHE.NODES, nodes_deduplicated)
     

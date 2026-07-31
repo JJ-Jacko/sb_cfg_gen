@@ -44,10 +44,10 @@ def sb_cfg(
         raise HTTPException(status_code=401, detail="Invalid token")
     
     if source == "airport":
-        nodes_raw: List[Node] = load_json_file(context.f_nodes)
+        nodes_raw: List[Node] = load_json_file(context.CACHE.NODES)
         
         if mainstream_area:
-            nodes_filterd_area = node_ops.filter_nodes_with_specified_areas(nodes_raw, context.project_config["buildin_area_codes"])
+            nodes_filterd_area = node_ops.filter_nodes_with_specified_areas(nodes_raw, context.CONFIG["buildin_area_codes"])
         else:
             nodes_filterd_area = nodes_raw
             
@@ -57,7 +57,7 @@ def sb_cfg(
             nodes = nodes_filterd_area
             
     elif source == "diy":
-        nodes: List[Node] = load_json_file(context.f_nodes_diy)
+        nodes: List[Node] = load_json_file(context.CACHE.NODES_DIY)
         
     if client == "app":
         sb_cfg = config_ops.merge_singbox_config_client(
