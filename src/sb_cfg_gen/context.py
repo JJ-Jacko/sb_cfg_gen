@@ -29,6 +29,12 @@ class TEMPLATES:
     CLIENT = DIR / "client.json"
     WEB_SCRAPER = DIR / "web_scraper.json"
 
+# Web
+UA_MAP = {
+    "V2rayN": "v2rayN/7.23.4",
+    "SingBox": "SFA/1.12.12 (575; sing-box 1.12.12; language zh_Hant_HK)",
+    "ClashMeta": "ClashMetaForAndroid/2.11.31.Meta"
+}
 
 # Initialization
 CONFIG = load_config(CONFIG_FILE)

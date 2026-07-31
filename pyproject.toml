@@ -6,7 +6,7 @@ authors = [
     { name = "Jacko", email = "l2982211930@163.com" }
 ]
 dependencies = [
-    "requests",
+    "httpx",
     "fastapi[standard]"
 ]
 

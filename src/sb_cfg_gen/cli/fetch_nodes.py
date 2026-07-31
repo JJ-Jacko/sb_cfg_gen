@@ -7,20 +7,20 @@ from sb_cfg_gen.factors import node_ops
 from sb_cfg_gen.other import base64_decode
 from sb_cfg_gen.other import write_json_file
 from sb_cfg_gen.parses import vless
-from sb_cfg_gen.web import Client
+from sb_cfg_gen.web import VirtualClient
 
 
 __all__ = ["run"]
 
 
 def fetch(url: str):
-    client = Client("V2rayN")
+    virtual_client = VirtualClient("V2rayN")
     
     for attempt in itertools.count(0):
         if attempt >= 3:
             raise Exception("airport can not support V2rayN")
         
-        resp = client.fetch_airport_config(url)
+        resp = virtual_client.fetch_airport_config(url)
         
         try:
             content = base64_decode(resp.content)
