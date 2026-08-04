@@ -4,7 +4,6 @@ import time
 from urllib import parse
 
 from sb_cfg_gen import context
-from sb_cfg_gen.dicts import SingBoxConfig
 from sb_cfg_gen.exceptions import ClientNotSupport
 from sb_cfg_gen.factors import config_ops
 from sb_cfg_gen.factors import node_ops
@@ -63,12 +62,18 @@ def fetch_using_SingBox(url: str):
         resp = virtual_client.fetch_airport_config(url)
         
         try:
-            raw_cfg: SingBoxConfig = resp.json()
+            raw_cfg: str | list | dict = resp.json()
         except json.JSONDecodeError:
             time.sleep(5)
             continue
 
         break
+    
+    if isinstance(raw_cfg, (str, list)):
+        raise ClientNotSupport
+    
+    if not isinstance(raw_cfg, dict):
+        raise ClientNotSupport
     
     write_json_file(context.CACHE.RAW_CFG, raw_cfg)
     nodes = config_ops.extra_nodes_from_singbox_config(raw_cfg)
