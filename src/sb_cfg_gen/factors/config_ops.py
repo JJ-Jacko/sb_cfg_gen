@@ -132,47 +132,37 @@ def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[Node]:
             continue
         
         # 调整 不同类型的节点键值顺序
-        match outbound["type"]:
-            case "shadowsocks":
-                node_cleaned = {
-                    k: copy.deepcopy(outbound[k])
-                    for k in ["tag", "type", "server", "server_port", "method", "password"]
-                    if k in outbound
-                }
+        node_cleaned = {}
+        node_cleaned["tag"] = outbound["tag"]
+        node_cleaned["type"] = outbound["type"]
+        node_cleaned["server"] = outbound["server"]
+        node_cleaned["server_port"] = outbound["server_port"]
+        
+        if outbound["type"] == "shadowsocks":
+            node_cleaned["method"] = outbound["method"]
+            node_cleaned["password"] = outbound["password"]
+        
+        elif outbound["type"] == "vmess":
+            node_cleaned["uuid"] = outbound["uuid"]
+            node_cleaned["security"] = outbound["security"]
+            node_cleaned["alter_id"] = outbound["alter_id"]
+            node_cleaned["transport"] = {}
+            node_cleaned["transport"]["type"] = outbound["transport"]["type"]
+            node_cleaned["transport"]["path"] = outbound["transport"]["path"]
             
-            case "vmess":
-                node_cleaned = {
-                    k: copy.deepcopy(outbound[k])
-                    for k in ["tag", "type", "server", "server_port"]
-                    if k in outbound
-                }
-
-                node_cleaned["uuid"] = outbound["uuid"]
-                node_cleaned["security"] = outbound["security"]
-                node_cleaned["alter_id"] = outbound["alter_id"]
-                node_cleaned["transport"] = {}
-                node_cleaned["transport"]["type"] = outbound["transport"]["type"]
-                node_cleaned["transport"]["path"] = outbound["transport"]["path"]
-                
-                node_cleaned["transport"]["headers"] = {}
-                host_src: str | List[str] = outbound["transport"]["headers"]["Host"]
-                if isinstance(host_src, str):
-                    node_cleaned["transport"]["headers"]["Host"] = host_src
-                elif isinstance(host_src, list):
-                    host = next(iter(host_src), None)
-                    if host:
-                        node_cleaned["transport"]["headers"]["Host"] = host
-                
-            case _:
-                node_cleaned = {
-                    k: copy.deepcopy(outbound[k])
-                    for k in ["tag", "type", "server", "server_port"]
-                    if k in outbound
-                }
-                        
-                for k in outbound:
-                    if k not in node_cleaned:
-                        node_cleaned[k] = outbound[k]
+            node_cleaned["transport"]["headers"] = {}
+            host_src: str | List[str] = outbound["transport"]["headers"]["Host"]
+            if isinstance(host_src, str):
+                node_cleaned["transport"]["headers"]["Host"] = host_src
+            elif isinstance(host_src, list):
+                host = next(iter(host_src), None)
+                if host:
+                    node_cleaned["transport"]["headers"]["Host"] = host
+        
+        else:
+            for k in outbound:
+                if k not in node_cleaned:
+                    node_cleaned[k] = outbound[k]
                 
         nodes.append(node_cleaned)
         
