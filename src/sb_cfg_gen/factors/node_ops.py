@@ -82,7 +82,8 @@ def filter_nodes_with_specified_area(
             ):
                 continue
         
-        elif Areas.get(area_code).flag in tag_cleaned:
+        # Normal situations
+        if Areas.get(area_code).flag in tag_cleaned:
             filtered_nodes.append(node)    
         elif area_code in tag_cleaned:
             filtered_nodes.append(node)
