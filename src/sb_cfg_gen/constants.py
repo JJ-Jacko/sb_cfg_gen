@@ -1,6 +1,7 @@
 from typing import Final
-from typing import get_args
 from typing import FrozenSet
+from typing import get_args
+from typing import Tuple
 
 from sb_cfg_gen import types
 
@@ -46,6 +47,6 @@ NODE_TYPE_KEYWORDS: Final[FrozenSet[str]] = frozenset([
 
 NODE_LEVEL_KEYWORDS: Final[FrozenSet[str]] = frozenset(["x0.8", "x1", "x3", "x2", "x4"])
 
-AREA_CODES: Final[FrozenSet[str]] = frozenset(get_args(types.AreaCode))
+AREA_CODES: Final[Tuple[str, ...]] = get_args(types.AreaCode)
 
 NODE_TYPES: Final[FrozenSet[str]] = frozenset(get_args(types.NodeType))
