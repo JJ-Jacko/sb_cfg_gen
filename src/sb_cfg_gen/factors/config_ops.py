@@ -139,6 +139,29 @@ def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[Node]:
                     for k in ["tag", "type", "server", "server_port", "method", "password"]
                     if k in outbound
                 }
+            
+            case "vmess":
+                node_cleaned = {
+                    k: copy.deepcopy(outbound[k])
+                    for k in ["tag", "type", "server", "server_port"]
+                    if k in outbound
+                }
+
+                node_cleaned["uuid"] = outbound["uuid"]
+                node_cleaned["security"] = outbound["security"]
+                node_cleaned["alter_id"] = outbound["alter_id"]
+                node_cleaned["transport"] = {}
+                node_cleaned["transport"]["type"] = outbound["transport"]["type"]
+                node_cleaned["transport"]["path"] = outbound["transport"]["path"]
+                
+                node_cleaned["transport"]["headers"] = {}
+                host_src: str | List[str] = outbound["transport"]["headers"]["Host"]
+                if isinstance(host_src, str):
+                    node_cleaned["transport"]["headers"]["Host"] = host_src
+                elif isinstance(host_src, list):
+                    host = next(iter(host_src), None)
+                    if host:
+                        node_cleaned["transport"]["headers"]["Host"] = host
                 
             case _:
                 node_cleaned = {
