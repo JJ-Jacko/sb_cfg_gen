@@ -71,6 +71,13 @@ def filter_nodes_with_specified_area(
         tag_cleaned = _get_cleaned_tag(node["tag"])
         if Areas.get(area_code).flag in tag_cleaned:
             filtered_nodes.append(node)
+        elif area_code == "SA":
+            if (
+                "🇺🇸" in tag_cleaned
+                or "US" in tag_cleaned
+                or keywords_in_text(Areas.get("US").keywords, tag_cleaned)
+            ):
+                continue
         elif area_code in tag_cleaned:
             filtered_nodes.append(node)
         elif area_code == "IN" and "印度尼西亚" in tag_cleaned:
