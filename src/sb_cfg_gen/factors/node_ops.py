@@ -69,8 +69,11 @@ def filter_nodes_with_specified_area(
     filtered_nodes: List[Node] = []
     for node in nodes:
         tag_cleaned = _get_cleaned_tag(node["tag"])
-        if Areas.get(area_code).flag in tag_cleaned:
-            filtered_nodes.append(node)
+        
+        # Special situations
+        if area_code == "IN":
+            if "印度尼西亚" in tag_cleaned:
+                continue
         elif area_code == "SA":
             if (
                 "🇺🇸" in tag_cleaned
@@ -78,10 +81,11 @@ def filter_nodes_with_specified_area(
                 or keywords_in_text(Areas.get("US").keywords, tag_cleaned)
             ):
                 continue
+        
+        elif Areas.get(area_code).flag in tag_cleaned:
+            filtered_nodes.append(node)    
         elif area_code in tag_cleaned:
             filtered_nodes.append(node)
-        elif area_code == "IN" and "印度尼西亚" in tag_cleaned:
-            continue
         elif keywords_in_text(Areas.get(area_code).keywords, tag_cleaned):
             filtered_nodes.append(node)
 
