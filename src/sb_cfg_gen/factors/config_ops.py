@@ -1,5 +1,6 @@
-import copy
 import json
+from typing import Any
+from typing import Dict
 from typing import List
 
 from sb_cfg_gen import constants
@@ -158,6 +159,19 @@ def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[Node]:
                 host = next(iter(host_src), None)
                 if host:
                     node_cleaned["transport"]["headers"]["Host"] = host
+        
+        elif outbound["type"] == "hysteria2":
+            node_cleaned["password"] = outbound["password"]
+            
+            node_cleaned["tls"] = {}
+            tls_src: Dict[str, Any] = outbound["tls"]
+            node_cleaned["tls"]["enabled"] = True
+            if tls_src.get("insecure", None):
+                node_cleaned["tls"]["insecure"] = True
+            if (server_name_src := tls_src.get("server_name", None)):
+                node_cleaned["tls"]["server_name"] = server_name_src
+            if (certificate_src := tls_src.get("certificate", None)):
+                node_cleaned["tls"]["certificate"] = certificate_src
         
         else:
             for k in outbound:
