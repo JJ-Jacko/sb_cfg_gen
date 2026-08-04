@@ -72,7 +72,11 @@ def filter_nodes_with_specified_area(
         
         # Special situations
         if area_code == "IN":
-            if "印度尼西亚" in tag_cleaned:
+            if (
+                "🇮🇩" in tag_cleaned
+                or "ID" in tag_cleaned
+                or keywords_in_text(Areas.get("ID").keywords, tag_cleaned)
+            ):
                 continue
         elif area_code == "SA":
             if (
