@@ -1,3 +1,4 @@
+import collections
 import copy
 from typing import List
 
@@ -129,6 +130,21 @@ def sort_nodes(nodes: List[Node]):
         for node in filter_nodes_with_specified_area(nodes, area_code)
         if node
     ]
+
+
+def rename_nodes(nodes: List[Node]):
+    nodes_result: List[Node] = []
+    counter = collections.Counter()
+    
+    for node in nodes:
+        area_code = get_node_area_code(node)
+        counter[area_code] += 1
+        new_node = copy.deepcopy(node)
+        new_node["tag"] = f"{Areas.get(area_code).flag} {area_code} {counter[area_code]}"
+        
+        nodes_result.append(new_node)
+
+    return nodes_result
 
 
 def organize_and_rename_nodes(nodes: List[Node]):
