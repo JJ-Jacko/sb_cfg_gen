@@ -24,7 +24,8 @@ def sb_cfg(
         source: Literal["airport", "diy"] = "airport",
         client: Literal["app", "cli-win", "cli-linux", "server"] = "app",
         mainstream_area: bool = True,
-        organize_and_rename: bool = False,
+        sort: bool = True,
+        rename: bool = True,
         area_group: bool = False
     ):
     """
@@ -32,8 +33,11 @@ def sb_cfg(
         mainstream_area:
             Using the custom areas nodes instead of all the nodes from airport.
             Only while `source` is set to `airport` effect.
-        organize_and_rename:
-            Using the custom names and positions instead of default names and positions of airport.
+        sort:
+            Using the custom positions instead of default positions of airport.
+            Only while `source` is set to `airport` effect.
+        rename:
+            Using the custom names instead of default names of airport.
             Only while `source` is set to `airport` effect.
         area_group:
             Using the area group instead of default non-grouping layout in outbound.
@@ -47,21 +51,26 @@ def sb_cfg(
         nodes_raw: List[Node] = load_json_file(context.CACHE.NODES)
         
         if mainstream_area:
-            nodes_filterd_area = node_ops.filter_nodes_with_specified_areas(nodes_raw, context.CONFIG["buildin_area_codes"])
+            nodes_1 = node_ops.filter_nodes_with_specified_areas(nodes_raw, context.CONFIG["buildin_area_codes"])
         else:
-            nodes_filterd_area = nodes_raw
-            
-        if organize_and_rename:
-            nodes = node_ops.organize_and_rename_nodes(nodes_filterd_area)
+            nodes_1 = nodes_raw
+        
+        if sort:
+            nodes_2 = node_ops.sort_nodes(nodes_1)
         else:
-            nodes = nodes_filterd_area
+            nodes_2 = nodes_1
+        
+        if rename:
+            nodes_3 = node_ops.rename_nodes(nodes_2)
+        else:
+            nodes_3 = nodes_2
             
     elif source == "diy":
-        nodes: List[Node] = load_json_file(context.CACHE.NODES_DIY)
+        nodes_3: List[Node] = load_json_file(context.CACHE.NODES_DIY)
         
     if client == "app":
         sb_cfg = config_ops.merge_singbox_config_client(
-            nodes,
+            nodes_3,
             inbound_mixd_in=False,
             inbound_tun_in=True,
             with_clash_api=False,
@@ -69,7 +78,7 @@ def sb_cfg(
         )
     elif client == "cli-win":
         sb_cfg = config_ops.merge_singbox_config_client(
-            nodes,
+            nodes_3,
             inbound_mixd_in=False,
             inbound_tun_in=True,
             with_clash_api=True,
@@ -77,7 +86,7 @@ def sb_cfg(
         )
     elif client == "cli-linux":
         sb_cfg = config_ops.merge_singbox_config_client(
-            nodes, 
+            nodes_3, 
             inbound_mixd_in=True,
             inbound_tun_in=True,
             with_clash_api=True,
@@ -85,6 +94,6 @@ def sb_cfg(
             clash_api_path="/var/www/clash_api"
         )
     elif client == "server":
-        sb_cfg = config_ops.merge_singbox_config_web_scraper(nodes)
+        sb_cfg = config_ops.merge_singbox_config_web_scraper(nodes_3)
     
     return sb_cfg

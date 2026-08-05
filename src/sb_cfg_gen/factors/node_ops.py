@@ -145,15 +145,3 @@ def rename_nodes(nodes: List[Node]):
         nodes_result.append(new_node)
 
     return nodes_result
-
-
-def organize_and_rename_nodes(nodes: List[Node]):
-    result_nodes: List[Node] = []
-    
-    for area_code in constants.AREA_CODES:
-        specified_area_nodes = filter_nodes_with_specified_area(nodes, area_code)
-        basic_nodes = _get_basic_nodes(specified_area_nodes)
-        for node in rename_same_area_nodes(basic_nodes, area_code):
-            result_nodes.append(node)
-
-    return result_nodes

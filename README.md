@@ -99,7 +99,8 @@ Get the sing-box Configuration.
 |  | cli-linux |  |  | Configuration for command line in Linux |
 |  | server |  |  | Configuration for server used to web scraper |
 | mainstream_area | true / false | true |  | Using the custom areas nodes instead of all the nodes from airport. Only while `source` is set to `airport` effect. |
-| organize_and_rename | true / false | false |  | Using the custom names and positions instead of default names and positions of airport. Only while `source` is set to `airport` effect. |
+| sort | true / false | true |  | Using the custom positions instead of default positions of airport. Only while `source` is set to `airport` effect. |
+| rename | true / false | true |  | Using the custom names instead of default names of airport. Only while `source` is set to `airport` effect. |
 | area_group | true / false | false |  | Using the area group instead of default non-grouping layout in outbound. Only while `client` is set to `app`, `cli-win`, `cli-linux` effect. |
 ### 🛠️ Environment
 Activate Environment
