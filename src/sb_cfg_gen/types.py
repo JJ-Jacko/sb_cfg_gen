@@ -21,7 +21,7 @@ AreaCode = Literal[
     "RU", "UA", "MD", "EE", "RO", "SK", "LV", "LT", "PL", "AT", "HU",
     
     # 东南欧
-    "BG", "RS", "AL", "HR", "SI", "GR", "MK",
+    "BG", "RS", "AL", "HR", "SI", "GR", "MK", "MC",
     
     # 西欧
     "DE", "FR", "NL", "BE", "LU", "GB", "IE", "IT", "ES", "PT", "CH", "CZ",
