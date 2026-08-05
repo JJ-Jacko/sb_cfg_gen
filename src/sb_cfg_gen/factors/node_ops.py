@@ -55,6 +55,23 @@ def deduplicate_nodes(nodes: List[Node]) -> List[Node | None]:
     return cleaned_nodes
 
 
+def get_node_area_code(node: None):
+    tag_cleaned = _get_cleaned_tag(node["tag"])
+    
+    for area_code in constants.AREA_CODES:
+        flag = Areas.get(area_code).flag
+        keywords = Areas.get(area_code).keywords
+        
+        if flag in tag_cleaned:
+            return area_code
+        elif area_code in tag_cleaned:
+            return area_code
+        elif keywords_in_text(keywords, tag_cleaned):
+            return area_code
+    
+    return None
+
+
 def filter_nodes_with_specified_area(
         nodes: List[Node],
         area_code: AreaCode
@@ -66,35 +83,11 @@ def filter_nodes_with_specified_area(
         nodes_with_specified_area: A list of the nodes which is in specified area.
     """
     
-    filtered_nodes: List[Node] = []
-    for node in nodes:
-        tag_cleaned = _get_cleaned_tag(node["tag"])
-        
-        # Special situations
-        if area_code == "IN":
-            if (
-                "🇮🇩" in tag_cleaned
-                or "ID" in tag_cleaned
-                or keywords_in_text(Areas.get("ID").keywords, tag_cleaned)
-            ):
-                continue
-        elif area_code == "SA":
-            if (
-                "🇺🇸" in tag_cleaned
-                or "US" in tag_cleaned
-                or keywords_in_text(Areas.get("US").keywords, tag_cleaned)
-            ):
-                continue
-        
-        # Normal situations
-        if Areas.get(area_code).flag in tag_cleaned:
-            filtered_nodes.append(node)    
-        elif area_code in tag_cleaned:
-            filtered_nodes.append(node)
-        elif keywords_in_text(Areas.get(area_code).keywords, tag_cleaned):
-            filtered_nodes.append(node)
-
-    return filtered_nodes
+    return [
+        node
+        for node in nodes
+        if area_code == get_node_area_code(node)
+    ]
 
 
 def filter_nodes_with_specified_areas(
