@@ -98,10 +98,10 @@ flowchart
 |  | cli-win |  |  | 在 Windows 命令行的配置文件 |
 |  | cli-linux |  |  | 在 Linux 命令行的配置文件 |
 |  | server |  |  | 在伺服器用於爬蟲程式的配置文件 |
-| mainstream_area | true / false | true |  | 使用客制化的地區節點替代機場默認的所有節點，僅當 `source` 設置為 `airport` 時才生效 |
-| sort | true / false | true |  | 使用客制化的位置替代機場默認的位置，僅當 `source` 設置為 `airport` 時才生效 |
-| rename | true / false | true |  | 使用客制化的名稱替代機場默認的名稱，僅當 `source` 設置為 `airport` 時才生效 |
-| area_group | true / false | false |  | 在 outbound 使用地區組替代默認的無組佈局，僅當 `client` 設置為 `app`, `cli-win`, `cli-linux` 時才生效 |
+| mainstream_area | true / false | true |  | 使用客制化的**地區**節點替代機場默認的所有節點，僅當 `source` 設置為 `airport` 時才生效 |
+| sort | true / false | true |  | 使用客制化的**位置**替代機場默認的位置，僅當 `source` 設置為 `airport` 時才生效 |
+| rename | true / false | true |  | 使用客制化的**名稱**替代機場默認的名稱，僅當 `source` 設置為 `airport` 時才生效 |
+| area_group | true / false | false |  | 在 outbound 使用**地區組**替代默認的無組佈局，僅當 `client` 設置為 `app`, `cli-win`, `cli-linux` 時才生效 |
 ### 🛠️ 環境
 激活環境
 ```sh

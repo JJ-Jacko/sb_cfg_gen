@@ -28,28 +28,28 @@ def sb_cfg(
         mainstream_area: Annotated[
             bool,
             Query(description=(
-                "Using the custom areas nodes instead of all the nodes from airport. "
+                "Using the custom **areas** nodes instead of all the nodes from airport. "
                 "Only while `source` is set to `airport` effect."   
             ))
         ] = True,
         sort: Annotated[
             bool,
             Query(description=(
-                "Using the custom positions instead of default positions of airport. "
+                "Using the custom **positions** instead of default positions of airport. "
                 "Only while `source` is set to `airport` effect."   
             ))
         ] = True,
         rename: Annotated[
             bool,
             Query(description=(
-                "Using the custom names instead of default names of airport. "
+                "Using the custom **names** instead of default names of airport. "
                 "Only while `source` is set to `airport` effect."   
             ))
         ] = True,
         area_group: Annotated[
             bool,
             Query(description=(
-                "Using the area group instead of default non-grouping layout in outbound. "
+                "Using the **area group** instead of default non-grouping layout in outbound. "
                 "Only while `source` is set to `airport` effect."   
             ))
         ] = True
