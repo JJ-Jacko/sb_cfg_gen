@@ -52,7 +52,7 @@ def sb_cfg(
                 "Using the **area group** instead of default non-grouping layout in outbound. "
                 "Only while `source` is set to `airport` effect."   
             ))
-        ] = True
+        ] = False
     ):
     
     if token not in config_file["api_tokens"]:
