@@ -129,6 +129,15 @@ def rename_same_area_nodes(
     return renamed_nodes
 
 
+def sort_nodes(nodes: List[Node]):
+    return [
+        node
+        for area_code in constants.AREA_CODES
+        for node in filter_nodes_with_specified_area(nodes, area_code)
+        if node
+    ]
+
+
 def organize_and_rename_nodes(nodes: List[Node]):
     result_nodes: List[Node] = []
     
