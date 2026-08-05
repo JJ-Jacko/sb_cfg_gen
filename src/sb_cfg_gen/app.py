@@ -1,9 +1,11 @@
 from pathlib import Path
+from typing import Annotated
 from typing import List
 from typing import Literal
 
 from fastapi import FastAPI
 from fastapi import HTTPException
+from fastapi import Query
 
 from sb_cfg_gen import context
 from sb_cfg_gen.dicts import Node
@@ -23,26 +25,35 @@ def sb_cfg(
         token: str,
         source: Literal["airport", "diy"] = "airport",
         client: Literal["app", "cli-win", "cli-linux", "server"] = "app",
-        mainstream_area: bool = True,
-        sort: bool = True,
-        rename: bool = True,
-        area_group: bool = False
+        mainstream_area: Annotated[
+            bool,
+            Query(description=(
+                "Using the custom areas nodes instead of all the nodes from airport. "
+                "Only while `source` is set to `airport` effect."   
+            ))
+        ] = True,
+        sort: Annotated[
+            bool,
+            Query(description=(
+                "Using the custom positions instead of default positions of airport. "
+                "Only while `source` is set to `airport` effect."   
+            ))
+        ] = True,
+        rename: Annotated[
+            bool,
+            Query(description=(
+                "Using the custom names instead of default names of airport. "
+                "Only while `source` is set to `airport` effect."   
+            ))
+        ] = True,
+        area_group: Annotated[
+            bool,
+            Query(description=(
+                "Using the area group instead of default non-grouping layout in outbound. "
+                "Only while `source` is set to `airport` effect."   
+            ))
+        ] = True
     ):
-    """
-    Args:
-        mainstream_area:
-            Using the custom areas nodes instead of all the nodes from airport.
-            Only while `source` is set to `airport` effect.
-        sort:
-            Using the custom positions instead of default positions of airport.
-            Only while `source` is set to `airport` effect.
-        rename:
-            Using the custom names instead of default names of airport.
-            Only while `source` is set to `airport` effect.
-        area_group:
-            Using the area group instead of default non-grouping layout in outbound.
-            Only while `client` is set to `app`, `cli-win`, `cli-linux` effect.
-    """
     
     if token not in config_file["api_tokens"]:
         raise HTTPException(status_code=401, detail="Invalid token")
