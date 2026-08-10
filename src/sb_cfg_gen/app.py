@@ -1,4 +1,3 @@
-from pathlib import Path
 from typing import Annotated
 from typing import List
 from typing import Literal
@@ -11,13 +10,10 @@ from sb_cfg_gen import context
 from sb_cfg_gen.dicts import Node
 from sb_cfg_gen.factors import config_ops
 from sb_cfg_gen.factors import node_ops
-from sb_cfg_gen.other import load_config
 from sb_cfg_gen.other import load_json_file
 
 
 app = FastAPI()
-project_config_file = Path("config.toml")
-config_file = load_config(project_config_file)
 
 
 @app.get("/sb_cfg")
@@ -55,7 +51,7 @@ def sb_cfg(
         ] = False
     ):
     
-    if token not in config_file["api_tokens"]:
+    if token not in context.CONFIG["api_tokens"]:
         raise HTTPException(status_code=401, detail="Invalid token")
     
     if source == "airport":
