@@ -6,6 +6,9 @@
             "type": "debugpy",
             "request": "launch",
             "module": "sb_cfg_gen.cli.fetch_nodes",
+            "args": [
+                // "--url", "https://example.com"
+            ],
             "console": "internalConsole"
         },
         {

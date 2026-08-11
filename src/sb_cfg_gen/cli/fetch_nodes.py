@@ -1,3 +1,4 @@
+import argparse
 import itertools
 import json
 import time
@@ -79,7 +80,14 @@ def fetch_using_SingBox(url: str):
     
 
 def main():
-    url = context.CONFIG["airport_url"]
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--url",
+        help="Airport subscription URL"
+    )
+    args = parser.parse_args()
+    
+    url = args.url or context.CONFIG["airport_url"]
     
     try:
         nodes = fetch_using_SingBox(url)
