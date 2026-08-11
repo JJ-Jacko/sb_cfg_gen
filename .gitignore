@@ -9,8 +9,5 @@ uv.lock
 !.vscode/launch.json
 
 # Project
-test
-cache
-output
-nodes.json
+cache/
 config.toml
