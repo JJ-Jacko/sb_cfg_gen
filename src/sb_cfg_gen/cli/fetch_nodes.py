@@ -13,9 +13,6 @@ from sb_cfg_gen.parses import vless
 from sb_cfg_gen.web import VirtualClient
 
 
-__all__ = ["run"]
-
-
 def fetch_using_V2rayN(url: str):
     """
     Raises:
@@ -81,7 +78,7 @@ def fetch_using_SingBox(url: str):
     return nodes
     
 
-def run():
+def main():
     url = context.CONFIG["airport_url"]
     
     try:
@@ -93,4 +90,8 @@ def run():
 
     nodes_deduplicated = node_ops.deduplicate_nodes(nodes)
     write_json_file(context.CACHE.NODES, nodes_deduplicated)
+
+
+if __name__ == "__main__":
+    main()
     

@@ -11,11 +11,11 @@ dependencies = [
 ]
 
 [project.scripts]
-sb-fetch-nodes = "sb_cfg_gen.cli.fetch_nodes:run"
-sb-web-api = "sb_cfg_gen.cli.web_api:run"
+sb-fetch-nodes  = "sb_cfg_gen.cli.fetch_nodes:main"
+sb-web-api      = "sb_cfg_gen.cli.web_api:main"
 
 [tool.fastapi]
-entrypoint = "sb_cfg_gen.app:app"
+entrypoint      = "sb_cfg_gen.app:app"
 
 [build-system]
 requires = ["hatchling"]

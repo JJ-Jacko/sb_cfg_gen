@@ -1,11 +1,17 @@
 import uvicorn
 
+from sb_cfg_gen.app import app
 
-def run():
+
+def main():
     uvicorn.run(
-        "sb_cfg_gen.app:app",
+        app,
         host="0.0.0.0",
         port=9988,
         reload=False
     )
+
+
+if __name__ == "__main__":
+    main()
     
