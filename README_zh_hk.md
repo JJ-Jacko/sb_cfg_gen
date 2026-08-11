@@ -113,6 +113,20 @@ uv sync
 ```sh
 source .venv/bin/activate
 ```
+### ⌨️ 命令行
+#### 獲取節點
+指定訂閲鏈接
+```sh
+sb-fetch-nodes --url "https://example.com/subscribe/..."
+```
+默認從配置文件獲取
+```sh
+sb-fetch-nodes
+```
+#### Web API
+```sh
+sb-web-api
+```
 ### ⚙️ 配置
 #### 配置文件 `config.toml`
 機場訂閲鏈接

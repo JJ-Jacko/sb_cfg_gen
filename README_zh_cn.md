@@ -113,6 +113,20 @@ uv sync
 ```sh
 source .venv/bin/activate
 ```
+### ⌨️ 命令行
+#### 获取节点
+指定订阅链接
+```sh
+sb-fetch-nodes --url "https://example.com/subscribe/..."
+```
+默认从配置文件获取
+```sh
+sb-fetch-nodes
+```
+#### Web API
+```sh
+sb-web-api
+```
 ### ⚙️ 配置
 #### 配置文件 `config.toml`
 机场订阅链接

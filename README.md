@@ -113,6 +113,20 @@ uv sync
 ```sh
 source .venv/bin/activate
 ```
+### ⌨️ Command Line
+#### Fetch Nodes
+Specify a subscription URL.
+```sh
+sb-fetch-nodes --url "https://example.com/subscribe/..."
+```
+Default from the configuration.
+```sh
+sb-fetch-nodes
+```
+#### Web API
+```sh
+sb-web-api
+```
 ### ⚙️ Configure
 #### Configuration file `config.toml`
 Airport subcription url
