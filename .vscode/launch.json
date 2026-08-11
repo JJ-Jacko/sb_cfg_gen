@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Fetch Nodes",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "sb_cfg_gen.cli.fetch_nodes",
+            "console": "internalConsole"
+        },
+        {
+            "name": "Web API",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "sb_cfg_gen.cli.web_api",
+            "console": "internalConsole"
+        },
+        {
+            "name": "Test",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "sb_cfg_gen.cli.test",
+            "console": "internalConsole"
+        }
+    ]
+}
