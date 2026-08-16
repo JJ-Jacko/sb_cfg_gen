@@ -45,7 +45,7 @@ def _get_basic_nodes(nodes: List[Node]):
     return basic_nodes
 
 
-def deduplicate_nodes(nodes: List[Node]) -> List[Node | None]:
+def deduplicate_nodes(nodes: List[Node]) -> List[Node]:
     cleaned_nodes = []
     for n in nodes:
         if _node_in_nodes(n, cleaned_nodes):
@@ -56,7 +56,7 @@ def deduplicate_nodes(nodes: List[Node]) -> List[Node | None]:
     return cleaned_nodes
 
 
-def get_node_area_code(node: None):
+def get_node_area_code(node: Node):
     tag_cleaned = _get_cleaned_tag(node["tag"])
     
     for area_code in constants.AREA_CODES:
