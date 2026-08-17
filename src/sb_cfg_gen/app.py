@@ -17,7 +17,7 @@ app = FastAPI()
 
 
 @app.get("/sb_cfg")
-def sb_cfg(
+async def sb_cfg(
         token: str,
         source: Literal["airport", "diy"] = "airport",
         client: Literal["app", "cli-win", "cli-linux", "server"] = "app",
