@@ -1,4 +1,3 @@
-import json
 from typing import Any
 from typing import Dict
 from typing import List
@@ -9,6 +8,7 @@ from sb_cfg_gen.dicts import Node
 from sb_cfg_gen.dicts import SingBoxConfig
 from sb_cfg_gen.factors import node_ops
 from sb_cfg_gen.other import keywords_in_text
+from sb_cfg_gen.other import load_json_file
 from sb_cfg_gen.types import AreaCode
 
 
@@ -191,8 +191,7 @@ def merge_singbox_config_client(
 ):
     """Merge sing-box configration in client mode."""
     
-    with context.TEMPLATES.CLIENT.open() as f:
-        template: SingBoxConfig = json.load(f)
+    template: SingBoxConfig = load_json_file(context.TEMPLATES.CLIENT)
     
     if area_group:
         _merge_nodes_into_singbox_config(
@@ -229,8 +228,7 @@ def merge_singbox_config_web_scraper(
         port_start: The start port of the proxy servers. 
     """
     
-    with context.TEMPLATES.WEB_SCRAPER.open() as f:
-        template: SingBoxConfig = json.load(f)
+    template: SingBoxConfig = load_json_file(context.TEMPLATES.WEB_SCRAPER)
 
     for i, node in enumerate(nodes):
         tag_node = node["tag"]
