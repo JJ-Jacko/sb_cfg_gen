@@ -5,7 +5,6 @@ from typing import List
 
 from sb_cfg_gen import constants
 from sb_cfg_gen import context
-from sb_cfg_gen.areas import Areas
 from sb_cfg_gen.dicts import Node
 from sb_cfg_gen.dicts import SingBoxConfig
 from sb_cfg_gen.factors import node_ops
@@ -32,7 +31,7 @@ def _merge_nodes_into_singbox_config(
         "outbounds": (
             ["⚡ Direct", "🖐️ Manual"] +
             [
-                f"{Areas.get(area_code).flag} {area_code}"
+                f"{constants.AREA_MAPPING[area_code].flag} {area_code}"
                 for area_code in buildin_area_codes
             ]
         )
@@ -51,7 +50,7 @@ def _merge_nodes_into_singbox_config(
     # 地区组
     for area_code in buildin_area_codes:
         template["outbounds"].append({
-            "tag": f"{Areas.get(area_code).flag} {area_code}",
+            "tag": f"{constants.AREA_MAPPING[area_code].flag} {area_code}",
             "type": "urltest",
             "outbounds": [
                 node["tag"]

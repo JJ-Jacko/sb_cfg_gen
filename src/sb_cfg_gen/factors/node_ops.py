@@ -3,7 +3,6 @@ import copy
 from typing import List
 
 from sb_cfg_gen import constants
-from sb_cfg_gen.areas import Areas
 from sb_cfg_gen.dicts import Node
 from sb_cfg_gen.other import keywords_in_text
 from sb_cfg_gen.types import AreaCode
@@ -60,8 +59,8 @@ def get_node_area_code(node: Node):
     tag_cleaned = _get_cleaned_tag(node["tag"])
     
     for area_code in constants.AREA_CODES:
-        flag = Areas.get(area_code).flag
-        keywords = Areas.get(area_code).keywords
+        flag = constants.AREA_MAPPING[area_code].flag
+        keywords = constants.AREA_MAPPING[area_code].keywords
         
         if flag in tag_cleaned:
             return area_code
@@ -117,7 +116,7 @@ def rename_same_area_nodes(
     
     for i, node in enumerate(nodes):
         new_node = copy.deepcopy(node)
-        new_node["tag"] = f"{Areas.get(area_code).flag} {area_code} {i + 1}"
+        new_node["tag"] = f"{constants.AREA_MAPPING[area_code].flag} {area_code} {i + 1}"
         renamed_nodes.append(new_node)
     
     return renamed_nodes
@@ -140,7 +139,7 @@ def rename_nodes(nodes: List[Node]):
         area_code = get_node_area_code(node)
         counter[area_code] += 1
         new_node = copy.deepcopy(node)
-        new_node["tag"] = f"{Areas.get(area_code).flag} {area_code} {counter[area_code]}"
+        new_node["tag"] = f"{constants.AREA_MAPPING[area_code].flag} {area_code} {counter[area_code]}"
         
         nodes_result.append(new_node)
 
