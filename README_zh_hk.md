@@ -94,7 +94,7 @@ flowchart
 | token |  |  | ✔️ | API token |
 | source | airport | ✔️ |  | 透過機場獲取節點 |
 |  | diy |  |  | 透過客制化獲取節點 |
-| client | app | ✔️ |  | App 的配置文件 (Andriod, IOS, Mac 官方 App) |
+| client | app | ✔️ |  | App 的配置文件 (Android, IOS, Mac 官方 App) |
 |  | cli-win |  |  | 在 Windows 命令行的配置文件 |
 |  | cli-linux |  |  | 在 Linux 命令行的配置文件 |
 |  | server |  |  | 在伺服器用於爬蟲程式的配置文件 |
@@ -167,7 +167,7 @@ buildin_area_codes = ["HK", "TW", "SG", "JP", "US"]
 WebAPI 服務文件 `/etc/systemd/system/sb_cfg_gen_webapi.service`
 ```ini
 [Unit]
-Description=Sing-box Config Genarator Web API
+Description=Sing-box Config Generator Web API
 After=network.target
 Wants=network.target
 Before=shutdown.target
@@ -184,7 +184,7 @@ WantedBy=multi-user.target
 自動生成機場配置文件的服務文件 `/etc/systemd/system/sb_cfg_gen_fetch_nodes.service`
 ```ini
 [Unit]
-Description=Sing-box Config Genarator Fetch Nodes
+Description=Sing-box Config Generator Fetch Nodes
 After=network.target
 
 [Service]

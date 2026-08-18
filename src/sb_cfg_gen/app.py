@@ -78,7 +78,7 @@ async def sb_cfg(
     if client == "app":
         sb_cfg = config_ops.merge_singbox_config_client(
             nodes_3,
-            inbound_mixd_in=False,
+            inbound_mixed_in=False,
             inbound_tun_in=True,
             with_clash_api=False,
             area_group=area_group
@@ -86,7 +86,7 @@ async def sb_cfg(
     elif client == "cli-win":
         sb_cfg = config_ops.merge_singbox_config_client(
             nodes_3,
-            inbound_mixd_in=False,
+            inbound_mixed_in=False,
             inbound_tun_in=True,
             with_clash_api=True,
             area_group=area_group
@@ -94,7 +94,7 @@ async def sb_cfg(
     elif client == "cli-linux":
         sb_cfg = config_ops.merge_singbox_config_client(
             nodes_3, 
-            inbound_mixd_in=True,
+            inbound_mixed_in=True,
             inbound_tun_in=True,
             with_clash_api=True,
             area_group=area_group,

@@ -184,7 +184,7 @@ def extra_nodes_from_singbox_config(config: SingBoxConfig) -> List[Node]:
 
 def merge_singbox_config_client(
         nodes: List[Node],
-        inbound_mixd_in: bool,
+        inbound_mixed_in: bool,
         inbound_tun_in: bool,
         with_clash_api: bool,
         area_group: bool,
@@ -209,7 +209,7 @@ def merge_singbox_config_client(
     
     _merge_inbounds_into_singbox_config(
         template,
-        mixed_in=inbound_mixd_in,
+        mixed_in=inbound_mixed_in,
         tun_in=inbound_tun_in
     )
 

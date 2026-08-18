@@ -63,8 +63,8 @@ flowchart
     end
 
     configuration -->|Tokens, the list of custom nodes| lite_server
-    configuration -->|Subcription URL| virtual_v2rayn_client
-    configuration -->|Subcription URL| virtual_sb_client
+    configuration -->|Subscription URL| virtual_v2rayn_client
+    configuration -->|Subscription URL| virtual_sb_client
 
     virtual_v2rayn_client -->|Request a list of nodes| airport_server
     virtual_sb_client -->|Request a configuration file of sing-box| airport_server
@@ -94,7 +94,7 @@ Get the sing-box Configuration.
 | token |  |  | ✔️ | API token |
 | source | airport | ✔️ |  | Load nodes from airport |
 |  | diy |  |  | Load nodes from DIY |
-| client | app | ✔️ |  |  Configuration for App (Andriod, IOS, Mac official App) |
+| client | app | ✔️ |  |  Configuration for App (Android, IOS, Mac official App) |
 |  | cli-win |  |  | Configuration for command line in Windows |
 |  | cli-linux |  |  | Configuration for command line in Linux |
 |  | server |  |  | Configuration for server used to web scraper |
@@ -129,7 +129,7 @@ sb-web-api
 ```
 ### ⚙️ Configure
 #### Configuration file `config.toml`
-Airport subcription url
+Airport subscription url
 ```toml
 airport_url = "https://example.com/sing-box"
 ```
@@ -167,7 +167,7 @@ buildin_area_codes = ["HK", "TW", "SG", "JP", "US"]
 WebAPI service file `/etc/systemd/system/sb_cfg_gen_webapi.service`
 ```ini
 [Unit]
-Description=Sing-box Config Genarator Web API
+Description=Sing-box Config Generator Web API
 After=network.target
 Wants=network.target
 Before=shutdown.target
@@ -184,7 +184,7 @@ WantedBy=multi-user.target
 Service file which automatically generate airport configration file `/etc/systemd/system/sb_cfg_gen_fetch_nodes.service`
 ```ini
 [Unit]
-Description=Sing-box Config Genarator Fetch Nodes
+Description=Sing-box Config Generator Fetch Nodes
 After=network.target
 
 [Service]
@@ -193,7 +193,7 @@ User=web_runner
 WorkingDirectory=/opt/sb_cfg_gen
 ExecStart=/opt/sb_cfg_gen/.venv/bin/sb-fetch-nodes
 ```
-Timmer file `/etc/systemd/system/sb_cfg_gen_fetch_nodes.timer`
+Timer file `/etc/systemd/system/sb_cfg_gen_fetch_nodes.timer`
 ```ini
 [Unit]
 Description=Timer for sb_cfg_gen_fetch_nodes.service
