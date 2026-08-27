@@ -1,6 +1,6 @@
 {
     "log": {
-        "disabled": false
+        "disabled": true
     },
     "experimental": {
         "cache_file": {
