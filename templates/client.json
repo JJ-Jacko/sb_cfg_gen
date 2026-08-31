@@ -153,29 +153,13 @@
             },
             {
                 "action": "route",
-                "rule_set": [
-                    "GeoSite-Private",
-                    "GeoIP-Private"
-                ],
+                "rule_set": "GeoSite-Private",
                 "server": "Local-DNS"
             },
             {
                 "action": "route",
-                "rule_set": [
-                    "GeoSite-CN",
-                    "GeoIP-CN",
-                    "GeoSite-Spotify",
-                    "GeoSite-Zoom"
-                ],
+                "rule_set": "GeoSite-CN",
                 "server": "Ali-DNS"
-            },
-            {
-                "action": "route",
-                "rule_set": [
-                    "GeoLocation-!CN",
-                    "GeoSite-Linkedin"
-                ],
-                "server": "Cloudflare-DNS"
             }
         ],
         "final": "Cloudflare-DNS"
