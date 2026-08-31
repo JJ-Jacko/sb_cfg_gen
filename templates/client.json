@@ -171,7 +171,6 @@
                 "server": "Cloudflare-DNS"
             }
         ],
-        "final": "Cloudflare-DNS",
-        "independent_cache": true
+        "final": "Cloudflare-DNS"
     }
 }
