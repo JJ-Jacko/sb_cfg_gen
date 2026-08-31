@@ -19,7 +19,14 @@
             "type": "direct"
         }
     ],
+    "http_clients": [
+        {
+            "tag": "Default-Client",
+            "detour": "🚀 Proxy"
+        }
+    ],
     "route": {
+        "default_http_client": "Default-Client",
         "default_domain_resolver": "Ali-DNS",
         "rule_set": [
             {
