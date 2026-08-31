@@ -94,7 +94,7 @@ Get the sing-box Configuration.
 | token |  |  | ✔️ | API token |
 | source | airport | ✔️ |  | Load nodes from airport |
 |  | diy |  |  | Load nodes from DIY |
-| client | app | ✔️ |  |  Configuration for App (Android, IOS, Mac official App) |
+| client | app | ✔️ |  |  Configuration for App (Android, IOS, Mac, Windows official App) |
 |  | cli-win |  |  | Configuration for command line in Windows |
 |  | cli-linux |  |  | Configuration for command line in Linux |
 |  | server |  |  | Configuration for server used to web scraper |

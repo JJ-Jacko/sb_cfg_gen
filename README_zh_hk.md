@@ -94,7 +94,7 @@ flowchart
 | token |  |  | ✔️ | API token |
 | source | airport | ✔️ |  | 透過機場獲取節點 |
 |  | diy |  |  | 透過客制化獲取節點 |
-| client | app | ✔️ |  | App 的配置文件 (Android, IOS, Mac 官方 App) |
+| client | app | ✔️ |  | App 的配置文件 (Android, IOS, Mac, Windows 官方 App) |
 |  | cli-win |  |  | 在 Windows 命令行的配置文件 |
 |  | cli-linux |  |  | 在 Linux 命令行的配置文件 |
 |  | server |  |  | 在伺服器用於爬蟲程式的配置文件 |
