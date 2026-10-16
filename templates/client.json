@@ -60,18 +60,6 @@
                 "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs"
             },
             {
-                "tag": "GeoSite-Spotify",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/spotify.srs"
-            },
-            {
-                "tag": "GeoSite-Zoom",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/zoom.srs"
-            },
-            {
                 "tag": "GeoSite-Linkedin",
                 "type": "remote",
                 "format": "binary",
@@ -101,9 +89,7 @@
                     "GeoIP-Private",
                     "GeoSite-Private",
                     "GeoIP-CN",
-                    "GeoSite-CN",
-                    "GeoSite-Spotify",
-                    "GeoSite-Zoom"
+                    "GeoSite-CN"
                 ],
                 "outbound": "⚡ Direct"
             }
